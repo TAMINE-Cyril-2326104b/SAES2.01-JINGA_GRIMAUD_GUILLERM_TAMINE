@@ -1,4 +1,4 @@
-L'objectif de la SAé est de développer un jeu d'échec similaire au jeu d'échec en ligne disponible sur le site https://www.chess.com/. L'interface graphique de l'application devra le plus possible respecter l'interface du site web (couleurs, polices, mise en page, etc.).
+L'objectif de la SAE est de développer un jeu d'échec similaire au jeu d'échec en ligne disponible sur le site https://www.chess.com/. L'interface graphique de l'application devra le plus possible respecter l'interface du site web (couleurs, polices, mise en page, etc.).
 
 Pour simplifier, vous implémenterez uniquement les règles de déplacements des différentes pièces. 
 
@@ -11,6 +11,9 @@ L'application devra permettre d'enregistrer les joueurs dans un fichier. Elle de
 Les parties seront aussi enregistrées (dans un fichier). Les joueurs pourront ainsi consulter leurs précédentes parties à partir de l'interface. Par ailleurs, une partie en cours pourra  être mise en pause (i.e. enregistrée dans un fichier temporaire), et rechargée plus tard par les joueurs afin d'être continuée. 
 
 Vous intègrerez un mode "tournoi" permettant de s'affronter à plusieurs. Il s'agira d'un tournoi à élimination directe, comme illustré dans la figure suivante.
+
+![TournoisEliminationDirecte2](https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/assets/146132293/d1459d95-da15-476c-9954-cb21287830ab)
+
 
 L'application devra permettre de jouer seul "contre l'ordinateur". Pour cela, vous pourrez par exemple implémenter dans un premier temps un "bot" basique faisant aléatoirement des coups valides.
 
