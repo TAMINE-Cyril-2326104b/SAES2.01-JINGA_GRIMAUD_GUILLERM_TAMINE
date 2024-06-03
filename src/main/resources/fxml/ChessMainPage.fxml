@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.ChessController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-  </padding>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.ChessController">
+    <SplitPane xmlns:fx="http://javafx.com/fxml">
+        <!-- First half with GridPane -->
+        <items>
+            <GridPane hgap="10" vgap="10">
+                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-   <ImageView>
-   <Image url="@../img/plateau.png" />
-   </ImageView>
-   <Button styleClass="jeuContreOrdi" text="Jouer contre l'ordinateur" />
+                <Label text="Age:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-  <Label fx:id="welcomeText" text="Jouez aux échecs en ligne sur le site n°1 !" />
-  <Button styleClass="jeuEnLigne" text="Jouez en ligne" />
-   <HBox prefHeight="100.0" prefWidth="200.0" />
-   <HBox prefHeight="100.0" prefWidth="200.0">
-      <children>
-         <GridPane>
-           <columnConstraints>
-             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-           </columnConstraints>
-           <rowConstraints>
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-           </rowConstraints>
-         </GridPane>
-      
-         <HBox>
-            <children>
-                <Label text="13 975 698 Parties du jour" />
-               <Label text="145 721 En train de jouer" />
-            </children>
-         </HBox>
-      </children>
-   </HBox>
+                <Button text="Submit" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- Second half with VBox -->
+            <VBox spacing="10" alignment="CENTER">
+                <Button text="Button 1"/>
+                <Button text="Button 2"/>
+                <Button text="Button 3"/>
+            </VBox>
+        </items>
+    </SplitPane>
 </VBox>
