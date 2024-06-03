@@ -10,7 +10,7 @@
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
 
-   <ImageView fitHeight="132.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView pickOnBounds="true" preserveRatio="true">
    <Image url="@/img/plateau.png" />
    </ImageView>
 
