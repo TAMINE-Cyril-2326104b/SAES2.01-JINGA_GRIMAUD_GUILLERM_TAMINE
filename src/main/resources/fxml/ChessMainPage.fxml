@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.ChessController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+
+   <ImageView>
+   <Image url="@../img/plateau.png" />
+   </ImageView>
+   <Button styleClass="jeuContreOrdi" text="Jouer contre l'ordinateur" />
+
+  <Label fx:id="welcomeText" text="Jouez aux échecs en ligne sur le site n°1 !" />
+  <Button styleClass="jeuEnLigne" text="Jouez en ligne" />
+   <HBox prefHeight="100.0" prefWidth="200.0" />
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <GridPane>
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+         </GridPane>
+      
+         <HBox>
+            <children>
+                <Label text="13 975 698 Parties du jour" />
+               <Label text="145 721 En train de jouer" />
+            </children>
+         </HBox>
+      </children>
+   </HBox>
+</VBox>
