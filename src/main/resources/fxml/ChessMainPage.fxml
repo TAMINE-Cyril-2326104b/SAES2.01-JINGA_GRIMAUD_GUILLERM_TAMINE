@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="438.0" prefWidth="710.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="438.0" prefWidth="710.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controllers.ChessMainPageController">
    <right>
 
                                                             <!-- Second half with VBox -->
@@ -74,9 +65,9 @@
                            </FXCollections>
                         </items>
                      </ChoiceBox>
-                     <Button mnemonicParsing="false" styleClass="actif">
+                     <Button fx:id="jouer" mnemonicParsing="false" styleClass="actif" onAction="#handleChangeScene">
                         <graphic>
-                           <ImageView fitHeight="45.0" fitWidth="200.0" styleClass="actif">
+                           <ImageView  fitHeight="45.0" fitWidth="200.0" styleClass="actif">
                               <image>
                                  <Image url="@../img/jouerLogo.png" />
                               </image>
@@ -100,14 +91,14 @@
             <children>
                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                   <children>
-                     <Label styleClass="statsChiffres" text="16" textFill="WHITE" />
-                     <Label styleClass="statsLabel" text="jouent" textFill="WHITE" />
+                     <Label styleClass="statsChiffres" text="144328" textFill="WHITE" />
+                     <Label styleClass="statsLabel" text="JOUENT" textFill="WHITE" />
                   </children>
                </HBox>
                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                   <children>
-                     <Label styleClass="statsChiffres" text="1561561" textFill="WHITE" />
-                     <Label styleClass="statsLabel" text="parties" textFill="WHITE" />
+                     <Label styleClass="statsChiffres" text="13459965" textFill="WHITE" />
+                     <Label styleClass="statsLabel" text="PARTIES" textFill="WHITE" />
                   </children>
                </HBox>
             </children>
