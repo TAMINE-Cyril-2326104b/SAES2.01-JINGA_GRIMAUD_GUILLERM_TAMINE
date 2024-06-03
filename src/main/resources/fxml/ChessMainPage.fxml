@@ -1,38 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.ChessController">
-    <SplitPane xmlns:fx="http://javafx.com/fxml">
-        <!-- First half with GridPane -->
-        <items>
-            <GridPane hgap="10" vgap="10">
-                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+<BorderPane prefHeight="438.0" prefWidth="710.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
 
-                <Label text="Age:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                <Button text="Submit" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-            </GridPane>
-
-            <!-- Second half with VBox -->
-            <VBox spacing="10" alignment="CENTER">
-                <Button text="Button 1"/>
-                <Button text="Button 2"/>
-                <Button text="Button 3"/>
+                                                            <!-- Second half with VBox -->
+            <VBox alignment="TOP_CENTER" prefHeight="408.0" prefWidth="357.0" spacing="10" styleClass="actif" BorderPane.alignment="CENTER">
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="123.0">
+                     <children>
+                         <Button styleClass="actif">
+                        <graphic>
+                           <ImageView fitHeight="69.0" fitWidth="126.0">
+                              <image>
+                                 <Image url="@../img/nouvelle_partie.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="116.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="108.0" styleClass="onglet">
+                        <graphic>
+                           <ImageView>
+                              <image>
+                                 <Image url="@../img/logoPartieMenu.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></Button>
+                     </children>
+                  </VBox>
+               <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="84.0">
+                  <children>
+                     <Button mnemonicParsing="false" styleClass="onglet">
+                        <graphic>
+                           <ImageView styleClass="onglet">
+                              <image>
+                                 <Image url="@../img/logoJoueurMenu.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></Button>
+                  </children>
+               </VBox>
+               </children>
+            </HBox>
+         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="75.0">
+            <children>
+               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                     <ChoiceBox accessibleText="hdghdgd" prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
+                        <items>
+                           <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Option 1" />
+                              <String fx:value="Option 2" />
+                              <String fx:value="Option 3" />
+                           </FXCollections>
+                        </items>
+                     </ChoiceBox>
+                     <Button mnemonicParsing="false" styleClass="actif">
+                        <graphic>
+                           <ImageView fitHeight="45.0" fitWidth="200.0" styleClass="actif">
+                              <image>
+                                 <Image url="@../img/jouerLogo.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+               </VBox>
+               <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="217.0" style="-fx-background-color: #1f1d1b;" text="Tournois" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0">
+                        <image>
+                           <Image url="@../img/Logo_Tournois.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
+         </VBox>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                  <children>
+                     <Label styleClass="statsChiffres" text="16" textFill="WHITE" />
+                     <Label styleClass="statsLabel" text="jouent" textFill="WHITE" />
+                  </children>
+               </HBox>
+               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                  <children>
+                     <Label styleClass="statsChiffres" text="1561561" textFill="WHITE" />
+                     <Label styleClass="statsLabel" text="parties" textFill="WHITE" />
+                  </children>
+               </HBox>
+            </children>
+         </HBox>
             </VBox>
-        </items>
-    </SplitPane>
-</VBox>
+   </right>
+   <left>
+      <VBox prefHeight="420.0" prefWidth="336.0" styleClass="onglet" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="290.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="55.0" fitWidth="55.0">
+                     <image>
+                        <Image url="@../img/adversaire_img.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Adversaire" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="5.0" top="3.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="258.0" prefWidth="316.0">
+               <children>
+                  <StackPane prefHeight="263.0" prefWidth="344.0">
+                     <children>
+                        <ImageView fitHeight="320.0" fitWidth="341.0">
+                           <image>
+                              <Image url="@../img/plateau.png" />
+                           </image>
+                        </ImageView>
+                              <GridPane id="GridPane" alignment="CENTER" hgap="10" prefHeight="258.0" prefWidth="248.0" vgap="10">
+                              <columnConstraints>
+                                 <ColumnConstraints />
+                                 <ColumnConstraints />
+                              <ColumnConstraints />
+                              </columnConstraints>
+                              <rowConstraints>
+                                 <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                              <RowConstraints maxHeight="0.0" minHeight="10.0" prefHeight="30.0" />
+                                 <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                 <RowConstraints />
+                              <RowConstraints />
+                              </rowConstraints>
+                              </GridPane>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="55.0" fitWidth="55.0">
+                     <image>
+                        <Image url="@../img/pdp_blanc.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="16.0" prefWidth="112.0" text="Nom choisi" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="5.0" top="3.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   </BorderPane>

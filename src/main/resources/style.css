@@ -14,13 +14,13 @@
 }
 
 .statsChiffres {
-    -fx-font-size: 1.5 rem;
     -fx-text-fill: #dfdede;
+    -fx-font-weight: bold;
 }
 
 .statsLabel{
-    -fx-font-size: 1.2 rem;
     -fx-text-fill: #868684;
+
 }
 
 .selecteur{
@@ -44,7 +44,7 @@
     /* box-shadow: rgba(93,153,72,.2) */
 }
 
-.boutonTournois{
+.boutontournois{
     -fx-background-color: #1f1d1b;*
     -fx-border-radius: .5 rem
     /* box-shadow: rgba(0,0,0,.4) */
@@ -72,4 +72,12 @@
 
 .casesFoncees {
     -fx-background-color: #739552;
+}
+.choice-box {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px;
+}
+
+.choice-box .list-cell {
+    -fx-font-size: 14px;
 }
