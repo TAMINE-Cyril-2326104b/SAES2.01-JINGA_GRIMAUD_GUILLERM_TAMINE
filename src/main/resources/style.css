@@ -1,3 +1,75 @@
-.jeuEnLigne{
+.interface{
+    -fx-background-color: #302e2b;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: Helvetica,Arial,Hiragino Sans GB,STXihei,Microsoft YaHei,WenQuanYi Micro Hei,Hind,MS Gothic,Apple SD Gothic Neo,NanumBarunGothic,sans-serif;
+}
 
+.onglet{
+    -fx-background-color: #21201e;
+}
+
+/* onglet actif */
+.actif{
+    -fx-background-color: #262522;
+}
+
+.statsChiffres {
+    -fx-font-size: 1.5 rem;
+    -fx-text-fill: #dfdede;
+}
+
+.statsLabel{
+    -fx-font-size: 1.2 rem;
+    -fx-text-fill: #868684;
+}
+
+.selecteur{
+    -fx-background-color: #3c3b39;
+    -fx-font-size: 1.2 rem;
+}
+
+.selecteur:hover{
+    -fx-background-color: rgba(255, 255, 255, 0.16);
+}
+
+.boutonJouer, .boutonJeuEnLigne{
+    -fx-background-color: #81b64c;
+    -fx-border-color: #45753c;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+}
+
+.boutonJouer:hover , .boutonJeuEnLigne:hover{
+    -fx-background-color: #a3d160;
+    /* box-shadow: rgba(93,153,72,.2) */
+}
+
+.boutonTournois{
+    -fx-background-color: #1f1d1b;*
+    -fx-border-radius: .5 rem
+    /* box-shadow: rgba(0,0,0,.4) */
+}
+
+.boutonTournois:hover{
+    -fx-background-color: #1f1d1b;
+}
+
+.boutonJeuContreOrdinateur{
+    -fx-background-color: #454341;
+    -fx-border-color: #3e3c3a;
+    -fx-text-fill: #bcbcbb;
+    -fx-font-size: 16px;
+}
+
+.boutonJeuContreOrdinateur:hover{
+    -fx-background-color: #454341;
+    /* box-shadow: rgba(0,0,0,.3) */
+}
+
+.casesClaires {
+    -fx-background-color: #ebecd0;
+}
+
+.casesFoncees {
+    -fx-background-color: #739552;
 }
