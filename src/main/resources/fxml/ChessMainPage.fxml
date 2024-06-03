@@ -20,7 +20,7 @@
                         <graphic>
                            <ImageView fitHeight="69.0" fitWidth="126.0">
                               <image>
-                                 <Image url="@../img/nouvelle_partie.png" />
+                                 <Image url="@../img/nouvelle_partie.png" /> <!-- Ajout de l'image de nouvelle partie  -->
                               </image>
                            </ImageView>
                         </graphic></Button>
@@ -32,7 +32,7 @@
                         <graphic>
                            <ImageView>
                               <image>
-                                 <Image url="@../img/logoPartieMenu.png" />
+                                 <Image url="@../img/logoPartieMenu.png" /> <!-- Ajout de l'image du menu de partie.  -->
                               </image>
                            </ImageView>
                         </graphic></Button>
@@ -44,7 +44,7 @@
                         <graphic>
                            <ImageView styleClass="onglet">
                               <image>
-                                 <Image url="@../img/logoJoueurMenu.png" />
+                                 <Image url="@../img/logoJoueurMenu.png" /> <!-- Ajout de l'image du menu du joueur.  -->
                               </image>
                            </ImageView>
                         </graphic></Button>
@@ -65,7 +65,7 @@
                            </FXCollections>
                         </items>
                      </ChoiceBox>
-                     <Button fx:id="jouer" mnemonicParsing="false" styleClass="actif" onAction="#handleChangeScene">
+                     <Button fx:id="jouer" mnemonicParsing="false" styleClass="actif" onAction="#handleChangeScene"> <!-- Le bouton jouer permet de changer d'interface.  -->
                         <graphic>
                            <ImageView  fitHeight="45.0" fitWidth="200.0" styleClass="actif">
                               <image>
@@ -80,14 +80,16 @@
                   <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0">
                         <image>
-                           <Image url="@../img/Logo_Tournois.png" />
+                           <Image url="@../img/Logo_Tournois.png" /> <!-- Ajout de l'image du tournoi. -->
                         </image>
                      </ImageView>
                   </graphic>
                </Button>
             </children>
          </VBox>
-         <HBox prefHeight="100.0" prefWidth="200.0">
+
+               <!-- Ici, il s'agit de la mise en place des statistiques présentes au bas de la page.  -->
+               <HBox prefHeight="100.0" prefWidth="200.0">
             <children>
                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                   <children>
@@ -106,6 +108,7 @@
             </VBox>
    </right>
    <left>
+      <!-- Ici, il s'agit de la création de la bannière de l'adversaire. -->
       <VBox prefHeight="420.0" prefWidth="336.0" styleClass="onglet" BorderPane.alignment="CENTER_LEFT">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="290.0" spacing="10.0">
@@ -121,6 +124,7 @@
                   <Insets bottom="3.0" left="5.0" top="3.0" />
                </VBox.margin>
             </HBox>
+            <!-- Création du tableau contenant la grille à gauche. -->
             <HBox prefHeight="258.0" prefWidth="316.0">
                <children>
                   <StackPane prefHeight="263.0" prefWidth="344.0">
@@ -148,6 +152,7 @@
                   </StackPane>
                </children>
             </HBox>
+            <!-- Création de la bannière du joueur.  -->
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <ImageView fitHeight="55.0" fitWidth="55.0">
