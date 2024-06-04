@@ -14,8 +14,17 @@ import java.io.IOException;
 public class ChessMainPageController {
 
 // Création du fonction permettant le changement de page, démarrant ainsi la partie.
-    public void handleChangeScene(ActionEvent event) throws IOException{
+    public void handleChangeSceneBot(ActionEvent event) throws IOException{
         Parent secondSceneParent = FXMLLoader.load(getClass().getResource("/fxml/ChessBotGame.fxml"));
+        Scene secondScene = new Scene(secondSceneParent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(secondScene);
+        stage.show();
+    }
+
+    public void handleChangeScenePlayer(ActionEvent event) throws IOException{
+        Parent secondSceneParent = FXMLLoader.load(getClass().getResource("/fxml/ChessPlayerGame.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

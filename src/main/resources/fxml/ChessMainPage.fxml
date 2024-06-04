@@ -80,7 +80,7 @@
                      </ChoiceBox>
                   </children>
                </VBox>
-               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE">
+               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE" onAction="#handleChangeScenePlayer">
                   <graphic>
                      <ImageView fitHeight="47.0" fitWidth="50.0">
                         <image>
@@ -88,7 +88,7 @@
                         </image>
                      </ImageView>
                   </graphic></Button>
-               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE">
+               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE" onAction="#handleChangeSceneBot">
                   <graphic>
                      <ImageView fitHeight="45.0" fitWidth="40.0">
                         <image>
