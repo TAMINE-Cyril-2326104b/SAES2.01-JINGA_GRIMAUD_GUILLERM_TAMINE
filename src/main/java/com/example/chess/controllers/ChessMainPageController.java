@@ -34,7 +34,7 @@ public class ChessMainPageController {
         Parent secondSceneParent = FXMLLoader.load(getClass().getResource("/fxml/ChessPlayerGame.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
         stage.setScene(secondScene);
         stage.show();
     }

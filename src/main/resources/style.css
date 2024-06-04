@@ -34,9 +34,11 @@
 
 .boutonJouer, .boutonJeuEnLigne{
     -fx-background-color: #81b64c;
-    -fx-border-color: #45753c;
     -fx-text-fill: #ffffff;
-    -fx-font-size: 16 px;
+    -fx-font-size: 16px;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow( two-pass-box,#45753c, 2, 0.4, 0, 7);
 }
 
 .boutonJouer:hover, .boutonJeuEnLigne:hover{
@@ -56,9 +58,9 @@
 
 .boutonJeuContreOrdinateur{
     -fx-background-color: #454341;
-    -fx-border-color: #3e3c3a;
     -fx-text-fill: #bcbcbb;
     -fx-font-size: 16px;
+    -fx-effect: dropshadow( two-pass-box,#3e3c3a, 2, 0.4, 0, 7);
 }
 
 .boutonJeuContreOrdinateur:hover{
@@ -81,4 +83,35 @@
 
 .choice-box .list-cell {
     -fx-font-size: 14px;
+}
+
+/* Formulaire */
+
+.formTitre{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 35px;
+    -fx-font-style: bold;
+    -fx-padding: 10px;
+}
+
+.formJoueur{
+    -fx-text-fill: #a3d160;
+    -fx-font-size: 20px;
+    -fx-font-style: bold;
+}
+
+.formLabel{
+    -fx-text-fill: #bcbcbb;
+    -fx-font-size: 15px;
+}
+
+.formTextField{
+    -fx-background-color: #585654;
+    -fx-border-color: #bcbcbb;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.formTextField:hover{
+    -fx-border-color: #ffffff;
 }

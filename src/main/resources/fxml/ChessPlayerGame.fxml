@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<GridPane prefHeight="438.0" prefWidth="710.0" alignment="center" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controllers.CsvWriterController" hgap="10" vgap="10">
+<GridPane prefHeight="438.0" prefWidth="710.0" alignment="center" stylesheets="@../style.css" styleClass="interface" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controllers.CsvWriterController" hgap="10" vgap="10">
     <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
     <columnConstraints>
         <ColumnConstraints minWidth="100" prefWidth="100"
@@ -20,6 +20,7 @@
 
     <!-- Add Header Label -->
     <Label text="Enregistrement joueurs"
+           styleClass="formTitre"
            GridPane.columnIndex="0" GridPane.rowIndex="0"
            GridPane.columnSpan="2" GridPane.rowSpan="1"
            GridPane.halignment="CENTER" >
@@ -29,41 +30,58 @@
     </Label>
 
     <!-- Add Player 1 Label -->
-    <Label text="Joueur 1" GridPane.columnIndex="0" GridPane.rowIndex="1"
+    <Label text="Joueur 1"
+           styleClass="formJoueur"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
            GridPane.columnSpan="2" GridPane.rowSpan="1"
            GridPane.halignment="CENTER">
     </Label>
 
     <!-- Add First Name Player 1 Text Field -->
-    <Label text="Prénom :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="Prénom :"
+           styleClass="formLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
     <TextField fx:id="player1Field_firstname" prefHeight="40"
+               styleClass="formTextField"
                GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
     <!-- Add Name Player 1 Text Field -->
-    <Label text="Nom :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="Nom :"
+           styleClass="formLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     <TextField fx:id="player1Field_name" prefHeight="40"
+               styleClass="formTextField"
                GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
     <!-- Add Player 2 Label -->
-    <Label text="Joueur 2" GridPane.columnIndex="0" GridPane.rowIndex="4"
+    <Label text="Joueur 2"
+           styleClass="formJoueur"
+           GridPane.columnIndex="0" GridPane.rowIndex="4"
            GridPane.columnSpan="2" GridPane.rowSpan="1"
            GridPane.halignment="CENTER">
     </Label>
 
     <!-- Add Name Player 2 Text Field -->
-    <Label text="Prénom :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label text="Prénom :"
+           styleClass="formLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="5"/>
     <TextField fx:id="player2Field_firstname" prefHeight="40"
+               styleClass="formTextField"
                GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
     <!-- Add Name Player 1 Text Field -->
-    <Label text="Nom :" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label text="Nom :"
+           styleClass="formLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="6"/>
     <TextField fx:id="player2Field_name" prefHeight="40"
+               styleClass="formTextField"
                GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
     <!-- Add Submit Button -->
     <Button fx:id="submitButton" text="C'est parti !"
             onAction="#handleSubmitButtonAction"
-            prefWidth="100" prefHeight="40" defaultButton="true"
+            styleClass="boutonJouer"
+            prefWidth="200" prefHeight="40" defaultButton="true"
             GridPane.columnIndex="0" GridPane.rowIndex="7"
             GridPane.columnSpan="2" GridPane.rowSpan="1"
             GridPane.halignment="CENTER">
