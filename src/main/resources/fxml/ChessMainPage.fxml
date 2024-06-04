@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
@@ -16,7 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <BorderPane prefHeight="438.0" prefWidth="710.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controllers.ChessMainPageController">
    <right>
@@ -64,30 +62,41 @@
                </VBox>
             </children>
          </HBox>
-         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="75.0">
+         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0">
             <children>
                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <ChoiceBox accessibleText="hdghdgd" prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
+                     <ChoiceBox prefHeight="60.0" prefWidth="150.0" styleClass="selecteur" >
                         <items>
                            <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="Option 1" />
-                              <String fx:value="Option 2" />
-                              <String fx:value="Option 3" />
+                              <String fx:value="5 min" />
+                              <String fx:value="10 min" />
+                              <String fx:value="20 min" />
                            </FXCollections>
                         </items>
+                        <VBox.margin>
+                           <Insets top="10.0" />
+                        </VBox.margin>
                      </ChoiceBox>
-                     <Button fx:id="jouer" mnemonicParsing="false" onAction="#handleChangeScene" styleClass="actif"> <!-- Le bouton jouer permet de changer d'interface.  -->
-                        <graphic>
-                           <ImageView fitHeight="45.0" fitWidth="200.0" styleClass="actif">
-                              <image>
-                                 <Image url="@../img/jouerLogo.png" />
-                              </image>
-                           </ImageView>
-                        </graphic>
-                     </Button>
                   </children>
                </VBox>
+               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="47.0" fitWidth="50.0">
+                        <image>
+                           <Image url="@../img/LogoJoueur.png" />
+                        </image>
+                     </ImageView>
+                  </graphic></Button>
+               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="45.0" fitWidth="40.0">
+                        <image>
+                           <Image url="@../img/LogoRobot.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
                <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="217.0" style="-fx-background-color: #1f1d1b;" text="Tournois" textFill="WHITE">
                   <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0">
@@ -146,28 +155,37 @@
                            <image>
                               <Image url="@../img/plateau.png" />
                            </image>
+                           <StackPane.margin>
+                              <Insets left="15.0" right="15.0" />
+                           </StackPane.margin>
                         </ImageView>
-                        <GridPane id="gridPane" prefHeight="370.0" prefWidth="400.0">
+                        <GridPane id="gridPane" prefHeight="310.0" prefWidth="323.0">
                            <columnConstraints>
-                              <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="6.0" prefWidth="40.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="4.931842930855883" prefWidth="40.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="5.9921875" prefWidth="40.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="10.0" prefWidth="40.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="10.0" prefWidth="40.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="10.0" prefWidth="40.0" />
-                              <ColumnConstraints maxWidth="40.0" minWidth="10.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" />
-                              <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-                              <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-                              <RowConstraints maxHeight="40.94626801987138" minHeight="0.0" prefHeight="30.959388732910156" />
-                              <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="25.96589854524302" />
-                              <RowConstraints maxHeight="46.9383992059131" minHeight="24.967264113621383" prefHeight="46.9383992059131" />
-                              <RowConstraints maxHeight="46.93836008954159" minHeight="19.973794875340133" prefHeight="46.93836008954159" />
-                              <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="14.980386672215133" />
+                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" />
+                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" />
+                              <RowConstraints maxHeight="40" minHeight="6.0" prefHeight="40" />
+                              <RowConstraints maxHeight="40.0" minHeight="6.0" prefHeight="40" />
+                              <RowConstraints maxHeight="40" minHeight="6" prefHeight="40" />
+                              <RowConstraints maxHeight="40" minHeight="6" prefHeight="40" />
+                              <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40" />
                            </rowConstraints>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <StackPane.margin>
+                              <Insets bottom="-5.0" left="30.0" right="30.0" top="-5.0" />
+                           </StackPane.margin>
                         </GridPane>
                      </children>
                   </StackPane>

@@ -26,10 +26,11 @@
     -fx-background-color: #3c3b39;
     -fx-font-size: 1.2 rem;
 }
-
-.selecteur:hover{
-    -fx-background-color: rgba(255, 255, 255, 0.16);
+.selecteur .label{
+    -fx-text-fill: white;
+    -fx-background-color: #3c3b39;
 }
+
 
 .boutonJouer, .boutonJeuEnLigne{
     -fx-background-color: #81b64c;
