@@ -6,6 +6,7 @@ public class Plateau {
     private Pieces[][] cases;
     private GridPane gridPane;
 
+    // On crée un constructeur Plateau qui va nous permettre de créer la grille et d'initialiser les pièces
     public Plateau(GridPane gridPane) {
         this.gridPane = gridPane;
         cases = new Pieces[8][8];
@@ -14,29 +15,29 @@ public class Plateau {
 
     private void initialiserPieces() {
         // Initialisation des pièces noires
-        cases[0][0] = new Tour(Pieces.Couleur.NOIR, 0, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/tourNoire.png");
-        cases[1][0] = new Cavalier(Pieces.Couleur.NOIR, 1, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/cavalierNoir.png");
-        cases[2][0] = new Fou(Pieces.Couleur.NOIR, 2, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/fouNoir.png");
-        cases[3][0] = new Reine(Pieces.Couleur.NOIR, 3, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/dameNoire.png");
-        cases[4][0] = new Roi(Pieces.Couleur.NOIR, 4, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/roiNoir.png");
-        cases[5][0] = new Fou(Pieces.Couleur.NOIR, 5, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/fouNoir.png");
-        cases[6][0] = new Cavalier(Pieces.Couleur.NOIR, 6, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/cavalierNoir.png");
-        cases[7][0] = new Tour(Pieces.Couleur.NOIR, 7, 0, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/tourNoire.png");
-        for (int i = 0; i < 8; i++) {
-            cases[i][1] = new Pion(Pieces.Couleur.NOIR, i, 1, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesNoires/pionNoir.png");
+        cases[0][0] = new Tour(Pieces.Couleur.NOIR, 0, 0, "/img/piecesNoires/tourNoire.png");
+        cases[1][0] = new Cavalier(Pieces.Couleur.NOIR, 1, 0, "/img/piecesNoires/cavalierNoir.png");
+        cases[2][0] = new Fou(Pieces.Couleur.NOIR, 2, 0, "/img/piecesNoires/fouNoir.png");
+        cases[3][0] = new Reine(Pieces.Couleur.NOIR, 3, 0, "/img/piecesNoires/dameNoire.png");
+        cases[4][0] = new Roi(Pieces.Couleur.NOIR, 4, 0, "/img/piecesNoires/roiNoir.png");
+        cases[5][0] = new Fou(Pieces.Couleur.NOIR, 5, 0, "/img/piecesNoires/fouNoir.png");
+        cases[6][0] = new Cavalier(Pieces.Couleur.NOIR, 6, 0, "/img/piecesNoires/cavalierNoir.png");
+        cases[7][0] = new Tour(Pieces.Couleur.NOIR, 7, 0, "/img/piecesNoires/tourNoire.png");
+        for (int i = 0; i < 8; i++) { // On lance une boucle afin de placer les pions noirs sur toute la ligne.
+            cases[i][1] = new Pion(Pieces.Couleur.NOIR, i, 1, "/img/piecesNoires/pionNoir.png");
         }
 
         // Initialisation des pièces blanches
-        cases[0][7] = new Tour(Pieces.Couleur.BLANC, 0, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/tourBlanche.png");
-        cases[1][7] = new Cavalier(Pieces.Couleur.BLANC, 1, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/cavalierBlanc.png");
-        cases[2][7] = new Fou(Pieces.Couleur.BLANC, 2, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/fouBlanc.png");
-        cases[3][7] = new Reine(Pieces.Couleur.BLANC, 3, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/reineBlanche.png");
-        cases[4][7] = new Roi(Pieces.Couleur.BLANC, 4, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/roiBlanc.png");
-        cases[5][7] = new Fou(Pieces.Couleur.BLANC, 5, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/fouBlanc.png");
-        cases[6][7] = new Cavalier(Pieces.Couleur.BLANC, 6, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/cavalierBlanc.png");
-        cases[7][7] = new Tour(Pieces.Couleur.BLANC, 7, 7, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/tourBlanche.png");
-        for (int i = 0; i < 8; i++) {
-            cases[i][6] = new Pion(Pieces.Couleur.BLANC, i, 6, "https://github.com/TAMINE-Cyril-2326104b/SAES2.01-JINGA_GRIMAUD_GUILLERM_TAMINE/blob/ffc4ae1d890d9de41500e9da720f3e0d4b2837ed/src/main/resources/img/piecesBlanches/pionBlanc.png");
+        cases[0][7] = new Tour(Pieces.Couleur.BLANC, 0, 7, "/img/piecesBlanches/tourBlanche.png");
+        cases[1][7] = new Cavalier(Pieces.Couleur.BLANC, 1, 7, "/img/piecesBlanches/cavalierBlanc.png");
+        cases[2][7] = new Fou(Pieces.Couleur.BLANC, 2, 7, "/img/piecesBlanches/fouBlanc.png");
+        cases[3][7] = new Reine(Pieces.Couleur.BLANC, 3, 7, "/img/piecesBlanches/reineBlanche.png");
+        cases[4][7] = new Roi(Pieces.Couleur.BLANC, 4, 7, "/img/piecesBlanches/roiBlanc.png");
+        cases[5][7] = new Fou(Pieces.Couleur.BLANC, 5, 7, "/img/piecesBlanches/fouBlanc.png");
+        cases[6][7] = new Cavalier(Pieces.Couleur.BLANC, 6, 7, "/img/piecesBlanches/cavalierBlanc.png");
+        cases[7][7] = new Tour(Pieces.Couleur.BLANC, 7, 7, "/img/piecesBlanches/tourBlanche.png");
+        for (int i = 0; i < 8; i++) { // On lance une boucle afin de placer les pions blancs sur toute la ligne.
+            cases[i][6] = new Pion(Pieces.Couleur.BLANC, i, 6, "/img/piecesBlanches/pionBlanc.png");
         }
     }
 
