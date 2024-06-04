@@ -65,9 +65,9 @@
                            </FXCollections>
                         </items>
                      </ChoiceBox>
-                     <Button fx:id="jouer" mnemonicParsing="false" styleClass="actif" onAction="#handleChangeScene"> <!-- Le bouton jouer permet de changer d'interface.  -->
+                     <Button fx:id="jouer" mnemonicParsing="false" onAction="#handleChangeScene" styleClass="actif"> <!-- Le bouton jouer permet de changer d'interface.  -->
                         <graphic>
-                           <ImageView  fitHeight="45.0" fitWidth="200.0" styleClass="actif">
+                           <ImageView fitHeight="45.0" fitWidth="200.0" styleClass="actif">
                               <image>
                                  <Image url="@../img/jouerLogo.png" />
                               </image>
@@ -76,6 +76,15 @@
                      </Button>
                   </children>
                </VBox>
+               <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="218.0" style="-fx-background-color: #1f1d1b;" text="Jouer contre un robot" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0">
+                        <image>
+                           <Image url="@../img/LogoRobot.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
                <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="217.0" style="-fx-background-color: #1f1d1b;" text="Tournois" textFill="WHITE">
                   <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0">
