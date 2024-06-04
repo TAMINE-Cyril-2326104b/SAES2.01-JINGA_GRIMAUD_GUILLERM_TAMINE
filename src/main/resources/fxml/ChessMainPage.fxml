@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,57 +17,57 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="438.0" prefWidth="710.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controllers.ChessMainPageController">
+<BorderPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controllers.ChessMainPageController">
    <right>
-
-
-      <!-- Second half with VBox -->
-      <VBox alignment="TOP_CENTER" prefHeight="408.0" prefWidth="357.0" spacing="10" styleClass="actif" BorderPane.alignment="CENTER">
-         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+      <VBox alignment="TOP_CENTER" spacing="10" styleClass="actif" BorderPane.alignment="CENTER">
+         <HBox alignment="TOP_CENTER">
             <children>
-               <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="123.0">
+               <VBox alignment="TOP_CENTER">
                   <children>
                      <Button styleClass="actif">
                         <graphic>
                            <ImageView fitHeight="69.0" fitWidth="126.0">
                               <image>
-                                 <Image url="@../img/nouvelle_partie.png" /> <!-- Ajout de l'image de nouvelle partie  -->
+                                 <Image url="@../img/nouvelle_partie.png" />
                               </image>
                            </ImageView>
-                        </graphic></Button>
+                        </graphic>
+                     </Button>
                   </children>
                </VBox>
-               <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="116.0">
+               <VBox alignment="TOP_CENTER">
                   <children>
-                     <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="108.0" styleClass="onglet">
+                     <Button mnemonicParsing="false" styleClass="onglet">
                         <graphic>
                            <ImageView>
                               <image>
-                                 <Image url="@../img/logoPartieMenu.png" /> <!-- Ajout de l'image du menu de partie.  -->
+                                 <Image url="@../img/logoPartieMenu.png" />
                               </image>
                            </ImageView>
-                        </graphic></Button>
+                        </graphic>
+                     </Button>
                   </children>
                </VBox>
-               <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="84.0">
+               <VBox alignment="TOP_CENTER">
                   <children>
                      <Button mnemonicParsing="false" styleClass="onglet">
                         <graphic>
                            <ImageView styleClass="onglet">
                               <image>
-                                 <Image url="@../img/logoJoueurMenu.png" /> <!-- Ajout de l'image du menu du joueur.  -->
+                                 <Image url="@../img/logoJoueurMenu.png" />
                               </image>
                            </ImageView>
-                        </graphic></Button>
+                        </graphic>
+                     </Button>
                   </children>
                </VBox>
             </children>
          </HBox>
-         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0">
+         <VBox alignment="TOP_CENTER" spacing="40.0">
             <children>
-               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <VBox alignment="TOP_CENTER">
                   <children>
-                     <ChoiceBox prefHeight="60.0" prefWidth="150.0" styleClass="selecteur" >
+                     <ChoiceBox prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
                         <items>
                            <FXCollections fx:factory="observableArrayList">
                               <String fx:value="5 min" />
@@ -80,15 +81,16 @@
                      </ChoiceBox>
                   </children>
                </VBox>
-               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE" onAction="#handleChangeScenePlayer">
+               <Button mnemonicParsing="false" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE" onAction="#handleChangeScenePlayer">
                   <graphic>
                      <ImageView fitHeight="47.0" fitWidth="50.0">
                         <image>
                            <Image url="@../img/LogoJoueur.png" />
                         </image>
                      </ImageView>
-                  </graphic></Button>
-               <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="285.0" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE" onAction="#handleChangeSceneBot">
+                  </graphic>
+               </Button>
+               <Button mnemonicParsing="false" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE" onAction="#handleChangeSceneBot">
                   <graphic>
                      <ImageView fitHeight="45.0" fitWidth="40.0">
                         <image>
@@ -97,29 +99,26 @@
                      </ImageView>
                   </graphic>
                </Button>
-               <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="217.0" style="-fx-background-color: #1f1d1b;" text="Tournois" textFill="WHITE">
+               <Button mnemonicParsing="false" style="-fx-background-color: #1f1d1b;" text="Tournois" textFill="WHITE">
                   <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0">
                         <image>
-                           <Image url="@../img/Logo_Tournois.png" /> <!-- Ajout de l'image du tournoi. -->
+                           <Image url="@../img/Logo_Tournois.png" />
                         </image>
                      </ImageView>
                   </graphic>
                </Button>
             </children>
          </VBox>
-
-
-         <!-- Ici, il s'agit de la mise en place des statistiques présentes au bas de la page.  -->
-         <HBox prefHeight="100.0" prefWidth="200.0">
+         <HBox>
             <children>
-               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <HBox alignment="BOTTOM_CENTER" spacing="5.0">
                   <children>
                      <Label styleClass="statsChiffres" text="144328" textFill="WHITE" />
                      <Label styleClass="statsLabel" text="JOUENT" textFill="WHITE" />
                   </children>
                </HBox>
-               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <HBox alignment="BOTTOM_CENTER" spacing="5.0">
                   <children>
                      <Label styleClass="statsChiffres" text="13459965" textFill="WHITE" />
                      <Label styleClass="statsLabel" text="PARTIES" textFill="WHITE" />
@@ -130,12 +129,11 @@
       </VBox>
    </right>
    <left>
-      <!-- Ici, il s'agit de la création de la bannière de l'adversaire. -->
-      <VBox prefHeight="420.0" prefWidth="336.0" styleClass="onglet" BorderPane.alignment="CENTER_LEFT">
+      <VBox styleClass="onglet" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="290.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <ImageView fitHeight="55.0" fitWidth="55.0">
+                  <ImageView fx:id="opponentImageView" fitHeight="55.0" fitWidth="55.0">
                      <image>
                         <Image url="@../img/adversaire_img.png" />
                      </image>
@@ -146,12 +144,11 @@
                   <Insets bottom="3.0" left="5.0" top="3.0" />
                </VBox.margin>
             </HBox>
-            <!-- Création du tableau contenant la grille à gauche. -->
-            <HBox prefHeight="258.0" prefWidth="316.0">
+            <HBox>
                <children>
-                  <StackPane prefHeight="263.0" prefWidth="344.0">
+                  <StackPane>
                      <children>
-                        <ImageView fitHeight="320.0" fitWidth="341.0">
+                        <ImageView fx:id="boardImageView" fitHeight="320.0" fitWidth="341.0">
                            <image>
                               <Image url="@../img/plateau.png" />
                            </image>
@@ -159,7 +156,7 @@
                               <Insets left="15.0" right="15.0" />
                            </StackPane.margin>
                         </ImageView>
-                        <GridPane id="gridPane" prefHeight="310.0" prefWidth="323.0">
+                        <GridPane fx:id="gridPane" id="gridPane">
                            <columnConstraints>
                               <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
                               <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
@@ -191,15 +188,14 @@
                   </StackPane>
                </children>
             </HBox>
-            <!-- Création de la bannière du joueur.  -->
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <ImageView fitHeight="55.0" fitWidth="55.0">
+                  <ImageView fx:id="playerImageView" fitHeight="55.0" fitWidth="55.0">
                      <image>
                         <Image url="@../img/pdp_blanc.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="16.0" prefWidth="112.0" text="Nom choisi" textFill="WHITE" />
+                  <Label text="Nom choisi" textFill="WHITE" />
                </children>
                <VBox.margin>
                   <Insets bottom="3.0" left="5.0" top="3.0" />
