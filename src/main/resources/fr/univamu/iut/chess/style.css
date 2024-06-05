@@ -4,13 +4,16 @@
     -fx-font-family: Helvetica, Arial, Hiragino Sans GB, STXihei, Microsoft YaHei, WenQuanYi Micro Hei, Hind, MS Gothic, Apple SD Gothic Neo, NanumBarunGothic, sans-serif;
 }
 
-.onglet{
-    -fx-background-color: #21201e;
+.light-square {
+    -fx-background-color: #f0d9b5; /* Couleur de la case claire */
 }
 
-/* onglet actif */
-.actif{
-    -fx-background-color: #262522;
+.dark-square {
+    -fx-background-color: #b58863; /* Couleur de la case foncée */
+}
+
+.onglet{
+    -fx-background-color: #21201e;
 }
 
 .statsChiffres {

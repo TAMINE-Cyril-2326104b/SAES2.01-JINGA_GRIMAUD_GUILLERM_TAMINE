@@ -1,4 +1,4 @@
-package com.example.chess;
+package fr.univamu.iut.chess;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +19,8 @@ public class ChessApplication extends Application {
 
         //Plateau plateau=new Plateau(gridPane);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("/fxml/ChessMainPage.fxml")); // On charge le fichier FXML.
-        Scene scene = new Scene(fxmlLoader.load(), 1400, 680); // On crée notre scène à partir du fichier FXML et on définit sa taille.
+        FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("fxml/ChessMainPage.fxml")); // On charge le fichier FXML.
+        Scene scene = new Scene(fxmlLoader.load(), 1400, 480); // On crée notre scène à partir du fichier FXML et on définit sa taille.
         stage.setTitle("Chess.com"); // On définit le titre de notre interface.
 
         stage.setScene(scene);

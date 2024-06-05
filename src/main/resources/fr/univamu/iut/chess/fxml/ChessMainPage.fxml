@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessMainPageController">
+  <!--
+   <right>
+      <VBox alignment="TOP_CENTER" spacing="10" styleClass="onglet" BorderPane.alignment="CENTER">
+         <HBox alignment="TOP_CENTER">
+            <children>
+               <VBox alignment="TOP_CENTER">
+                  <children>
+                     <Button styleClass="actif">
+                        <graphic>
+                           <ImageView fitHeight="69.0" fitWidth="126.0">
+                              <image>
+                                 <Image url="@../img/nouvelle_partie.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+               </VBox>
+               <VBox alignment="TOP_CENTER">
+                  <children>
+                     <Button mnemonicParsing="false" styleClass="onglet">
+                        <graphic>
+                           <ImageView>
+                              <image>
+                                 <Image url="@../img/logoPartieMenu.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+               </VBox>
+               <VBox alignment="TOP_CENTER">
+                  <children>
+                     <Button mnemonicParsing="false" styleClass="onglet">
+                        <graphic>
+                           <ImageView styleClass="onglet">
+                              <image>
+                                 <Image url="@../img/logoJoueurMenu.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+         <VBox alignment="TOP_CENTER" spacing="40.0">
+            <children>
+               <VBox alignment="TOP_CENTER">
+                  <children>
+                     <ChoiceBox prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
+                        <items>
+                           <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="5 min" />
+                              <String fx:value="10 min" />
+                              <String fx:value="20 min" />
+                           </FXCollections>
+                        </items>
+                        <VBox.margin>
+                           <Insets top="10.0" />
+                        </VBox.margin>
+                     </ChoiceBox>
+                  </children>
+               </VBox>
+               <Button mnemonicParsing="false"  onAction="#handleJouerPlayerButtonClicked" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="47.0" fitWidth="50.0">
+                        <image>
+                           <Image url="@../img/LogoJoueur.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#handleJouerBotButtonClicked" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="45.0" fitWidth="40.0">
+                        <image>
+                           <Image url="@../img/LogoRobot.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button mnemonicParsing="false" style="-fx-background-color: #1f1d1b;" text="Tournois" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0">
+                        <image>
+                           <Image url="@../img/Logo_Tournois.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
+         </VBox>
+         <HBox>
+            <children>
+               <HBox alignment="BOTTOM_CENTER" spacing="5.0">
+                  <children>
+                     <Label styleClass="statsChiffres" text="144328" textFill="WHITE" />
+                     <Label styleClass="statsLabel" text="JOUENT" textFill="WHITE" />
+                  </children>
+               </HBox>
+               <HBox alignment="BOTTOM_CENTER" spacing="5.0">
+                  <children>
+                     <Label styleClass="statsChiffres" text="13459965" textFill="WHITE" />
+                     <Label styleClass="statsLabel" text="PARTIES" textFill="WHITE" />
+                  </children>
+               </HBox>
+            </children>
+         </HBox>
+      </VBox>
+   </right>
+   -->
+   <center>
+      <VBox styleClass="onglet" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <HBox alignment="BOTTOM_CENTER" spacing="10.0">
+               <children>
+                  <ImageView fx:id="opponentImageView" fitHeight="55.0" fitWidth="55.0">
+                     <image>
+                        <Image url="@../img/adversaire_img.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="18.0" prefWidth="277.0" text="Adversaire" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="5.0" top="3.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER">
+               <children>
+                  <StackPane>
+                     <children>
+                        <GridPane id="gridPaneJeu" fx:id="gridPaneJeu">
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="light-square">
+                              <ImageView fx:id="a8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="dark-square">
+                              <ImageView fx:id="b8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="light-square">
+                              <ImageView fx:id="c8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="dark-square">
+                              <ImageView fx:id="d8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="0" styleClass="light-square">
+                              <ImageView fx:id="e8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="0" styleClass="dark-square">
+                              <ImageView fx:id="f8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="0" styleClass="light-square">
+                              <ImageView fx:id="g8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="0" styleClass="dark-square">
+                              <ImageView fx:id="h8" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 7 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="dark-square">
+                              <ImageView fx:id="a7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="light-square">
+                              <ImageView fx:id="b7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="dark-square">
+                              <ImageView fx:id="c7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="light-square">
+                              <ImageView fx:id="d7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="1" styleClass="dark-square">
+                              <ImageView fx:id="e7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="1" styleClass="light-square">
+                              <ImageView fx:id="f7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="1" styleClass="dark-square">
+                              <ImageView fx:id="g7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="1" styleClass="light-square">
+                              <ImageView fx:id="h7" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 6 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="light-square">
+                              <ImageView fx:id="a6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="dark-square">
+                              <ImageView fx:id="b6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="light-square">
+                              <ImageView fx:id="c6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="2" styleClass="dark-square">
+                              <ImageView fx:id="d6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="2" styleClass="light-square">
+                              <ImageView fx:id="e6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="2" styleClass="dark-square">
+                              <ImageView fx:id="f6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="2" styleClass="light-square">
+                              <ImageView fx:id="g6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="2" styleClass="dark-square">
+                              <ImageView fx:id="h6" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 5 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="dark-square">
+                              <ImageView fx:id="a5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="light-square">
+                              <ImageView fx:id="b5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="3" styleClass="dark-square">
+                              <ImageView fx:id="c5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="3" styleClass="light-square">
+                              <ImageView fx:id="d5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="3" styleClass="dark-square">
+                              <ImageView fx:id="e5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="3" styleClass="light-square">
+                              <ImageView fx:id="f5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="3" styleClass="dark-square">
+                              <ImageView fx:id="g5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="3" styleClass="light-square">
+                              <ImageView fx:id="h5" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 4 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="light-square">
+                              <ImageView fx:id="a4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="dark-square">
+                              <ImageView fx:id="b4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="4" styleClass="light-square">
+                              <ImageView fx:id="c4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="4" styleClass="dark-square">
+                              <ImageView fx:id="d4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="4" styleClass="light-square">
+                              <ImageView fx:id="e4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="4" styleClass="dark-square">
+                              <ImageView fx:id="f4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="4" styleClass="light-square">
+                              <ImageView fx:id="g4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="4" styleClass="dark-square">
+                              <ImageView fx:id="h4" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 3 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="dark-square">
+                              <ImageView fx:id="a3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="5" styleClass="light-square">
+                              <ImageView fx:id="b3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="5" styleClass="dark-square">
+                              <ImageView fx:id="c3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="5" styleClass="light-square">
+                              <ImageView fx:id="d3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="5" styleClass="dark-square">
+                              <ImageView fx:id="e3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="5" styleClass="light-square">
+                              <ImageView fx:id="f3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="5" styleClass="dark-square">
+                              <ImageView fx:id="g3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="5" styleClass="light-square">
+                              <ImageView fx:id="h3" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 2 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="6" styleClass="light-square">
+                              <ImageView fx:id="a2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="6" styleClass="dark-square">
+                              <ImageView fx:id="b2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="6" styleClass="light-square">
+                              <ImageView fx:id="c2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="6" styleClass="dark-square">
+                              <ImageView fx:id="d2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="6" styleClass="light-square">
+                              <ImageView fx:id="e2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="6" styleClass="dark-square">
+                              <ImageView fx:id="f2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="6" styleClass="light-square">
+                              <ImageView fx:id="g2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="6" styleClass="dark-square">
+                              <ImageView fx:id="h2" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+
+                           <!-- Rangée 1 -->
+                           <StackPane GridPane.columnIndex="0" GridPane.rowIndex="7" styleClass="dark-square">
+                              <ImageView fx:id="a1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="1" GridPane.rowIndex="7" styleClass="light-square">
+                              <ImageView fx:id="b1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="2" GridPane.rowIndex="7" styleClass="dark-square">
+                              <ImageView fx:id="c1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="3" GridPane.rowIndex="7" styleClass="light-square">
+                              <ImageView fx:id="d1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="4" GridPane.rowIndex="7" styleClass="dark-square">
+                              <ImageView fx:id="e1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="5" GridPane.rowIndex="7" styleClass="light-square">
+                              <ImageView fx:id="f1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="6" GridPane.rowIndex="7" styleClass="dark-square">
+                              <ImageView fx:id="g1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <StackPane GridPane.columnIndex="7" GridPane.rowIndex="7" styleClass="light-square">
+                              <ImageView fx:id="h1" fitWidth="40" fitHeight="40"/>
+                           </StackPane>
+                           <columnConstraints>
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                              <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" />
+                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" />
+                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" />
+                              <RowConstraints maxHeight="40" minHeight="6.0" prefHeight="40" />
+                              <RowConstraints maxHeight="40.0" minHeight="6.0" prefHeight="40" />
+                              <RowConstraints maxHeight="40" minHeight="6" prefHeight="40" />
+                              <RowConstraints maxHeight="40" minHeight="6" prefHeight="40" />
+                              <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40" />
+                           </rowConstraints>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <StackPane.margin>
+                              <Insets bottom="-5.0" left="30.0" right="30.0" top="-5.0" />
+                           </StackPane.margin>
+                        </GridPane>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" spacing="10.0">
+               <children>
+                  <ImageView fx:id="playerImageView" fitHeight="55.0" fitWidth="55.0">
+                     <image>
+                        <Image url="@../img/pdp_blanc.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="18.0" prefWidth="279.0" text="Nom choisi" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="5.0" top="3.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

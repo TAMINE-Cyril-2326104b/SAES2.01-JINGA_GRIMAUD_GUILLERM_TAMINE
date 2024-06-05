@@ -1,12 +1,15 @@
 module com.example.chess {
     requires javafx.controls;
     requires javafx.fxml;
-            
-                            
-    opens com.example.chess to javafx.fxml;
-    exports com.example.chess;
-    exports com.example.chess.Piece;
-    opens com.example.chess.Piece to javafx.fxml;
-    exports com.example.chess.controllers;
-    opens com.example.chess.controllers to javafx.fxml;
+    requires java.desktop;
+
+
+    opens fr.univamu.iut.chess to javafx.fxml;
+    exports fr.univamu.iut.chess;
+
+    exports fr.univamu.iut.chess.Piece;
+    opens fr.univamu.iut.chess.Piece to javafx.fxml;
+
+    exports fr.univamu.iut.chess.controllers;
+    opens fr.univamu.iut.chess.controllers to javafx.fxml;
 }
