@@ -24,9 +24,65 @@ public class ChessMainPageController implements Initializable {
        // plateau = new Plateau();
         // Afficher les pions sur le plateau
         // afficherPlateau();
-        Image image= new Image( ChessApplication.class.getResource("img/piecesBlanc/pionBlanc.png").toString());
-        ImageView imageview= new ImageView(image);
-        gridPaneJeu.add(imageview,0,0);
+        // On affiche les pieces noires :
+        Image pionNoir= new Image( ChessApplication.class.getResource("img/piecesNoir/pionNoir.png").toString());
+        //ImageView imageview= new ImageView(image);
+        for (int ligne=0; ligne<8; ligne++){
+            gridPaneJeu.add(new ImageView(pionNoir),ligne,1);
+        }
+
+        Image tourNoire = new Image( ChessApplication.class.getResource("img/piecesNoir/tourNoire.png").toString());
+        gridPaneJeu.add(new ImageView(tourNoire), 7,0);
+        gridPaneJeu.add(new ImageView(tourNoire), 0,0);
+
+        Image cavalierNoir = new Image( ChessApplication.class.getResource("img/piecesNoir/cavalierNoir.png").toString());
+        gridPaneJeu.add(new ImageView(cavalierNoir), 6,0);
+        gridPaneJeu.add(new ImageView(cavalierNoir), 1,0);
+
+
+        Image fouNoir = new Image( ChessApplication.class.getResource("img/piecesNoir/fouNoir.png").toString());
+        gridPaneJeu.add(new ImageView(fouNoir), 5,0);
+        gridPaneJeu.add(new ImageView(fouNoir), 2,0);
+
+        Image reineNoire = new Image( ChessApplication.class.getResource("img/piecesNoir/reineNoire.png").toString());
+        gridPaneJeu.add(new ImageView(reineNoire), 4,0);
+
+
+        Image roiNoire = new Image( ChessApplication.class.getResource("img/piecesNoir/roiNoir.png").toString());
+        gridPaneJeu.add(new ImageView(roiNoire), 3,0);
+
+
+        // On affiche les pieces blanches
+        Image pionBlanc= new Image(ChessApplication.class.getResource("img/piecesBlanc/pionBlanc.png").toString());
+        //ImageView imageview2= new ImageView(image2);
+        for (int ligne=0; ligne<8; ligne++){
+            gridPaneJeu.add(new ImageView(pionBlanc),ligne,6);
+        }
+
+        Image tourBlanche = new Image( ChessApplication.class.getResource("img/piecesBlanc/tourBlanche.png").toString());
+        gridPaneJeu.add(new ImageView(tourBlanche), 7,7);
+        gridPaneJeu.add(new ImageView(tourBlanche), 0,7);
+
+        Image cavalierBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/cavalierBlanc.png").toString());
+        gridPaneJeu.add(new ImageView(cavalierBlanc), 6,7);
+        gridPaneJeu.add(new ImageView(cavalierBlanc), 1,7);
+
+
+        Image fouBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/fouBlanc.png").toString());
+        gridPaneJeu.add(new ImageView(fouBlanc), 5,7);
+        gridPaneJeu.add(new ImageView(fouBlanc), 2,7);
+
+        Image reineBlanche = new Image(ChessApplication.class.getResource("img/piecesBlanc/reineBlanche.png").toString());
+        gridPaneJeu.add(new ImageView(reineBlanche), 3,7);
+
+
+        Image roiBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/roiBlanc.png").toString());
+        gridPaneJeu.add(new ImageView(roiBlanc), 4,7);
+
+
+
+
+
     }
 
     private void afficherPlateau() {

@@ -24,6 +24,10 @@ public class ChessBotGameController implements Initializable {
         Image image= new Image("/fr/univ-amu/iut/chess/img/piecesBlanc/pionBlanc.png");
         ImageView imageview= new ImageView(image);
         gridPaneJeu.add(imageview,1,1);
+
+        Image image2= new Image("/fr/univ-amu/iut/chess/img/piecesBlanc/pionBlanc.png");
+        ImageView imageview2= new ImageView(image2);
+        gridPaneJeu.add(imageview2,8,8);
     }
 
     private void afficherPlateau() {

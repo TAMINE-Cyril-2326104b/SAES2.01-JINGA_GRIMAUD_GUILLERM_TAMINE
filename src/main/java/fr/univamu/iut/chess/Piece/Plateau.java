@@ -5,7 +5,11 @@ public class Plateau {
 
     public Plateau() {
         Pion pionBlanc=new Pion("Blanc", "/fr/univ-amu/iut/chess/img/piecesBlanc/pionBlanc.png");
-        placerPiece(pionBlanc, 0,1);
+        for (int ligne=0; ligne < 8 ; ++ligne){
+            placerPiece(pionBlanc, ligne,1);
+        }
+        Pion pionNoir=new Pion("Noir", "/fr/univ-amu/iut/chess/img/piecesNoir/pionNoir.png");
+        placerPiece(pionNoir, 8,8);
         this.pieces = new Piece[8][8];
     }
 
