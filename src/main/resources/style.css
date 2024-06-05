@@ -115,3 +115,7 @@
 .formTextField:hover{
     -fx-border-color: #ffffff;
 }
+
+.timer{
+    -fx-text-alignment: RIGHT;
+}
