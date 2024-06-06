@@ -4,6 +4,7 @@ import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.Piece;
 import fr.univamu.iut.chess.Piece.Pion;
 import fr.univamu.iut.chess.Piece.Plateau;
+import fr.univamu.iut.chess.Piece.Position;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -16,7 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,86 +47,92 @@ public class ChessPlayerGameController implements Initializable {
     private GridPane gridPaneJeu;
 
     private Plateau plateau;
+    private Piece selectedPiece;
+    private Position selectedPosition;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Gestion timers
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
 
-        // plateau = new Plateau();
-        // Afficher les pions sur le plateau
-        // afficherPlateau();
-        // On affiche les pieces noires :
-        Image pionNoir= new Image( ChessApplication.class.getResource("img/piecesNoir/pionNoir.png").toString());
-        //ImageView imageview= new ImageView(image);
-        for (int ligne=0; ligne<8; ligne++){
-            gridPaneJeu.add(new ImageView(pionNoir),ligne,1);
-        }
-
-        Image tourNoire = new Image( ChessApplication.class.getResource("img/piecesNoir/tourNoire.png").toString());
-        gridPaneJeu.add(new ImageView(tourNoire), 7,0);
-        gridPaneJeu.add(new ImageView(tourNoire), 0,0);
-
-        Image cavalierNoir = new Image( ChessApplication.class.getResource("img/piecesNoir/cavalierNoir.png").toString());
-        gridPaneJeu.add(new ImageView(cavalierNoir), 6,0);
-        gridPaneJeu.add(new ImageView(cavalierNoir), 1,0);
-
-
-        Image fouNoir = new Image( ChessApplication.class.getResource("img/piecesNoir/fouNoir.png").toString());
-        gridPaneJeu.add(new ImageView(fouNoir), 5,0);
-        gridPaneJeu.add(new ImageView(fouNoir), 2,0);
-
-        Image reineNoire = new Image( ChessApplication.class.getResource("img/piecesNoir/reineNoire.png").toString());
-        gridPaneJeu.add(new ImageView(reineNoire), 4,0);
-
-
-        Image roiNoire = new Image( ChessApplication.class.getResource("img/piecesNoir/roiNoir.png").toString());
-        gridPaneJeu.add(new ImageView(roiNoire), 3,0);
-
-
-        // On affiche les pieces blanches
-        Image pionBlanc= new Image(ChessApplication.class.getResource("img/piecesBlanc/pionBlanc.png").toString());
-        //ImageView imageview2= new ImageView(image2);
-        for (int ligne=0; ligne<8; ligne++){
-            gridPaneJeu.add(new ImageView(pionBlanc),ligne,6);
-        }
-
-        Image tourBlanche = new Image( ChessApplication.class.getResource("img/piecesBlanc/tourBlanche.png").toString());
-        gridPaneJeu.add(new ImageView(tourBlanche), 7,7);
-        gridPaneJeu.add(new ImageView(tourBlanche), 0,7);
-
-        Image cavalierBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/cavalierBlanc.png").toString());
-        gridPaneJeu.add(new ImageView(cavalierBlanc), 6,7);
-        gridPaneJeu.add(new ImageView(cavalierBlanc), 1,7);
-
-
-        Image fouBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/fouBlanc.png").toString());
-        gridPaneJeu.add(new ImageView(fouBlanc), 5,7);
-        gridPaneJeu.add(new ImageView(fouBlanc), 2,7);
-
-        Image reineBlanche = new Image(ChessApplication.class.getResource("img/piecesBlanc/reineBlanche.png").toString());
-        gridPaneJeu.add(new ImageView(reineBlanche), 3,7);
-
-
-        Image roiBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/roiBlanc.png").toString());
-        gridPaneJeu.add(new ImageView(roiBlanc), 4,7);
-
-
-
-
-
+        this.plateau = new Plateau();
+        afficherPlateau();
     }
 
-    private void afficherPlateau() {
+    public void afficherPlateau() {
+        gridPaneJeu.getChildren().clear(); // Clear the GridPane before adding pieces
+
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
+                // Ajouter les cases du plateau
+                Rectangle rectangle = new Rectangle(40, 40);
+                if ((ligne + colonne) % 2 == 0) {
+                    rectangle.setFill(Color.BEIGE);
+                } else {
+                    rectangle.setFill(Color.GREEN);
+                }
+
+                StackPane stackPane = new StackPane();
+                stackPane.getChildren().add(rectangle);
+
+                // Ajouter les pièces du plateau
                 Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null) {
-                    ImageView imageView = new ImageView(piece.getImageView());
-                    gridPaneJeu.add(imageView, colonne, ligne);
+                    Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
+                    ImageView imageView = new ImageView(image);
+                    stackPane.getChildren().add(imageView);
+
+                    // Ajouter l'événement de clic sur la pièce
+                    int finalLigne = ligne;
+                    int finalColonne = colonne;
+                    imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        handlePieceClick(piece, new Position(finalLigne, finalColonne));
+                    });
+                } else {
+                    // Ajouter l'événement de clic sur la case vide
+                    int finalLigne1 = ligne;
+                    int finalColonne1 = colonne;
+                    stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        handleEmptySquareClick(new Position(finalLigne1, finalColonne1));
+                    });
                 }
+
+                gridPaneJeu.add(stackPane, colonne, ligne);
             }
+        }
+    }
+
+    private void handlePieceClick(Piece piece, Position position) {
+        if (selectedPiece == null) {
+            selectedPiece = piece;
+            selectedPosition = position;
+            System.out.println("Piece selected: " + piece.getClass().getSimpleName() + " at position " + position.getRow() + ", " + position.getCol());
+        } else {
+            // Logique pour déplacer la pièce si une pièce est déjà sélectionnée
+            movePiece(position);
+        }
+    }
+
+    private void handleEmptySquareClick(Position position) {
+        if (selectedPiece != null) {
+            // Logique pour déplacer la pièce sélectionnée vers une case vide
+            movePiece(position);
+        }
+    }
+
+    private void movePiece(Position newPosition) {
+        if (selectedPiece != null && selectedPiece.estDeplacementValide(
+                selectedPosition.getRow(), selectedPosition.getCol(),
+                newPosition.getRow(), newPosition.getCol())) {
+
+            System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
+            plateau.deplacerPiece(
+                    selectedPosition.getRow(), selectedPosition.getCol(),
+                    newPosition.getRow(), newPosition.getCol());
+
+            selectedPiece = null;
+            selectedPosition = null;
+            afficherPlateau(); // Rafraîchir le plateau après le déplacement
         }
     }
 
@@ -155,48 +166,4 @@ public class ChessPlayerGameController implements Initializable {
         }
         isWhiteTurn = !isWhiteTurn;
     }
-
-    /*
-    @FXML
-    private GridPane gridPaneJeu;
-
-    private Plateau plateau;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        plateau = new Plateau();
-
-        // Placer une ligne de pions blancs sur la deuxième rangée (ligne 1)
-        for (int colonne = 0; colonne < 8; colonne++) {
-            Pion pionBlanc = new Pion("Blanc", "https://camo.githubusercontent.com/06bfc1d20e1d241b0f2d991b16252e6f9f907a9320767ea7018d088eba0a6b03/68747470733a2f2f696d616765732e6368657373636f6d66696c65732e636f6d2f63686573732d7468656d65732f7069656365732f6e656f2f3235362f77702e706e67");
-            plateau.placerPiece(pionBlanc, 1, colonne); // La deuxième rangée a l'index 1
-        }
-
-        afficherPlateau();
-    }
-
-    public void afficherPlateau() {
-        for (int ligne = 0; ligne < 8; ligne++) {
-            for (int colonne = 0; colonne < 8; colonne++) {
-                Piece piece = plateau.getPieces()[ligne][colonne];
-                if (piece != null) {
-                    ImageView imageView = getImageViewFromPosition(ligne, colonne);
-                    if (imageView != null) {
-                        imageView.setImage(piece.getImageView().getImage());
-                    }
-                }
-            }
-        }
-    }
-
-    public ImageView getImageViewFromPosition(int ligne, int colonne) {
-        for (var node : gridPaneJeu.getChildren()) {
-            if (node instanceof ImageView && GridPane.getRowIndex(node) == ligne && GridPane.getColumnIndex(node) == colonne) {
-                return (ImageView) node;
-            }
-        }
-        return null;
-    }
-
-     */
 }
