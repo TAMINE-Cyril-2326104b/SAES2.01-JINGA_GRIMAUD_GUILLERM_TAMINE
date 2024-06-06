@@ -1,6 +1,7 @@
 package fr.univamu.iut.chess.controllers;
 
 import fr.univamu.iut.chess.ChessApplication;
+import javafx.scene.paint.Color;
 import fr.univamu.iut.chess.Piece.Piece;
 import fr.univamu.iut.chess.Piece.Plateau;
 import fr.univamu.iut.chess.Piece.Position;
@@ -16,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -40,36 +40,32 @@ public class ChessMainPageController implements Initializable {
     }
 
     public void afficherPlateau() {
-        gridPaneJeu.getChildren().clear(); // Clear the GridPane before adding pieces
+        gridPaneJeu.getChildren().clear();
 
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                // Ajouter les cases du plateau
                 Rectangle rectangle = new Rectangle(40, 40);
                 if ((ligne + colonne) % 2 == 0) {
-                    rectangle.setFill(Color.BEIGE);
-                } else {
                     rectangle.setFill(Color.GREEN);
+                } else {
+                    rectangle.setFill(Color.BEIGE);
                 }
 
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(rectangle);
 
-                // Ajouter les pièces du plateau
                 Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null) {
                     Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
                     ImageView imageView = new ImageView(image);
                     stackPane.getChildren().add(imageView);
 
-                    // Ajouter l'événement de clic sur la pièce
                     int finalLigne = ligne;
                     int finalColonne = colonne;
                     imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         handlePieceClick(piece, new Position(finalLigne, finalColonne));
                     });
                 } else {
-                    // Ajouter l'événement de clic sur la case vide
                     int finalLigne1 = ligne;
                     int finalColonne1 = colonne;
                     stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -88,14 +84,12 @@ public class ChessMainPageController implements Initializable {
             selectedPosition = position;
             System.out.println("Piece selected: " + piece.getClass().getSimpleName() + " at position " + position.getRow() + ", " + position.getCol());
         } else {
-            // Logique pour déplacer la pièce si une pièce est déjà sélectionnée
             movePiece(position);
         }
     }
 
     private void handleEmptySquareClick(Position position) {
         if (selectedPiece != null) {
-            // Logique pour déplacer la pièce sélectionnée vers une case vide
             movePiece(position);
         }
     }
@@ -103,19 +97,17 @@ public class ChessMainPageController implements Initializable {
     private void movePiece(Position newPosition) {
         if (selectedPiece != null && selectedPiece.estDeplacementValide(
                 selectedPosition.getRow(), selectedPosition.getCol(),
-                newPosition.getRow(), newPosition.getCol(), new Piece[selectedPosition.getRow()][selectedPosition.getCol()])) {
+                newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
             plateau.deplacerPiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
                     newPosition.getRow(), newPosition.getCol(), new Piece[selectedPosition.getRow()][selectedPosition.getCol()]);
-
             selectedPiece = null;
             selectedPosition = null;
-            afficherPlateau(); // Rafraîchir le plateau après le déplacement
+            afficherPlateau();
         }
     }
 
-    // Création du fonction permettant le changement de page, démarrant ainsi la partie.
     public void handleChangeSceneBot(ActionEvent event) throws IOException {
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessBotGameForm.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
@@ -125,7 +117,7 @@ public class ChessMainPageController implements Initializable {
         stage.show();
     }
 
-    public void handleChangeScenePlayer(ActionEvent event) throws IOException{
+    public void handleChangeScenePlayer(ActionEvent event) throws IOException {
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessPlayerGameForm.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
@@ -133,5 +125,4 @@ public class ChessMainPageController implements Initializable {
         stage.setScene(secondScene);
         stage.show();
     }
-
 }
