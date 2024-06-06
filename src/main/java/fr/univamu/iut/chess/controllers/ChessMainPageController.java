@@ -7,6 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +25,7 @@ public class ChessMainPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.plateau = new Plateau();
-       // plateau = new Plateau();
+        // plateau = new Plateau();
         // Afficher les pions sur le plateau
         afficherPlateau();
         // On affiche les pieces noires :
@@ -86,14 +89,27 @@ public class ChessMainPageController implements Initializable {
 
     public void afficherPlateau() {
         gridPaneJeu.getChildren().clear(); // Clear the GridPane before adding pieces
+
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                Piece piece = plateau.getPieces(ligne, colonne);
-                System.out.println(piece);
-                if (piece != null) {
-                    Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
-                    ImageView imageView = new ImageView(image);
-                    gridPaneJeu.add(imageView, colonne, ligne);
+                // Ajouter les cases du plateau
+                Rectangle rectangle = new Rectangle(80, 80);
+                if ((ligne + colonne) % 2 == 0) {
+                    rectangle.setFill(Color.BEIGE);
+                } else {
+                    rectangle.setFill(Color.BROWN);
+                }
+
+                StackPane stackPane = new StackPane();
+                stackPane.getChildren().add(rectangle);
+                        Piece piece = plateau.getPieces(ligne, colonne);
+                        System.out.println(piece);
+                        if (piece != null) {
+                            Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
+                            ImageView imageView = new ImageView(image);
+                            gridPaneJeu.add(imageView, colonne, ligne);
+                        }
+                    }
                 }
             }
         }
