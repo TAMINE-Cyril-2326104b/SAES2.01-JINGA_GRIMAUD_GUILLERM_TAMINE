@@ -6,7 +6,7 @@ public class Roi extends Piece {
     }
 
     @Override
-    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee) {
+    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] cases) {
         // Implémentation du déplacement du roi
         return false;
     }

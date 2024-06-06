@@ -27,5 +27,5 @@ public abstract class Piece {
         this.position = position;
     }
 
-    public abstract boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee);
+    public abstract boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] cases);
 }

@@ -103,12 +103,11 @@ public class ChessMainPageController implements Initializable {
     private void movePiece(Position newPosition) {
         if (selectedPiece != null && selectedPiece.estDeplacementValide(
                 selectedPosition.getRow(), selectedPosition.getCol(),
-                newPosition.getRow(), newPosition.getCol())) {
-
+                newPosition.getRow(), newPosition.getCol(), new Piece[selectedPosition.getRow()][selectedPosition.getCol()])) {
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
             plateau.deplacerPiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
-                    newPosition.getRow(), newPosition.getCol());
+                    newPosition.getRow(), newPosition.getCol(), new Piece[selectedPosition.getRow()][selectedPosition.getCol()]);
 
             selectedPiece = null;
             selectedPosition = null;

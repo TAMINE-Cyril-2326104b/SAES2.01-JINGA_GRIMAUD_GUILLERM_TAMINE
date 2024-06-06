@@ -43,7 +43,7 @@ public class Plateau {
         return pieces[ligne][colonne];
     }
 
-    public void deplacerPiece(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee){
+    public void deplacerPiece(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] cases){
         Piece piece = pieces[ligneDepart][colonneDepart];
         pieces[ligneDepart][colonneDepart] = null;
         piece.setPosition(new Position(ligneArrivee, colonneArrivee));

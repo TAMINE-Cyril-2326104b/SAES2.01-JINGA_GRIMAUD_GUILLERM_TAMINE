@@ -9,8 +9,8 @@ public class Pion extends Piece {
 
 
     @Override
-    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee) {
-        int direction = this.getCouleur().equals("Blanc") ? -1 : 1;
+    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] cases) {
+        int direction = this.getCouleur().equals("WHITE") ? -1 : 1;
 
         // Mouvement de 1 case en avant
         if (colonneDepart == colonneArrivee && ligneArrivee == ligneDepart + direction) {
