@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessMainPageController">
-  <!--
    <right>
       <VBox alignment="TOP_CENTER" spacing="10" styleClass="onglet" BorderPane.alignment="CENTER">
          <HBox alignment="TOP_CENTER">
@@ -72,7 +71,7 @@
                      </ChoiceBox>
                   </children>
                </VBox>
-               <Button mnemonicParsing="false"  onAction="#handleJouerPlayerButtonClicked" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" textFill="WHITE">
+               <Button mnemonicParsing="false" styleClass="boutonJeuEnLigne" text="Jouer contre un ami" onAction="#handleChangeScenePlayer" textFill="WHITE">
                   <graphic>
                      <ImageView fitHeight="47.0" fitWidth="50.0">
                         <image>
@@ -81,7 +80,7 @@
                      </ImageView>
                   </graphic>
                </Button>
-               <Button mnemonicParsing="false" onAction="#handleJouerBotButtonClicked" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" textFill="WHITE">
+               <Button mnemonicParsing="false" styleClass="boutonJeuEnLigne" text="Jouer contre l'ordinateur" onAction="#handleChangeSceneBot" textFill="WHITE">
                   <graphic>
                      <ImageView fitHeight="45.0" fitWidth="40.0">
                         <image>
@@ -119,7 +118,6 @@
          </HBox>
       </VBox>
    </right>
-   -->
    <center>
       <VBox styleClass="onglet" BorderPane.alignment="BOTTOM_CENTER">
          <children>

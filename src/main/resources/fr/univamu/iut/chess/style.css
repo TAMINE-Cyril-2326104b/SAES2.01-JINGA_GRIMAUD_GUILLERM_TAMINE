@@ -120,5 +120,7 @@
 }
 
 .timer{
-    -fx-text-alignment: RIGHT;
+    -fx-background-color: #585654;
+    -fx-background-radius: 10px;
+    -fx-padding: 15px;
 }
