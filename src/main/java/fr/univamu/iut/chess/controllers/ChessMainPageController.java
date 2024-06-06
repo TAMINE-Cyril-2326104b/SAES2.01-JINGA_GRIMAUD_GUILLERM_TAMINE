@@ -1,6 +1,5 @@
 package fr.univamu.iut.chess.controllers;
 
-import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.Piece;
 import fr.univamu.iut.chess.Piece.Plateau;
 import javafx.fxml.FXML;
@@ -19,12 +18,15 @@ public class ChessMainPageController implements Initializable {
 
     private Plateau plateau;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.plateau = new Plateau();
        // plateau = new Plateau();
         // Afficher les pions sur le plateau
-        // afficherPlateau();
+        afficherPlateau();
         // On affiche les pieces noires :
+        /*
         Image pionNoir= new Image( ChessApplication.class.getResource("img/piecesNoir/pionNoir.png").toString());
         //ImageView imageview= new ImageView(image);
         for (int ligne=0; ligne<8; ligne++){
@@ -77,25 +79,28 @@ public class ChessMainPageController implements Initializable {
 
 
         Image roiBlanc = new Image( ChessApplication.class.getResource("img/piecesBlanc/roiBlanc.png").toString());
-        gridPaneJeu.add(new ImageView(roiBlanc), 4,7);
-
-
-
+        gridPaneJeu.add(new ImageView(roiBlanc), 4,7);*/
 
 
     }
 
-    private void afficherPlateau() {
+    public void afficherPlateau() {
+        gridPaneJeu.getChildren().clear(); // Clear the GridPane before adding pieces
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
                 Piece piece = plateau.getPieces(ligne, colonne);
+                System.out.println(piece);
                 if (piece != null) {
-                    ImageView imageView = new ImageView(piece.getImageView());
+                    Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
+                    ImageView imageView = new ImageView(image);
                     gridPaneJeu.add(imageView, colonne, ligne);
                 }
             }
         }
     }
+}
+
+
 
 /*
 
@@ -131,5 +136,3 @@ public class ChessMainPageController implements Initializable {
         }
     }
 */
-
-}
