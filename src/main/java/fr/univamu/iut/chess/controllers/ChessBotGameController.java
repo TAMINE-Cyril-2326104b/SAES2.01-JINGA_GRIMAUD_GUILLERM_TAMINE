@@ -105,15 +105,7 @@ public class ChessBotGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         plateau = new Plateau();
-        // Afficher les pions sur le plateau
-        // afficherPlateau();
-        Image image= new Image("/fr/univ-amu/iut/chess/img/piecesBlanc/pionBlanc.png");
-        ImageView imageview= new ImageView(image);
-        gridPaneJeu.add(imageview,1,1);
-
-        Image image2= new Image("/fr/univ-amu/iut/chess/img/piecesBlanc/pionBlanc.png");
-        ImageView imageview2= new ImageView(image2);
-        gridPaneJeu.add(imageview2,8,8);
+        afficherPlateau();
     }
 
     private void afficherPlateau() {
@@ -121,7 +113,7 @@ public class ChessBotGameController implements Initializable {
             for (int colonne = 0; colonne < 8; colonne++) {
                 Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null) {
-                    ImageView imageView = new ImageView(piece.getImageView());
+                    ImageView imageView = new ImageView(piece.getImagePath());
                     gridPaneJeu.add(imageView, colonne, ligne);
                 }
             }

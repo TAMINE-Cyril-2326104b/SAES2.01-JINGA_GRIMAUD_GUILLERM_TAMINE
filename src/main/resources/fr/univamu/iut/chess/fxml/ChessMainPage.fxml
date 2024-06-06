@@ -376,6 +376,7 @@
                   </StackPane>
                </children>
             </HBox>
+
             <HBox alignment="BOTTOM_CENTER" spacing="10.0">
                <children>
                   <ImageView fx:id="playerImageView" fitHeight="55.0" fitWidth="55.0">

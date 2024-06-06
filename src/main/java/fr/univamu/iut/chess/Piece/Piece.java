@@ -1,18 +1,31 @@
 package fr.univamu.iut.chess.Piece;
 
 public abstract class Piece {
-        private String couleur;
-        private String url;
+    private Color couleur;
+    private String imagePath;
+    private Position position;
 
-        public Piece(String couleur, String imagePath) {
-            this.couleur = couleur;
-            this.url = imagePath;
-        }
-
-
-        public String getImageView() {
-            return url;
-        }
-
-        public abstract boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee);
+    public Piece(Color couleur, String imagePath, Position position) {
+        this.couleur = couleur;
+        this.imagePath = imagePath;
+        this.position = position;
     }
+
+    public Color getCouleur() {
+        return couleur;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public abstract boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee);
+}
