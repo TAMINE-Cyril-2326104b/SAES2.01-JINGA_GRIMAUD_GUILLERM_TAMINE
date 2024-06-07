@@ -3,8 +3,6 @@ package fr.univamu.iut.chess.controllers;
 import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.Piece;
 import fr.univamu.iut.chess.Piece.Plateau;
-import fr.univamu.iut.chess.Piece.Position;
-import fr.univamu.iut.chess.Piece.Couleur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -46,9 +42,9 @@ public class ChessMainPageController implements Initializable {
             for (int colonne = 0; colonne < 8; colonne++) {
                 Rectangle rectangle = new Rectangle(40, 40);
                 if ((ligne + colonne) % 2 == 0) {
-                    rectangle.setFill(Color.BEIGE);
+                    rectangle.setFill(Color.rgb(235,236,208));
                 } else {
-                    rectangle.setFill(Color.GREEN);
+                    rectangle.setFill(Color.rgb(119,149,86));
                 }
 
                 StackPane stackPane = new StackPane();
@@ -60,11 +56,7 @@ public class ChessMainPageController implements Initializable {
                     ImageView imageView = new ImageView(image);
                     stackPane.getChildren().add(imageView);
 
-                    int finalLigne = ligne;
-                    int finalColonne = colonne;
                 } else {
-                    int finalLigne1 = ligne;
-                    int finalColonne1 = colonne;
                 }
 
                 gridPaneJeu.add(stackPane, colonne, ligne);

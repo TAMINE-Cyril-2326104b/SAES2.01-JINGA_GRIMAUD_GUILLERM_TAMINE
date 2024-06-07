@@ -77,9 +77,9 @@ public class ChessBotGameController implements Initializable {
             for (int colonne = 0; colonne < 8; colonne++) {
                 Rectangle rectangle = new Rectangle(40, 40);
                 if ((ligne + colonne) % 2 == 0) {
-                    rectangle.setFill(Color.BEIGE);
+                    rectangle.setFill(Color.rgb(235,236,208));
                 } else {
-                    rectangle.setFill(Color.GREEN);
+                    rectangle.setFill(Color.rgb(119,149,86));
                 }
 
                 StackPane stackPane = new StackPane();
