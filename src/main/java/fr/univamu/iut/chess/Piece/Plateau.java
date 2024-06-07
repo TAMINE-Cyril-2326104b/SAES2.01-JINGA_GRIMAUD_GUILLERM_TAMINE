@@ -53,4 +53,16 @@ public class Plateau {
         piece.setPosition(new Position(ligneArrivee, colonneArrivee));
         this.pieces[ligneArrivee][colonneArrivee] = piece;
     }
+    public Position findKingPosition(Couleur kingColor) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                Piece piece = pieces[row][col];
+                if (piece != null && piece instanceof Roi && piece.getColor() == kingColor) {
+                    return new Position(row, col);
+                }
+            }
+        }
+        // Si le roi n'est pas trouvé (ce qui ne devrait pas arriver), renvoie null ou une exception
+        return null;
+    }
 }

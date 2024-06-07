@@ -53,6 +53,8 @@
                     </VBox>
                 </children>
             </HBox>
+
+            <Label fx:id="tourMessage" layoutX="10" layoutY="10" text="Les blancs jouent !"  textFill="white"/>
         </VBox>
     </right>
     <center>
@@ -66,6 +68,8 @@
                             </image>
                         </ImageView>
                         <Label prefHeight="18.0" prefWidth="277.0" text="BOT" textFill="WHITE" />
+
+                        <Label fx:id="timeLabelBlack" text="10:00" textFill="aliceblue" styleClass="timer"/>
                     </children>
                     <VBox.margin>
                         <Insets bottom="3.0" left="5.0" top="3.0" />
@@ -321,6 +325,7 @@
                             </image>
                         </ImageView>
                         <Label prefHeight="18.0" prefWidth="279.0" text="Nom choisi" textFill="WHITE" />
+                        <Label fx:id="timeLabelWhite" text="10:00" textFill="aliceblue" styleClass="timer"/>
                     </children>
                     <VBox.margin>
                         <Insets bottom="3.0" left="5.0" top="3.0" />

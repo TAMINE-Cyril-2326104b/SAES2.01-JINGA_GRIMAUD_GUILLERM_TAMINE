@@ -135,7 +135,6 @@
                </VBox.margin>
             </HBox>
             <HBox alignment="BOTTOM_CENTER">
-               <Label fx:id="tourMessage" layoutX="10" layoutY="10" text="Les blancs jouent !"  textFill="white"/>
 
                <children>
                   <StackPane>

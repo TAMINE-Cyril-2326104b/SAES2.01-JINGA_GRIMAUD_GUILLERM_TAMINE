@@ -12,7 +12,7 @@ public class Fou extends Piece {
         int deltaColonne = Math.abs(colonneArrivee - colonneDepart);
 
         // Vérifier que le fou se déplace en diagonale
-        if (deltaLigne == deltaColonne) {
+        if (deltaLigne == deltaColonne && deltaLigne != 0) {
             // Vérifier que toutes les cases entre le départ et l'arrivée sont vides
             int stepLigne = (ligneArrivee - ligneDepart) / deltaLigne;
             int stepColonne = (colonneArrivee - colonneDepart) / deltaColonne;

@@ -44,7 +44,6 @@ public class ChessMainPageController implements Initializable {
         this.plateau = new Plateau();
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
-        afficherTourMessage();
     }
 
     public void afficherPlateau() {
@@ -70,63 +69,14 @@ public class ChessMainPageController implements Initializable {
 
                     int finalLigne = ligne;
                     int finalColonne = colonne;
-                    imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handlePieceClick(piece, new Position(finalLigne, finalColonne)));
                 } else {
                     int finalLigne1 = ligne;
                     int finalColonne1 = colonne;
-                    stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleEmptySquareClick(new Position(finalLigne1, finalColonne1)));
                 }
 
                 gridPaneJeu.add(stackPane, colonne, ligne);
             }
         }
-    }
-
-    private void handlePieceClick(Piece piece, Position position) {
-        if (selectedPiece == null) {
-            if (piece.getColor().equals(currentTurn)) {
-                selectedPiece = piece;
-                selectedPosition = position;
-                System.out.println("Piece selected: " + piece.getClass().getSimpleName() + " at position " + position.getRow() + ", " + position.getCol());
-            }
-        } else {
-            movePiece(position);
-        }
-    }
-
-    private void handleEmptySquareClick(Position position) {
-        if (selectedPiece != null) {
-            movePiece(position);
-        }
-    }
-
-    private void movePiece(Position newPosition) {
-        if (selectedPiece != null && selectedPiece.estDeplacementValide(
-                selectedPosition.getRow(), selectedPosition.getCol(),
-                newPosition.getRow(), newPosition.getCol(), plateau.getPieces()) == true) {
-            System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
-            plateau.deplacerPiece(
-                    selectedPosition.getRow(), selectedPosition.getCol(),
-                    newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
-
-            selectedPiece = null;
-            selectedPosition = null;
-            switchTurn();
-            afficherPlateau();
-        }
-        else {
-            selectedPiece = null;
-            selectedPosition = null;
-        }
-    }
-
-    private void switchTurn() {
-        currentTurn = (currentTurn == Couleur.WHITE) ? Couleur.BLACK : Couleur.WHITE;
-        afficherTourMessage();
-    }
-
-    private void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
     }
 
     public void handleChangeSceneBot(ActionEvent event) throws IOException {
