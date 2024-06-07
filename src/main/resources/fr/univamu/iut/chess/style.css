@@ -1,7 +1,7 @@
 .interface{
     -fx-background-color: #302e2b;
     -fx-text-fill: #ffffff;
-    -fx-font-family: Helvetica, Arial, Hiragino Sans GB, STXihei, Microsoft YaHei, WenQuanYi Micro Hei, Hind, MS Gothic, Apple SD Gothic Neo, NanumBarunGothic, sans-serif;
+    -fx-font-family: "Helvetica", "Arial", "Hiragino Sans GB", "STXihei", "Microsoft YaHei", "WenQuanYi Micro Hei", "Hind", "MS Gothic", "Apple SD Gothic Neo", "NanumBarunGothic", "sans-serif";
 }
 
 .light-square {
@@ -93,14 +93,14 @@
 .formTitre{
     -fx-text-fill: #ffffff;
     -fx-font-size: 35px;
-    -fx-font-style: bold;
+    -fx-font-style:normal;
     -fx-padding: 10px;
 }
 
 .formJoueur{
     -fx-text-fill: #a3d160;
     -fx-font-size: 20px;
-    -fx-font-style: bold;
+    -fx-font-style: normal;
 }
 
 .formLabel{
