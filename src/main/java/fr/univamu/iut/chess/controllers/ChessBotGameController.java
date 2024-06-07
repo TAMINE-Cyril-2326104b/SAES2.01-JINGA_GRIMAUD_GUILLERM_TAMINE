@@ -49,6 +49,10 @@ public class ChessBotGameController implements Initializable {
     private GridPane gridPaneJeu;
     @FXML
     private Label tourMessage;
+    @FXML
+    private Label mouvImpo;
+    @FXML
+    private Label echecLabel;
 
     private Plateau plateau;
     private Piece selectedPiece;
@@ -123,15 +127,41 @@ public class ChessBotGameController implements Initializable {
         if (selectedPiece != null && selectedPiece.estDeplacementValide(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
+
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
             plateau.deplacerPiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
                     newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
 
+
+            if (isKingInCheck(currentTurn)) {
+                if (isCheckmate(currentTurn)) {
+                    endGame(currentTurn == Couleur.WHITE ? Couleur.BLACK : Couleur.WHITE);
+                } else {
+                    echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
+                    if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
+                        plateau.deplacerPiece(
+                                newPosition.getRow(), newPosition.getCol(),
+                                selectedPosition.getRow(), selectedPosition.getCol(),
+                                plateau.getPieces());
+                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        switchTurn();
+                    }
+                }
+            }else {
+                echecLabel.setText("");
+            }
+            if(currentTurn.equals(Couleur.WHITE) && isKingInCheck(Couleur.BLACK) || currentTurn.equals(Couleur.BLACK) && isKingInCheck(Couleur.WHITE)){
+                echecLabel.setText((currentTurn == Couleur.BLACK ? "Les blancs" : "Les noirs") + " echec !");
+
+            }else {
+                echecLabel.setText("");
+            }
             selectedPiece = null;
             selectedPosition = null;
             switchTurn();
             afficherPlateau();
+
         }
         else {
             selectedPiece = null;
@@ -237,5 +267,49 @@ public class ChessBotGameController implements Initializable {
         String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
         System.out.println(winner+" on gagnés");
         Platform.exit(); // fermer l'application
+    }
+    private boolean isKingInCheck(Couleur kingColor) {
+        Position kingPosition = plateau.findKingPosition(kingColor);
+        for (Piece[] row : plateau.getPieces()) {
+            for (Piece piece : row) {
+                if (piece != null && piece.getColor() != kingColor) {
+                    if (piece.estDeplacementValide(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), plateau.getPieces())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    private boolean isCheckmate(Couleur kingColor) {
+        if (!isKingInCheck(kingColor)) {
+            return false;
+        }
+
+        Position kingPosition = plateau.findKingPosition(kingColor);
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                Position newPosition = new Position(row, col);
+                if (plateau.getPieces()[row][col] == null || plateau.getPieces()[row][col].getColor() != kingColor) {
+                    if (canKingMove(kingPosition, newPosition)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    private boolean canKingMove(Position from, Position to) {
+        Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
+        if (king.estDeplacementValide(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
+            Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
+            plateau.getPieces()[to.getRow()][to.getCol()] = king;
+            plateau.getPieces()[from.getRow()][from.getCol()] = null;
+            boolean isInCheck = isKingInCheck(king.getColor());
+            plateau.getPieces()[from.getRow()][from.getCol()] = king;
+            plateau.getPieces()[to.getRow()][to.getCol()] = temp;
+            return !isInCheck;
+        }
+        return false;
     }
 }

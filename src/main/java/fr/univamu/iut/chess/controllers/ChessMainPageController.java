@@ -31,18 +31,11 @@ public class ChessMainPageController implements Initializable {
     @FXML
     private GridPane gridPaneJeu;
 
-    @FXML
-    private Label tourMessage;
-
     private Plateau plateau;
-    private Piece selectedPiece;
-    private Position selectedPosition;
-    private Couleur currentTurn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.plateau = new Plateau();
-        this.currentTurn = Couleur.WHITE;
         afficherPlateau();
     }
 

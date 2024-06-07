@@ -49,6 +49,8 @@ public class ChessPlayerGameController implements Initializable {
     private Label tourMessage;
     @FXML
     private Label echecLabel;
+    @FXML
+    private Label mouvImpo;
 
     private Plateau plateau;
     private Piece selectedPiece;
@@ -129,20 +131,35 @@ public class ChessPlayerGameController implements Initializable {
                     selectedPosition.getRow(), selectedPosition.getCol(),
                     newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
 
-            selectedPiece = null;
-            selectedPosition = null;
 
-            switchTurn();
-            afficherPlateau();
             if (isKingInCheck(currentTurn)) {
                 if (isCheckmate(currentTurn)) {
                     endGame(currentTurn == Couleur.WHITE ? Couleur.BLACK : Couleur.WHITE);
                 } else {
-                    echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec eee !");
+                    echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
+                    if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
+                        plateau.deplacerPiece(
+                                newPosition.getRow(), newPosition.getCol(),
+                                selectedPosition.getRow(), selectedPosition.getCol(),
+                                plateau.getPieces());
+                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        switchTurn();
+                    }
                 }
             }else {
                 echecLabel.setText("");
             }
+            if(currentTurn.equals(Couleur.WHITE) && isKingInCheck(Couleur.BLACK) || currentTurn.equals(Couleur.BLACK) && isKingInCheck(Couleur.WHITE)){
+                echecLabel.setText((currentTurn == Couleur.BLACK ? "Les blancs" : "Les noirs") + " echec !");
+
+            }else {
+                echecLabel.setText("");
+            }
+            selectedPiece = null;
+            selectedPosition = null;
+            switchTurn();
+            afficherPlateau();
+
         }
         else {
             selectedPiece = null;
@@ -207,7 +224,7 @@ public class ChessPlayerGameController implements Initializable {
         timerBlack.stop();
 
         String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
-        System.out.println(winner+" on gagnés");
+        System.out.println(winner+" ont gagnés");
         Platform.exit(); // fermer l'application
     }
     private boolean isKingInCheck(Couleur kingColor) {
