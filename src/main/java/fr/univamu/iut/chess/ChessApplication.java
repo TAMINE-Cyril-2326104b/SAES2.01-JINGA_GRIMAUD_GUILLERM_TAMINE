@@ -9,11 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 public class ChessApplication extends Application {
-    //private GridPane gridPane;
-
-//    public ChessApplication(GridPane gridPane) {
-//        this.gridPane = gridPane;
-//    }
 
     @Override
     public void start(Stage stage) throws IOException {

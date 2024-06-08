@@ -238,9 +238,14 @@ public class ChessPlayerGameController implements Initializable {
         timerWhite.stop();
         timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
-        System.out.println(winner+" ont gagnés");
-        Platform.exit(); // fermer l'application
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Fin de la partie");
+            alert.setHeaderText(null);
+            alert.setContentText( winnerColor + " WINS !");
+            alert.showAndWait();
+        });
+        Platform.exit();
     }
     private boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);

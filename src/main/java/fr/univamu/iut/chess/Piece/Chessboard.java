@@ -1,8 +1,5 @@
 package fr.univamu.iut.chess.Piece;
 
-
-
-
 public class Chessboard {
     private final Piece[][] pieces;
 
@@ -59,6 +56,12 @@ public class Chessboard {
         piece.setPosition(new Position(ligneArrivee, colonneArrivee));
         this.pieces[ligneArrivee][colonneArrivee] = piece;
     }
+
+    // Ajouter une méthode pour définir une pièce à une position spécifique
+    public void setPiece(int row, int col, Piece piece) {
+        this.pieces[row][col] = piece;
+    }
+
     public Position findKingPosition(Couleur kingColor) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {

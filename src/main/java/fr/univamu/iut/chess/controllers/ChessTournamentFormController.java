@@ -1,22 +1,16 @@
 package fr.univamu.iut.chess.controllers;
 
 import fr.univamu.iut.chess.ChessApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChessTournamentFormController {
 
@@ -25,6 +19,11 @@ public class ChessTournamentFormController {
 
     @FXML
     private TextField player1Field_name;
+
+    @FXML
+    private Label joueurTournoi;
+
+    private int i=1;
 
     @FXML
     private void handleSubmitButtonAction() throws IOException {
@@ -38,6 +37,7 @@ public class ChessTournamentFormController {
     }
     @FXML
     private void handleAddPlayer() throws IOException {
+        joueurTournoi.setText("Joueur " + ++i);
         String firstName = player1Field_firstname.getText().trim();
         String lastName = player1Field_name.getText().trim();
         if (!firstName.isEmpty() && !lastName.isEmpty()) {
