@@ -70,6 +70,7 @@ public class ChessMainPageController implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(secondScene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -79,6 +80,7 @@ public class ChessMainPageController implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(secondScene);
+        stage.centerOnScreen();
         stage.show();
     }
 }

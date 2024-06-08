@@ -19,7 +19,7 @@
             <HBox alignment="TOP_CENTER">
                 <children>
                     <VBox alignment="TOP_CENTER">
-                        <Button styleClass="actif">
+                        <Button styleClass="actif" onAction="#handleNewGameButtonAction">
                             <graphic>
                                 <ImageView fitHeight="69.0" fitWidth="126.0">
                                     <Image url="@../img/nouvelle_partie.png" />
