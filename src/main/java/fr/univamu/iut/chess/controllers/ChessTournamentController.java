@@ -24,14 +24,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.util.*;
 import java.util.ResourceBundle;
 
-public class ChessPlayerGameController implements Initializable {
+public class ChessTournamentController implements Initializable {
 
     @FXML
     private Label timeLabelWhite;
@@ -72,7 +70,7 @@ public class ChessPlayerGameController implements Initializable {
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
         afficherTourMessage();
-        String filePath = "PlayerGame_joueurs.csv";
+        String filePath = "TournamentGame.csv";
         File file = new File(filePath);
         if (file.exists()) {
             readLastTwoLinesFromCSV(file);
@@ -82,6 +80,7 @@ public class ChessPlayerGameController implements Initializable {
         }
         startGame();
     }
+
 
     public void afficherPlateau() {
         gridPaneJeu.getChildren().clear();
@@ -189,7 +188,7 @@ public class ChessPlayerGameController implements Initializable {
     }
 
     private void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+        tourMessage.setText((currentTurn == Couleur.WHITE ? NomChoisiLabel : AdvLabel) + " jouent !");
     }
 
 
@@ -238,9 +237,8 @@ public class ChessPlayerGameController implements Initializable {
         timerWhite.stop();
         timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
+        String winner = (winnerColor == Couleur.WHITE) ? "Les blancs "+NomChoisiLabel : "Les noirs "+AdvLabel;
         System.out.println(winner+" ont gagnés");
-        Platform.exit(); // fermer l'application
     }
     private boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
@@ -336,5 +334,27 @@ public class ChessPlayerGameController implements Initializable {
             NomChoisiLabel.setText("CSV is empty or does not contain enough lines");
         }
     }
+    public static void deleteLineContainingPhrase(String phrase) {
+        List<String> lines = new ArrayList<>();
 
+        try (BufferedReader reader = new BufferedReader(new FileReader("TournamentGame.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.contains(phrase)) {
+                    lines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("TournamentGame.csv"))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

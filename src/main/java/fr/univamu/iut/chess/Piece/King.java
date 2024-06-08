@@ -1,12 +1,13 @@
 package fr.univamu.iut.chess.Piece;
 
-public class Roi extends Piece {
-    public Roi(Couleur couleur, String imagePath, Position position) {
+public class King extends Piece {
+    // La classe Roi hérite des caractéristiques de la classe abstraite Piece.
+    public King(Couleur couleur, String imagePath, Position position) {
         super(couleur, imagePath, position);
     }
 
     @Override
-    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
+    public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int deltaLigne = Math.abs(ligneArrivee - ligneDepart);
         int deltaColonne = Math.abs(colonneArrivee - colonneDepart);
 

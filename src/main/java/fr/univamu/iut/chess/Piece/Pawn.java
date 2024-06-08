@@ -1,13 +1,13 @@
 package fr.univamu.iut.chess.Piece;
 
-public class Pion extends Piece {
-
-    public Pion(Couleur color, String imagePath, Position position) {
+public class Pawn extends Piece {
+    // La classe Pion hérite des caractéristiques de la classe abstraite Piece.
+    public Pawn(Couleur color, String imagePath, Position position) {
         super(color, imagePath, position);
     }
 
     @Override
-    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
+    public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int direction = (this.getColor() == Couleur.WHITE) ? -1 : 1; // Les pions blancs montent, les pions noirs descendent
 
         // Vérification du déplacement d'une case en avant

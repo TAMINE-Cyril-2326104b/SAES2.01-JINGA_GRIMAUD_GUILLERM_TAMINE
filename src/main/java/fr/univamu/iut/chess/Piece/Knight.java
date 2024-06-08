@@ -1,13 +1,15 @@
 package fr.univamu.iut.chess.Piece;
 
-public class Cavalier extends Piece {
 
-    public Cavalier(Couleur couleur, String imagePath, Position position) {
+
+public class Knight extends Piece {
+
+    public Knight(Couleur couleur, String imagePath, Position position) {
         super(couleur, imagePath, position);
     }
 
     @Override
-    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
+    public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int deltaLigne = Math.abs(ligneArrivee - ligneDepart);
         int deltaColonne = Math.abs(colonneArrivee - colonneDepart);
 
