@@ -1,20 +1,14 @@
 package fr.univamu.iut.chess.controllers;
 
-import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.Couleur;
 import fr.univamu.iut.chess.Piece.Piece;
-import fr.univamu.iut.chess.Piece.Plateau;
+import fr.univamu.iut.chess.Piece.Chessboard;
 import fr.univamu.iut.chess.Piece.Position;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
@@ -22,10 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +46,7 @@ public class ChessBotGameController implements Initializable {
     @FXML
     private Label echecLabel;
 
-    private Plateau plateau;
+    private Chessboard chessboard;
     private Piece selectedPiece;
     private Position selectedPosition;
     private Couleur currentTurn;
@@ -63,7 +55,7 @@ public class ChessBotGameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
-        this.plateau = new Plateau();
+        this.chessboard = new Chessboard();
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
         afficherTourMessage();
@@ -85,7 +77,7 @@ public class ChessBotGameController implements Initializable {
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(rectangle);
 
-                Piece piece = plateau.getPieces(ligne, colonne);
+                Piece piece = chessboard.getPieces(ligne, colonne);
                 if (piece != null) {
                     Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
                     ImageView imageView = new ImageView(image);
@@ -124,14 +116,14 @@ public class ChessBotGameController implements Initializable {
     }
 
     private void movePiece(Position newPosition) {
-        if (selectedPiece != null && selectedPiece.estDeplacementValide(
+        if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
-                newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
+                newPosition.getRow(), newPosition.getCol(), chessboard.getPieces())) {
 
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
-            plateau.deplacerPiece(
+            chessboard.movePiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
-                    newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
+                    newPosition.getRow(), newPosition.getCol(), chessboard.getPieces());
 
 
             if (isKingInCheck(currentTurn)) {
@@ -140,10 +132,10 @@ public class ChessBotGameController implements Initializable {
                 } else {
                     echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
                     if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
-                        plateau.deplacerPiece(
+                        chessboard.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
-                                plateau.getPieces());
+                                chessboard.getPieces());
                         mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
                         switchTurn();
                     }
@@ -185,7 +177,7 @@ public class ChessBotGameController implements Initializable {
         if (!validMoves.isEmpty()) {
             Random rand = new Random();
             Move move = validMoves.get(rand.nextInt(validMoves.size()));
-            selectedPiece = plateau.getPieces(move.from.getRow(), move.from.getCol());
+            selectedPiece = chessboard.getPieces(move.from.getRow(), move.from.getCol());
             selectedPosition = new Position(move.from.getRow(),move.from.getCol());
             handleEmptySquareClick(new Position(move.to.getRow(),move.to.getCol()));
             movePiece(move.to);
@@ -196,11 +188,11 @@ public class ChessBotGameController implements Initializable {
         List<Move> validMoves = new ArrayList<>();
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                Piece piece = plateau.getPieces(ligne, colonne);
+                Piece piece = chessboard.getPieces(ligne, colonne);
                 if (piece != null && piece.getColor().equals(couleur)) {
                     for (int newLigne = 0; newLigne < 8; newLigne++) {
                         for (int newColonne = 0; newColonne < 8; newColonne++) {
-                            if (piece.estDeplacementValide(ligne, colonne, newLigne, newColonne, plateau.getPieces())) {
+                            if (piece.isMoveLegal(ligne, colonne, newLigne, newColonne, chessboard.getPieces())) {
                                 validMoves.add(new Move(new Position(ligne, colonne), new Position(newLigne, newColonne)));
                             }
                         }
@@ -269,11 +261,11 @@ public class ChessBotGameController implements Initializable {
         Platform.exit(); // fermer l'application
     }
     private boolean isKingInCheck(Couleur kingColor) {
-        Position kingPosition = plateau.findKingPosition(kingColor);
-        for (Piece[] row : plateau.getPieces()) {
+        Position kingPosition = chessboard.findKingPosition(kingColor);
+        for (Piece[] row : chessboard.getPieces()) {
             for (Piece piece : row) {
                 if (piece != null && piece.getColor() != kingColor) {
-                    if (piece.estDeplacementValide(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), plateau.getPieces())) {
+                    if (piece.isMoveLegal(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), chessboard.getPieces())) {
                         return true;
                     }
                 }
@@ -286,11 +278,11 @@ public class ChessBotGameController implements Initializable {
             return false;
         }
 
-        Position kingPosition = plateau.findKingPosition(kingColor);
+        Position kingPosition = chessboard.findKingPosition(kingColor);
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 Position newPosition = new Position(row, col);
-                if (plateau.getPieces()[row][col] == null || plateau.getPieces()[row][col].getColor() != kingColor) {
+                if (chessboard.getPieces()[row][col] == null || chessboard.getPieces()[row][col].getColor() != kingColor) {
                     if (canKingMove(kingPosition, newPosition)) {
                         return false;
                     }
@@ -300,14 +292,14 @@ public class ChessBotGameController implements Initializable {
         return true;
     }
     private boolean canKingMove(Position from, Position to) {
-        Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
-        if (king.estDeplacementValide(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
-            Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
-            plateau.getPieces()[to.getRow()][to.getCol()] = king;
-            plateau.getPieces()[from.getRow()][from.getCol()] = null;
+        Piece king = chessboard.getPieces()[from.getRow()][from.getCol()];
+        if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), chessboard.getPieces())) {
+            Piece temp = chessboard.getPieces()[to.getRow()][to.getCol()];
+            chessboard.getPieces()[to.getRow()][to.getCol()] = king;
+            chessboard.getPieces()[from.getRow()][from.getCol()] = null;
             boolean isInCheck = isKingInCheck(king.getColor());
-            plateau.getPieces()[from.getRow()][from.getCol()] = king;
-            plateau.getPieces()[to.getRow()][to.getCol()] = temp;
+            chessboard.getPieces()[from.getRow()][from.getCol()] = king;
+            chessboard.getPieces()[to.getRow()][to.getCol()] = temp;
             return !isInCheck;
         }
         return false;

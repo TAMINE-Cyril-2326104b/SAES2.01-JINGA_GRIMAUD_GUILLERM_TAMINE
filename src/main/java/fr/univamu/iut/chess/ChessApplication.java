@@ -25,7 +25,7 @@ public class ChessApplication extends Application {
         stage.setTitle("Chess.com"); // On définit le titre de notre interface.
 
         stage.setScene(scene);
-        stage.show();
+        stage.show(); // On fait apparaître notre interface.
     }
 
     public static void main(String[] args) {

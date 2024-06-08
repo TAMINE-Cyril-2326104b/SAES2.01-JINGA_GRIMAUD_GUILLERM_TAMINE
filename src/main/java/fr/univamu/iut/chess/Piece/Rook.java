@@ -1,12 +1,15 @@
 package fr.univamu.iut.chess.Piece;
 
-public class Tour extends Piece {
-    public Tour(Couleur couleur, String imagePath, Position position) {
+public class Rook extends Piece {
+    // La classe Rook hérite des caractéristiques de la classe abstraite Piece.
+    public Rook(Couleur couleur, String imagePath, Position position) {
         super(couleur, imagePath, position);
     }
 
+    // On utilise l'annotation @Override et on réecrit la fonction isMoveLegal :
+    // La tour ne peut se déplacer uniquement à la verticale ou l'horizontale.
     @Override
-    public boolean estDeplacementValide(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
+    public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         if (ligneDepart != ligneArrivee && colonneDepart != colonneArrivee) {
             return false;
         }

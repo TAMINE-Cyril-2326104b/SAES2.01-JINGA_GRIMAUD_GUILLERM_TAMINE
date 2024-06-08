@@ -2,7 +2,7 @@ package fr.univamu.iut.chess.controllers;
 
 import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.Piece;
-import fr.univamu.iut.chess.Piece.Plateau;
+import fr.univamu.iut.chess.Piece.Chessboard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,15 +27,15 @@ public class ChessMainPageController implements Initializable {
     @FXML
     private GridPane gridPaneJeu;
 
-    private Plateau plateau;
+    private Chessboard chessboard;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.plateau = new Plateau();
-        afficherPlateau();
+        this.chessboard = new Chessboard();
+        displayChessboard();
     }
 
-    public void afficherPlateau() {
+    public void displayChessboard() {
         gridPaneJeu.getChildren().clear();
 
         for (int ligne = 0; ligne < 8; ligne++) {
@@ -50,7 +50,7 @@ public class ChessMainPageController implements Initializable {
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(rectangle);
 
-                Piece piece = plateau.getPieces(ligne, colonne);
+                Piece piece = chessboard.getPieces(ligne, colonne);
                 if (piece != null) {
                     Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
                     ImageView imageView = new ImageView(image);
