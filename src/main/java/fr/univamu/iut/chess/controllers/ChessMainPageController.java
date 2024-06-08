@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,8 +33,17 @@ public class ChessMainPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        clearCSVFile();
         this.chessboard = new Chessboard();
         displayChessboard();
+    }
+    private void clearCSVFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("TournamentGame.csv"))) {
+            // Writing an empty string to clear the file
+            writer.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void displayChessboard() {
@@ -78,6 +89,15 @@ public class ChessMainPageController implements Initializable {
     // Une fonction permettant de changer de scène et d'affronter un autre joueur
     public void handleChangeScenePlayer(ActionEvent event) throws IOException{
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessPlayerGameForm.fxml")); // On charge la page de formulaire FXML
+        Scene secondScene = new Scene(secondSceneParent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(secondScene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+    public void handleChangeSceneTournament(ActionEvent event) throws IOException{
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessTournamentForm.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
