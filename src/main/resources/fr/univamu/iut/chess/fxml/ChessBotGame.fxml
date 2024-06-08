@@ -20,7 +20,7 @@
                 <children>
                     <VBox alignment="TOP_CENTER">
                         <children>
-                            <Button styleClass="actif" onAction="#handleNewGameButtonAction">
+                            <Button styleClass="onglet" onAction="#handleNewGameButtonAction">
                                 <graphic>
                                     <ImageView fitHeight="69.0" fitWidth="126.0">
                                         <image>
