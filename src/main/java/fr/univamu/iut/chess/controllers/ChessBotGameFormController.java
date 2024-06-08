@@ -43,6 +43,7 @@ public class ChessBotGameFormController {
 
         Stage stage = (Stage) player1Field_firstname.getScene().getWindow();
         stage.setScene(firstScene);
+        stage.centerOnScreen();
         stage.show();
     }
 }

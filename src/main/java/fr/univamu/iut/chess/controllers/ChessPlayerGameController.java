@@ -1,11 +1,18 @@
 package fr.univamu.iut.chess.controllers;
 
+import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,8 +21,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,6 +47,10 @@ public class ChessPlayerGameController implements Initializable {
 
     @FXML
     private GridPane gridPaneJeu;
+    @FXML
+    private Label NomChoisiLabel;
+    @FXML
+    private Label AdvLabel;
 
     @FXML
     private Label tourMessage;
@@ -43,7 +59,7 @@ public class ChessPlayerGameController implements Initializable {
     @FXML
     private Label mouvImpo;
 
-    private Chessboard chessboard;
+    private Plateau plateau;
     private Piece selectedPiece;
     private Position selectedPosition;
     private Couleur currentTurn;
@@ -52,21 +68,29 @@ public class ChessPlayerGameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
-        this.chessboard = new Chessboard();
+        this.plateau = new Plateau();
         this.currentTurn = Couleur.WHITE;
-        displayChessboard();
+        afficherPlateau();
         afficherTourMessage();
+        String filePath = "PlayerGame_joueurs.csv";
+        File file = new File(filePath);
+        if (file.exists()) {
+            readLastTwoLinesFromCSV(file);
+        } else {
+            AdvLabel.setText("File not found");
+            NomChoisiLabel.setText("File not found");
+        }
         startGame();
     }
 
-    public void displayChessboard() {
+    public void afficherPlateau() {
         gridPaneJeu.getChildren().clear();
 
-        for (int row = 0; row < 8; row++) {
-            for (int column = 0; column < 8; column++) {
-                Rectangle rectangle = new Rectangle(40, 40); // On génère un rectangle de 40x40
-                if ((row + column) % 2 == 0) {
-                    rectangle.setFill(Color.rgb(235,236,208)); // On colorie ce rectnagle en
+        for (int ligne = 0; ligne < 8; ligne++) {
+            for (int colonne = 0; colonne < 8; colonne++) {
+                Rectangle rectangle = new Rectangle(40, 40);
+                if ((ligne + colonne) % 2 == 0) {
+                    rectangle.setFill(Color.rgb(235,236,208));
                 } else {
                     rectangle.setFill(Color.rgb(119,149,86));
                 }
@@ -74,22 +98,22 @@ public class ChessPlayerGameController implements Initializable {
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(rectangle);
 
-                Piece piece = chessboard.getPieces(row, column);
+                Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null) {
                     Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
                     ImageView imageView = new ImageView(image);
                     stackPane.getChildren().add(imageView);
 
-                    int finalLigne = row;
-                    int finalColonne = column;
+                    int finalLigne = ligne;
+                    int finalColonne = colonne;
                     imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handlePieceClick(piece, new Position(finalLigne, finalColonne)));
                 } else {
-                    int finalLigne1 = row;
-                    int finalColonne1 = column;
+                    int finalLigne1 = ligne;
+                    int finalColonne1 = colonne;
                     stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleEmptySquareClick(new Position(finalLigne1, finalColonne1)));
                 }
 
-                gridPaneJeu.add(stackPane, column, row);
+                gridPaneJeu.add(stackPane, colonne, ligne);
             }
         }
     }
@@ -113,14 +137,14 @@ public class ChessPlayerGameController implements Initializable {
     }
 
     private void movePiece(Position newPosition) {
-        if (selectedPiece != null && selectedPiece.isMoveLegal(
+        if (selectedPiece != null && selectedPiece.estDeplacementValide(
                 selectedPosition.getRow(), selectedPosition.getCol(),
-                newPosition.getRow(), newPosition.getCol(), chessboard.getPieces())) {
+                newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
 
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
-            chessboard.movePiece(
+            plateau.deplacerPiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
-                    newPosition.getRow(), newPosition.getCol(), chessboard.getPieces());
+                    newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
 
 
             if (isKingInCheck(currentTurn)) {
@@ -129,10 +153,10 @@ public class ChessPlayerGameController implements Initializable {
                 } else {
                     echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
                     if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
-                        chessboard.movePiece(
+                        plateau.deplacerPiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
-                                chessboard.getPieces());
+                                plateau.getPieces());
                         mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
                         switchTurn();
                     }
@@ -149,7 +173,7 @@ public class ChessPlayerGameController implements Initializable {
             selectedPiece = null;
             selectedPosition = null;
             switchTurn();
-            displayChessboard();
+            afficherPlateau();
 
         }
         else {
@@ -219,11 +243,11 @@ public class ChessPlayerGameController implements Initializable {
         Platform.exit(); // fermer l'application
     }
     private boolean isKingInCheck(Couleur kingColor) {
-        Position kingPosition = chessboard.findKingPosition(kingColor);
-        for (Piece[] row : chessboard.getPieces()) {
+        Position kingPosition = plateau.findKingPosition(kingColor);
+        for (Piece[] row : plateau.getPieces()) {
             for (Piece piece : row) {
                 if (piece != null && piece.getColor() != kingColor) {
-                    if (piece.isMoveLegal(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), chessboard.getPieces())) {
+                    if (piece.estDeplacementValide(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), plateau.getPieces())) {
                         return true;
                     }
                 }
@@ -236,11 +260,11 @@ public class ChessPlayerGameController implements Initializable {
             return false;
         }
 
-        Position kingPosition = chessboard.findKingPosition(kingColor);
+        Position kingPosition = plateau.findKingPosition(kingColor);
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 Position newPosition = new Position(row, col);
-                if (chessboard.getPieces()[row][col] == null || chessboard.getPieces()[row][col].getColor() != kingColor) {
+                if (plateau.getPieces()[row][col] == null || plateau.getPieces()[row][col].getColor() != kingColor) {
                     if (canKingMove(kingPosition, newPosition)) {
                         return false;
                     }
@@ -250,17 +274,67 @@ public class ChessPlayerGameController implements Initializable {
         return true;
     }
     private boolean canKingMove(Position from, Position to) {
-        Piece king = chessboard.getPieces()[from.getRow()][from.getCol()];
-        if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), chessboard.getPieces())) {
-            Piece temp = chessboard.getPieces()[to.getRow()][to.getCol()];
-            chessboard.getPieces()[to.getRow()][to.getCol()] = king;
-            chessboard.getPieces()[from.getRow()][from.getCol()] = null;
+        Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
+        if (king.estDeplacementValide(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
+            Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
+            plateau.getPieces()[to.getRow()][to.getCol()] = king;
+            plateau.getPieces()[from.getRow()][from.getCol()] = null;
             boolean isInCheck = isKingInCheck(king.getColor());
-            chessboard.getPieces()[from.getRow()][from.getCol()] = king;
-            chessboard.getPieces()[to.getRow()][to.getCol()] = temp;
+            plateau.getPieces()[from.getRow()][from.getCol()] = king;
+            plateau.getPieces()[to.getRow()][to.getCol()] = temp;
             return !isInCheck;
         }
         return false;
+    }
+
+    public void handleNewGameButtonAction(ActionEvent event) throws IOException{
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
+        Scene secondScene = new Scene(secondSceneParent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(secondScene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+    private void readLastTwoLinesFromCSV(File file) {
+        String secondLastLine = "";
+        String lastLine = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    secondLastLine = lastLine;
+                    lastLine = line;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Assuming CSV format: lastName, firstName
+        if (!lastLine.isEmpty() && !secondLastLine.isEmpty()) {
+            String[] lastParts = lastLine.split(",");
+            String[] secondLastParts = secondLastLine.split(",");
+            if (lastParts.length >= 2 && secondLastParts.length >= 2) {
+                String lastNameLast = lastParts[0].trim();
+                String firstNameLast = lastParts[1].trim();
+                String lastNameSecondLast = secondLastParts[0].trim();
+                String firstNameSecondLast = secondLastParts[1].trim();
+                if (!lastNameLast.isEmpty() && !firstNameLast.isEmpty() && !lastNameSecondLast.isEmpty() && !firstNameSecondLast.isEmpty()) {
+                    AdvLabel.setText(lastNameLast + " " + firstNameLast);
+                    NomChoisiLabel.setText( lastNameSecondLast + " " + firstNameSecondLast);
+                } else {
+                    AdvLabel.setText("Invalid CSV format: empty values");
+                    NomChoisiLabel.setText("Invalid CSV format: empty values");
+                }
+            } else {
+                AdvLabel.setText("Invalid CSV format: not enough values");
+                NomChoisiLabel.setText("Invalid CSV format: not enough values");
+            }
+        } else {
+            AdvLabel.setText("CSV is empty or does not contain enough lines");
+            NomChoisiLabel.setText("CSV is empty or does not contain enough lines");
+        }
     }
 
 }

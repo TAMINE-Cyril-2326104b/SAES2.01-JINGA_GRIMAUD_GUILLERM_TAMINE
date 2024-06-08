@@ -1,14 +1,20 @@
 package fr.univamu.iut.chess.controllers;
 
+import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.Couleur;
 import fr.univamu.iut.chess.Piece.Piece;
-import fr.univamu.iut.chess.Piece.Chessboard;
+import fr.univamu.iut.chess.Piece.Plateau;
 import fr.univamu.iut.chess.Piece.Position;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
@@ -16,8 +22,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +48,8 @@ public class ChessBotGameController implements Initializable {
     private int timeWhite = 600; // 10 minutes in seconds
     private int timeBlack = 600; // 10 minutes in seconds
     private boolean isWhiteTurn = true;
+    @FXML
+    private Label LabelNom;
 
     @FXML
     private GridPane gridPaneJeu;
@@ -46,7 +60,7 @@ public class ChessBotGameController implements Initializable {
     @FXML
     private Label echecLabel;
 
-    private Chessboard chessboard;
+    private Plateau plateau;
     private Piece selectedPiece;
     private Position selectedPosition;
     private Couleur currentTurn;
@@ -55,10 +69,17 @@ public class ChessBotGameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
-        this.chessboard = new Chessboard();
+        this.plateau = new Plateau();
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
         afficherTourMessage();
+        String filePath = "BotGame_joueur.csv";
+        File file = new File(filePath);
+        if (file.exists()) {
+            readLastLineFromCSV(file);
+        } else {
+            LabelNom.setText("File not found");
+        }
         startGame();
     }
 
@@ -77,7 +98,7 @@ public class ChessBotGameController implements Initializable {
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(rectangle);
 
-                Piece piece = chessboard.getPieces(ligne, colonne);
+                Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null) {
                     Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
                     ImageView imageView = new ImageView(image);
@@ -116,14 +137,14 @@ public class ChessBotGameController implements Initializable {
     }
 
     private void movePiece(Position newPosition) {
-        if (selectedPiece != null && selectedPiece.isMoveLegal(
+        if (selectedPiece != null && selectedPiece.estDeplacementValide(
                 selectedPosition.getRow(), selectedPosition.getCol(),
-                newPosition.getRow(), newPosition.getCol(), chessboard.getPieces())) {
+                newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
 
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
-            chessboard.movePiece(
+            plateau.deplacerPiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
-                    newPosition.getRow(), newPosition.getCol(), chessboard.getPieces());
+                    newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
 
 
             if (isKingInCheck(currentTurn)) {
@@ -132,10 +153,10 @@ public class ChessBotGameController implements Initializable {
                 } else {
                     echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
                     if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
-                        chessboard.movePiece(
+                        plateau.deplacerPiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
-                                chessboard.getPieces());
+                                plateau.getPieces());
                         mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
                         switchTurn();
                     }
@@ -177,7 +198,7 @@ public class ChessBotGameController implements Initializable {
         if (!validMoves.isEmpty()) {
             Random rand = new Random();
             Move move = validMoves.get(rand.nextInt(validMoves.size()));
-            selectedPiece = chessboard.getPieces(move.from.getRow(), move.from.getCol());
+            selectedPiece = plateau.getPieces(move.from.getRow(), move.from.getCol());
             selectedPosition = new Position(move.from.getRow(),move.from.getCol());
             handleEmptySquareClick(new Position(move.to.getRow(),move.to.getCol()));
             movePiece(move.to);
@@ -188,11 +209,11 @@ public class ChessBotGameController implements Initializable {
         List<Move> validMoves = new ArrayList<>();
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                Piece piece = chessboard.getPieces(ligne, colonne);
+                Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null && piece.getColor().equals(couleur)) {
                     for (int newLigne = 0; newLigne < 8; newLigne++) {
                         for (int newColonne = 0; newColonne < 8; newColonne++) {
-                            if (piece.isMoveLegal(ligne, colonne, newLigne, newColonne, chessboard.getPieces())) {
+                            if (piece.estDeplacementValide(ligne, colonne, newLigne, newColonne, plateau.getPieces())) {
                                 validMoves.add(new Move(new Position(ligne, colonne), new Position(newLigne, newColonne)));
                             }
                         }
@@ -261,11 +282,11 @@ public class ChessBotGameController implements Initializable {
         Platform.exit(); // fermer l'application
     }
     private boolean isKingInCheck(Couleur kingColor) {
-        Position kingPosition = chessboard.findKingPosition(kingColor);
-        for (Piece[] row : chessboard.getPieces()) {
+        Position kingPosition = plateau.findKingPosition(kingColor);
+        for (Piece[] row : plateau.getPieces()) {
             for (Piece piece : row) {
                 if (piece != null && piece.getColor() != kingColor) {
-                    if (piece.isMoveLegal(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), chessboard.getPieces())) {
+                    if (piece.estDeplacementValide(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), plateau.getPieces())) {
                         return true;
                     }
                 }
@@ -278,11 +299,11 @@ public class ChessBotGameController implements Initializable {
             return false;
         }
 
-        Position kingPosition = chessboard.findKingPosition(kingColor);
+        Position kingPosition = plateau.findKingPosition(kingColor);
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 Position newPosition = new Position(row, col);
-                if (chessboard.getPieces()[row][col] == null || chessboard.getPieces()[row][col].getColor() != kingColor) {
+                if (plateau.getPieces()[row][col] == null || plateau.getPieces()[row][col].getColor() != kingColor) {
                     if (canKingMove(kingPosition, newPosition)) {
                         return false;
                     }
@@ -292,16 +313,52 @@ public class ChessBotGameController implements Initializable {
         return true;
     }
     private boolean canKingMove(Position from, Position to) {
-        Piece king = chessboard.getPieces()[from.getRow()][from.getCol()];
-        if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), chessboard.getPieces())) {
-            Piece temp = chessboard.getPieces()[to.getRow()][to.getCol()];
-            chessboard.getPieces()[to.getRow()][to.getCol()] = king;
-            chessboard.getPieces()[from.getRow()][from.getCol()] = null;
+        Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
+        if (king.estDeplacementValide(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
+            Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
+            plateau.getPieces()[to.getRow()][to.getCol()] = king;
+            plateau.getPieces()[from.getRow()][from.getCol()] = null;
             boolean isInCheck = isKingInCheck(king.getColor());
-            chessboard.getPieces()[from.getRow()][from.getCol()] = king;
-            chessboard.getPieces()[to.getRow()][to.getCol()] = temp;
+            plateau.getPieces()[from.getRow()][from.getCol()] = king;
+            plateau.getPieces()[to.getRow()][to.getCol()] = temp;
             return !isInCheck;
         }
         return false;
+    }
+
+    public void handleNewGameButtonAction(ActionEvent event) throws IOException{
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
+        Scene secondScene = new Scene(secondSceneParent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(secondScene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    private void readLastLineFromCSV(File file) {
+        String lastLine = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lastLine = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Assuming CSV format: lastName, firstName
+        if (!lastLine.isEmpty()) {
+            String[] parts = lastLine.split(",");
+            if (parts.length >= 2) {
+                String lastName = parts[0].trim();
+                String firstName = parts[1].trim();
+                LabelNom.setText(lastName + " " + firstName);
+            } else {
+                LabelNom.setText("Invalid CSV format");
+            }
+        } else {
+            LabelNom.setText("CSV is empty");
+        }
     }
 }
