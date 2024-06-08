@@ -38,7 +38,7 @@ public class ChessBotGameFormController {
             e.printStackTrace();
         }
 
-        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessBotGame.fxml"));
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessBotGame.fxml")); // On charge la page permettant de jouer contre l'ordinateur
         Scene firstScene = new Scene(secondSceneParent);
 
         Stage stage = (Stage) player1Field_firstname.getScene().getWindow();

@@ -89,210 +89,210 @@
                             <children>
                                 <GridPane id="gridPaneJeu" fx:id="gridPaneJeu">
                                     <StackPane styleClass="light-square" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                        <ImageView fx:id="a8" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                        <ImageView fx:id="b8" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                                        <ImageView fx:id="c8" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                                        <ImageView fx:id="d8" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="4" GridPane.rowIndex="0">
-                                        <ImageView fx:id="e8" fitHeight="40" fitWidth="40" />
+                                        <ImageView  fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="5" GridPane.rowIndex="0">
-                                        <ImageView fx:id="f8" fitHeight="40" fitWidth="40" />
+                                        <ImageView  fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="6" GridPane.rowIndex="0">
-                                        <ImageView fx:id="g8" fitHeight="40" fitWidth="40" />
+                                        <ImageView  fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="7" GridPane.rowIndex="0">
-                                        <ImageView fx:id="h8" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 7 -->
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                        <ImageView fx:id="a7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                        <ImageView fx:id="b7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                        <ImageView fx:id="c7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                        <ImageView fx:id="d7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                        <ImageView fx:id="e7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                        <ImageView fx:id="f7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="6" GridPane.rowIndex="1">
-                                        <ImageView fx:id="g7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="7" GridPane.rowIndex="1">
-                                        <ImageView fx:id="h7" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 6 -->
                                     <StackPane styleClass="light-square" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                                        <ImageView fx:id="a6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                        <ImageView fx:id="b6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                        <ImageView fx:id="c6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                                        <ImageView fx:id="d6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                                        <ImageView fx:id="e6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="5" GridPane.rowIndex="2">
-                                        <ImageView fx:id="f6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="6" GridPane.rowIndex="2">
-                                        <ImageView fx:id="g6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="7" GridPane.rowIndex="2">
-                                        <ImageView fx:id="h6" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 5 -->
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                                        <ImageView fx:id="a5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                        <ImageView fx:id="b5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                        <ImageView fx:id="c5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                                        <ImageView fx:id="d5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                                        <ImageView fx:id="e5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="5" GridPane.rowIndex="3">
-                                        <ImageView fx:id="f5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="6" GridPane.rowIndex="3">
-                                        <ImageView fx:id="g5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="7" GridPane.rowIndex="3">
-                                        <ImageView fx:id="h5" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 4 -->
                                     <StackPane styleClass="light-square" GridPane.columnIndex="0" GridPane.rowIndex="4">
-                                        <ImageView fx:id="a4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                        <ImageView fx:id="b4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                        <ImageView fx:id="c4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                                        <ImageView fx:id="d4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="4" GridPane.rowIndex="4">
-                                        <ImageView fx:id="e4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="5" GridPane.rowIndex="4">
-                                        <ImageView fx:id="f4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="6" GridPane.rowIndex="4">
-                                        <ImageView fx:id="g4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="7" GridPane.rowIndex="4">
-                                        <ImageView fx:id="h4" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 3 -->
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="0" GridPane.rowIndex="5">
-                                        <ImageView fx:id="a3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                        <ImageView fx:id="b3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                                        <ImageView fx:id="c3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                                        <ImageView fx:id="d3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="4" GridPane.rowIndex="5">
-                                        <ImageView fx:id="e3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="5" GridPane.rowIndex="5">
-                                        <ImageView fx:id="f3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="6" GridPane.rowIndex="5">
-                                        <ImageView fx:id="g3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="7" GridPane.rowIndex="5">
-                                        <ImageView fx:id="h3" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 2 -->
                                     <StackPane styleClass="light-square" GridPane.columnIndex="0" GridPane.rowIndex="6">
-                                        <ImageView fx:id="a2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                        <ImageView fx:id="b2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                                        <ImageView fx:id="c2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="3" GridPane.rowIndex="6">
-                                        <ImageView fx:id="d2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="4" GridPane.rowIndex="6">
-                                        <ImageView fx:id="e2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="5" GridPane.rowIndex="6">
-                                        <ImageView fx:id="f2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="6" GridPane.rowIndex="6">
-                                        <ImageView fx:id="g2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="7" GridPane.rowIndex="6">
-                                        <ImageView fx:id="h2" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
 
                                     <!-- Rangée 1 -->
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="0" GridPane.rowIndex="7">
-                                        <ImageView fx:id="a1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                        <ImageView fx:id="b1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                                        <ImageView fx:id="c1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                                        <ImageView fx:id="d1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="4" GridPane.rowIndex="7">
-                                        <ImageView fx:id="e1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="5" GridPane.rowIndex="7">
-                                        <ImageView fx:id="f1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="dark-square" GridPane.columnIndex="6" GridPane.rowIndex="7">
-                                        <ImageView fx:id="g1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <StackPane styleClass="light-square" GridPane.columnIndex="7" GridPane.rowIndex="7">
-                                        <ImageView fx:id="h1" fitHeight="40" fitWidth="40" />
+                                        <ImageView fitHeight="40" fitWidth="40" />
                                     </StackPane>
                                     <columnConstraints>
                                         <ColumnConstraints maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />

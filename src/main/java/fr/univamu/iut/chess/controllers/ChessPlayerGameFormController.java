@@ -37,7 +37,7 @@ public class ChessPlayerGameFormController {
     }
 
     private void writeCsvFile(String player1_fn, String player1_n, String player2_fn, String player2_n) throws IOException {
-        String fileName = "PlayerGame_joueurs.csv";
+        String fileName = "PlayerGame_joueurs.csv"; // On définit notre fichier CSV
         try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.append(player1_fn)
                     .append(',')
@@ -48,7 +48,7 @@ public class ChessPlayerGameFormController {
                     .append(',')
                     .append(player2_n)
                     .append(',')
-                    .append('\n');
+                    .append('\n'); // Cette séquence de code permet d'enregistrer dans le fichier le nom et prénom des deux joueurs.
         } catch (IOException e) {
             e.printStackTrace();
         }

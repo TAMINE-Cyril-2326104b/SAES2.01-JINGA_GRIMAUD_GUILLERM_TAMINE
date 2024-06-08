@@ -59,7 +59,7 @@ public class ChessPlayerGameController implements Initializable {
     @FXML
     private Label mouvImpo;
 
-    private Plateau plateau;
+    private Chessboard plateau;
     private Piece selectedPiece;
     private Position selectedPosition;
     private Couleur currentTurn;
@@ -68,7 +68,7 @@ public class ChessPlayerGameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
-        this.plateau = new Plateau();
+        this.plateau = new Chessboard();
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
         afficherTourMessage();
@@ -137,12 +137,12 @@ public class ChessPlayerGameController implements Initializable {
     }
 
     private void movePiece(Position newPosition) {
-        if (selectedPiece != null && selectedPiece.estDeplacementValide(
+        if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
 
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
-            plateau.deplacerPiece(
+            plateau.movePiece(
                     selectedPosition.getRow(), selectedPosition.getCol(),
                     newPosition.getRow(), newPosition.getCol(), plateau.getPieces());
 
@@ -153,7 +153,7 @@ public class ChessPlayerGameController implements Initializable {
                 } else {
                     echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
                     if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
-                        plateau.deplacerPiece(
+                        plateau.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
@@ -247,7 +247,7 @@ public class ChessPlayerGameController implements Initializable {
         for (Piece[] row : plateau.getPieces()) {
             for (Piece piece : row) {
                 if (piece != null && piece.getColor() != kingColor) {
-                    if (piece.estDeplacementValide(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), plateau.getPieces())) {
+                    if (piece.isMoveLegal(piece.getPosition().getRow(), piece.getPosition().getCol(), kingPosition.getRow(), kingPosition.getCol(), plateau.getPieces())) {
                         return true;
                     }
                 }
@@ -275,7 +275,7 @@ public class ChessPlayerGameController implements Initializable {
     }
     private boolean canKingMove(Position from, Position to) {
         Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
-        if (king.estDeplacementValide(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
+        if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
             Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
             plateau.getPieces()[to.getRow()][to.getCol()] = king;
             plateau.getPieces()[from.getRow()][from.getCol()] = null;

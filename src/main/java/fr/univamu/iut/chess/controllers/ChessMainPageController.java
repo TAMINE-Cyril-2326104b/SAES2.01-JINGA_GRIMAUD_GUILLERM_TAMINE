@@ -38,10 +38,10 @@ public class ChessMainPageController implements Initializable {
     public void displayChessboard() {
         gridPaneJeu.getChildren().clear();
 
-        for (int ligne = 0; ligne < 8; ligne++) {
-            for (int colonne = 0; colonne < 8; colonne++) {
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
                 Rectangle rectangle = new Rectangle(40, 40);
-                if ((ligne + colonne) % 2 == 0) {
+                if ((row + column) % 2 == 0) {
                     rectangle.setFill(Color.rgb(235,236,208));
                 } else {
                     rectangle.setFill(Color.rgb(119,149,86));
@@ -50,7 +50,7 @@ public class ChessMainPageController implements Initializable {
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(rectangle);
 
-                Piece piece = chessboard.getPieces(ligne, colonne);
+                Piece piece = chessboard.getPieces(row, column);
                 if (piece != null) {
                     Image image = new Image(getClass().getResourceAsStream(piece.getImagePath()));
                     ImageView imageView = new ImageView(image);
@@ -59,28 +59,30 @@ public class ChessMainPageController implements Initializable {
                 } else {
                 }
 
-                gridPaneJeu.add(stackPane, colonne, ligne);
+                gridPaneJeu.add(stackPane, column, row);
             }
         }
     }
 
+    // Une fonction permettant de changer de scène et d'affronter l'ordinateur
     public void handleChangeSceneBot(ActionEvent event) throws IOException {
-        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessBotGameForm.fxml"));
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessBotGameForm.fxml")); // On charge la page de formulaire FXML
         Scene secondScene = new Scene(secondSceneParent);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(secondScene);
         stage.centerOnScreen();
-        stage.show();
+        stage.show(); // On fait apparaître le stage
     }
 
+    // Une fonction permettant de changer de scène et d'affronter un autre joueur
     public void handleChangeScenePlayer(ActionEvent event) throws IOException{
-        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessPlayerGameForm.fxml"));
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessPlayerGameForm.fxml")); // On charge la page de formulaire FXML
         Scene secondScene = new Scene(secondSceneParent);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(secondScene);
         stage.centerOnScreen();
-        stage.show();
+        stage.show(); // On fait apparaître le stage
     }
 }
