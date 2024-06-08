@@ -37,7 +37,7 @@ public class ChessPlayerGameFormController {
     }
 
     private void writeCsvFile(String player1_fn, String player1_n, String player2_fn, String player2_n) throws IOException {
-        String fileName = "PlayerGame_joueurs.txt";
+        String fileName = "PlayerGame_joueurs.csv";
         try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.append(player1_fn)
                     .append(',')

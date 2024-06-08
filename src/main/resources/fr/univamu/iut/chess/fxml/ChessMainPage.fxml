@@ -39,7 +39,7 @@
                </VBox>
                <VBox alignment="TOP_CENTER">
                   <children>
-                     <Button mnemonicParsing="false" styleClass="onglet">
+                     <Button mnemonicParsing="false" styleClass="onglet" >
                         <graphic>
                            <ImageView styleClass="onglet">
                               <image>
