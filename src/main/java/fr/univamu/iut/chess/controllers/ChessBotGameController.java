@@ -22,9 +22,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,6 +48,8 @@ public class ChessBotGameController implements Initializable {
     private int timeWhite = 600; // 10 minutes in seconds
     private int timeBlack = 600; // 10 minutes in seconds
     private boolean isWhiteTurn = true;
+    @FXML
+    private Label LabelNom;
 
     @FXML
     private GridPane gridPaneJeu;
@@ -67,6 +73,13 @@ public class ChessBotGameController implements Initializable {
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
         afficherTourMessage();
+        String filePath = "BotGame_joueur.csv";
+        File file = new File(filePath);
+        if (file.exists()) {
+            readLastLineFromCSV(file);
+        } else {
+            LabelNom.setText("File not found");
+        }
         startGame();
     }
 
@@ -321,5 +334,31 @@ public class ChessBotGameController implements Initializable {
         stage.setScene(secondScene);
         stage.centerOnScreen();
         stage.show();
+    }
+
+    private void readLastLineFromCSV(File file) {
+        String lastLine = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lastLine = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Assuming CSV format: lastName, firstName
+        if (!lastLine.isEmpty()) {
+            String[] parts = lastLine.split(",");
+            if (parts.length >= 2) {
+                String lastName = parts[0].trim();
+                String firstName = parts[1].trim();
+                LabelNom.setText(lastName + " " + firstName);
+            } else {
+                LabelNom.setText("Invalid CSV format");
+            }
+        } else {
+            LabelNom.setText("CSV is empty");
+        }
     }
 }

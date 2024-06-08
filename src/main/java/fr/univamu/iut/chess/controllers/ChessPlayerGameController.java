@@ -24,6 +24,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,6 +47,10 @@ public class ChessPlayerGameController implements Initializable {
 
     @FXML
     private GridPane gridPaneJeu;
+    @FXML
+    private Label NomChoisiLabel;
+    @FXML
+    private Label AdvLabel;
 
     @FXML
     private Label tourMessage;
@@ -65,6 +72,14 @@ public class ChessPlayerGameController implements Initializable {
         this.currentTurn = Couleur.WHITE;
         afficherPlateau();
         afficherTourMessage();
+        String filePath = "PlayerGame_joueurs.csv";
+        File file = new File(filePath);
+        if (file.exists()) {
+            readLastTwoLinesFromCSV(file);
+        } else {
+            AdvLabel.setText("File not found");
+            NomChoisiLabel.setText("File not found");
+        }
         startGame();
     }
 
@@ -280,6 +295,46 @@ public class ChessPlayerGameController implements Initializable {
         stage.setScene(secondScene);
         stage.centerOnScreen();
         stage.show();
+    }
+    private void readLastTwoLinesFromCSV(File file) {
+        String secondLastLine = "";
+        String lastLine = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    secondLastLine = lastLine;
+                    lastLine = line;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Assuming CSV format: lastName, firstName
+        if (!lastLine.isEmpty() && !secondLastLine.isEmpty()) {
+            String[] lastParts = lastLine.split(",");
+            String[] secondLastParts = secondLastLine.split(",");
+            if (lastParts.length >= 2 && secondLastParts.length >= 2) {
+                String lastNameLast = lastParts[0].trim();
+                String firstNameLast = lastParts[1].trim();
+                String lastNameSecondLast = secondLastParts[0].trim();
+                String firstNameSecondLast = secondLastParts[1].trim();
+                if (!lastNameLast.isEmpty() && !firstNameLast.isEmpty() && !lastNameSecondLast.isEmpty() && !firstNameSecondLast.isEmpty()) {
+                    AdvLabel.setText(lastNameLast + " " + firstNameLast);
+                    NomChoisiLabel.setText( lastNameSecondLast + " " + firstNameSecondLast);
+                } else {
+                    AdvLabel.setText("Invalid CSV format: empty values");
+                    NomChoisiLabel.setText("Invalid CSV format: empty values");
+                }
+            } else {
+                AdvLabel.setText("Invalid CSV format: not enough values");
+                NomChoisiLabel.setText("Invalid CSV format: not enough values");
+            }
+        } else {
+            AdvLabel.setText("CSV is empty or does not contain enough lines");
+            NomChoisiLabel.setText("CSV is empty or does not contain enough lines");
+        }
     }
 
 }

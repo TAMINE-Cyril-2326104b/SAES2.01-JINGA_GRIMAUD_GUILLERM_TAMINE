@@ -30,7 +30,7 @@
 </Label>
 
 <!-- Add Player 1 Label -->
-<Label text="Joueur 1"
+<Label text="Joueur 1 (blanc)"
        styleClass="formJoueur"
        GridPane.columnIndex="0" GridPane.rowIndex="1"
        GridPane.columnSpan="2" GridPane.rowSpan="1"
@@ -54,7 +54,7 @@
            GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
 <!-- Add Player 2 Label -->
-<Label text="Joueur 2"
+<Label text="Joueur 2 (noir)"
        styleClass="formJoueur"
        GridPane.columnIndex="0" GridPane.rowIndex="4"
        GridPane.columnSpan="2" GridPane.rowSpan="1"

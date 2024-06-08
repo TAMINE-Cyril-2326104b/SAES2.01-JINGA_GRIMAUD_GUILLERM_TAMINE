@@ -70,7 +70,7 @@
                                 <Image url="@../img/adversaire_img.png" />
                             </image>
                         </ImageView>
-                        <Label prefHeight="18.0" prefWidth="277.0" text="Adversaire" textFill="WHITE" />
+                        <Label prefHeight="18.0" prefWidth="277.0" fx:id="AdvLabel" text="Adversaire" textFill="WHITE" />
                         <Label fx:id="timeLabelBlack" styleClass="timer" text="10:00" textFill="aliceblue" />
 
 
@@ -329,7 +329,7 @@
                                 <Image url="@../img/pdp_blanc.png" />
                             </image>
                         </ImageView>
-                        <Label prefHeight="18.0" prefWidth="279.0" text="Nom choisi" textFill="WHITE" />
+                        <Label prefHeight="18.0" prefWidth="279.0" fx:id="NomChoisiLabel" text="Nom choisi" textFill="WHITE" />
                         <Label fx:id="timeLabelWhite" styleClass="timer" text="10:00" textFill="aliceblue" />
                     </children>
                     <VBox.margin>
