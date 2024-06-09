@@ -4,7 +4,6 @@ import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,8 +37,8 @@ public class ChessTournamentController implements Initializable {
 
     private Timeline timerWhite;
     private Timeline timerBlack;
-    private int timeWhite = 600; // 10 minutes in seconds
-    private int timeBlack = 600; // 10 minutes in seconds
+    private int timeWhite = 600; // 10 minutes en secondes
+    private int timeBlack = 600; // 10 minutes en secondes
     private boolean isWhiteTurn = true;
 
     @FXML

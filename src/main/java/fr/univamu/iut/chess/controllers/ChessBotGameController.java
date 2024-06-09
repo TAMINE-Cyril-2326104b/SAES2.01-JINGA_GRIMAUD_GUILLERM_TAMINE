@@ -87,7 +87,7 @@ public class ChessBotGameController implements Initializable {
 
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                Rectangle rectangle = new Rectangle(40, 40);
+                Rectangle rectangle = new Rectangle(80, 80);
                 if ((ligne + colonne) % 2 == 0) {
                     rectangle.setFill(Color.rgb(235,236,208));
                 } else {

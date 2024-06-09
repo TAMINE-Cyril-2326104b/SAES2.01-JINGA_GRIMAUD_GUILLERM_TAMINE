@@ -13,10 +13,8 @@ public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //Plateau plateau=new Plateau(gridPane);
-
         FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("fxml/ChessMainPage.fxml")); // On charge le fichier FXML.
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 700); // On crée notre scène à partir du fichier FXML et on définit sa taille.
+        Scene scene = new Scene(fxmlLoader.load(), 1520, 800); // On crée notre scène à partir du fichier FXML et on définit sa taille.
         stage.setTitle("Chess.com"); // On définit le titre de notre interface.
 
         stage.setScene(scene);

@@ -51,7 +51,7 @@ public class ChessMainPageController implements Initializable {
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
-                Rectangle rectangle = new Rectangle(40, 40);
+                Rectangle rectangle = new Rectangle(80, 80);
                 if ((row + column) % 2 == 0) {
                     rectangle.setFill(Color.rgb(235,236,208));
                 } else {
