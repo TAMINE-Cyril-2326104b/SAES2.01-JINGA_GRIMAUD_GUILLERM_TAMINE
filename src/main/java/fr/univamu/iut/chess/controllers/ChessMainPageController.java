@@ -41,10 +41,10 @@ public class ChessMainPageController implements Initializable {
 
 
     /**
-     * Initialise le contrôleur.
      *
-     * @param url            L'emplacement utilisé pour résoudre les chemins relatifs des objets racine.
-     * @param resourceBundle Les ressources locales utilisées par l'application.
+     * Fonction permettant d'initialiser la partie, avec mise en place du timer, du plateau, mais aussi du fichier CSV
+     * @param url
+     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -12,7 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +25,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 public class ChessPlayerGameController {
@@ -61,8 +63,12 @@ public class ChessPlayerGameController {
     private Position selectedPosition;
     public Couleur currentTurn;
 
-
-    public void initialize() { //initialise le nom des joueurs, le plateau etc...
+    /**
+     *  Fonction permettant d'initialiser la partie, avec mise en place du timer, du plateau, mais aussi du fichier CSV
+     * @param url
+     * @param resourceBundle
+     */
+    public void initialize(URL url, ResourceBundle resourceBundle) { //initialise le nom des joueurs, le plateau etc...
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
@@ -86,6 +92,9 @@ public class ChessPlayerGameController {
         startGame();
     }
 
+    /**
+     * Fonction permettant d'afficher l'échiquier.
+     */
     public void afficherPlateau() {
         gridPaneJeu.getChildren().clear();
 
@@ -121,6 +130,11 @@ public class ChessPlayerGameController {
         }
     }
 
+    /**
+     * Détecte le clic sur une pièce du plateau.
+     * @param piece
+     * @param position
+     */
     public void handlePieceClick(Piece piece, Position position) { //permet de choisir la piece a déplacer ou de choisir la case vers laquelle la déplacer
         if (selectedPiece == null) {
             if (piece.getColor().equals(currentTurn)) {
@@ -133,12 +147,21 @@ public class ChessPlayerGameController {
         }
     }
 
+    /**
+     * Détecte le clic sur une case vide, permettant le déplacement d'une pièce
+     * @param position
+     */
     public void handleEmptySquareClick(Position position) { // si on choisi une case vide et qu"on a aupréalablement choisi une piece on la déplace
         if (selectedPiece != null) {
             movePiece(position);
         }
     }
 
+
+    /**
+     * Permet le déplacement d'une pièce selon les fonctions mises en place dans leur classe respective.
+     * @param newPosition
+     */
     public void movePiece(Position newPosition) {
         if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
@@ -194,12 +217,18 @@ public class ChessPlayerGameController {
         }
     }
 
+    /**
+     * Change le tour du joueur.
+     */
     public void switchTurn() {
         currentTurn = (currentTurn == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
         afficherTourMessage();
         handleMove();
     }
 
+    /**
+     * Affiche un message indiquant quel joueur joue.
+     */
     public void afficherTourMessage() {
         // Vérifier si le tourMessage n'est pas null avant de le mettre à jour
         if (tourMessage != null) {
@@ -208,7 +237,9 @@ public class ChessPlayerGameController {
     }
 
 
-
+    /**
+     * Mise en place du timer, avec décrémentation.
+     */
     public void setupTimers() {
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeWhite--;
@@ -231,12 +262,22 @@ public class ChessPlayerGameController {
         updateTimeLabel(timeLabelBlack, timeBlack);
     }
 
+
+    /**
+     * Mise à jour du temps
+     * @param label
+     * @param time
+     */
     public void updateTimeLabel(Label label, int time) {
         int minutes = time / 60;
         int seconds = time % 60;
         label.setText(String.format("%02d:%02d", minutes, seconds));
     }
 
+
+    /**
+     * Gestion des mouvements
+     */
     public void handleMove() {
         if (isWhiteTurn) {
             timerWhite.stop();
@@ -247,11 +288,18 @@ public class ChessPlayerGameController {
         }
         isWhiteTurn = !isWhiteTurn;
     }
+
+    /**
+     * Démarrage de la partie, avec le début du timer des blancs.
+     */
     public void startGame() {
         timerWhite.play();
     }
 
-
+    /**
+     * Fin de la partie, avec la fin du timer, l'apparition d'une alerte, ainsi que l'enregistrement des coups et la fermeture du programme.
+     * @param winnerColor
+     */
     public void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();
@@ -279,6 +327,12 @@ public class ChessPlayerGameController {
 
 
     }
+
+    /**
+     * Vérifie si le roi est en position d'échec.
+     * @param kingColor
+     * @return
+     */
     public boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
         for (Piece[] row : plateau.getPieces()) {
@@ -292,6 +346,12 @@ public class ChessPlayerGameController {
         }
         return false;
     }
+
+    /**
+     * Vérifie si le joueur est en position d'échec et mat.
+     * @param kingColor
+     * @return
+     */
     public boolean isCheckmate(Couleur kingColor) {
         if (!isKingInCheck(kingColor)) {
             return false;
@@ -310,6 +370,13 @@ public class ChessPlayerGameController {
         }
         return true;
     }
+
+    /**
+     * Vérifie si le roi est en capacité de se déplacer dans une direction, en cas d'échec.
+     * @param from
+     * @param to
+     * @return
+     */
     public boolean canKingMove(Position from, Position to) {
         Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
         if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
@@ -324,6 +391,11 @@ public class ChessPlayerGameController {
         return false;
     }
 
+    /**
+     * Permet de relancer une nouvelle partie.
+     * @param event
+     * @throws IOException
+     */
     public void handleNewGameButtonAction(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
