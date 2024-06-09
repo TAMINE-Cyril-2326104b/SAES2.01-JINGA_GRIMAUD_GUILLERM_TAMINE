@@ -65,6 +65,7 @@ public class ChessPlayerGameController {
     public void initialize() { //initialise le nom des joueurs, le plateau etc...
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
+
         this.plateau = new Chessboard();
         this.currentTurn = Couleur.BLANC;
         afficherPlateau();
@@ -209,7 +210,10 @@ public class ChessPlayerGameController {
 
 
 
-    public void setupTimers() {
+    private void setupTimers() {
+        if (timerWhite != null) timerWhite.stop();
+        if (timerBlack != null) timerBlack.stop();
+
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
