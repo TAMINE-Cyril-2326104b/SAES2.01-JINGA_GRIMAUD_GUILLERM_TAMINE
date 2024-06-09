@@ -241,16 +241,7 @@ public class ChessBotGameController implements Initializable {
         }));
         timerWhite.setCycleCount(Timeline.INDEFINITE);
 
-        timerBlack = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            timeBlack--;
-            updateTimeLabel(timeLabelBlack, timeBlack);
-            if (timeBlack <= 0) {
-                endGame(Couleur.WHITE);
-            }
-        }));
-        timerBlack.setCycleCount(Timeline.INDEFINITE);
         updateTimeLabel(timeLabelWhite, timeWhite);
-        updateTimeLabel(timeLabelBlack, timeBlack);
     }
 
     private void updateTimeLabel(Label label, int time) {
@@ -262,9 +253,7 @@ public class ChessBotGameController implements Initializable {
     private void handleMove() {
         if (isWhiteTurn) {
             timerWhite.stop();
-            timerBlack.play();
         } else {
-            timerBlack.stop();
             timerWhite.play();
         }
         isWhiteTurn = !isWhiteTurn;
@@ -275,7 +264,6 @@ public class ChessBotGameController implements Initializable {
 
     private void endGame(Couleur winnerColor) {
         timerWhite.stop();
-        timerBlack.stop();
 
         String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
         System.out.println(winner+" on gagnés");

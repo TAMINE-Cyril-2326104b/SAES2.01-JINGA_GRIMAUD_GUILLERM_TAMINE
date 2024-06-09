@@ -63,9 +63,8 @@
                             </image>
                         </ImageView>
                         <Label fx:id="AdvLabel" prefHeight="18.0" prefWidth="277.0" text="Adversaire" textFill="WHITE" />
-                        <Label fx:id="timeLabelBlack" styleClass="timer" text="10:00" textFill="aliceblue" />
-
-
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="timeLabelBlack" styleClass="timer" text="10:00" textFill="aliceblue"/>
                     </children>
                     <VBox.margin>
                         <Insets bottom="3.0" left="5.0" top="3.0" />
@@ -91,6 +90,7 @@
                             </image>
                         </ImageView>
                         <Label fx:id="NomChoisiLabel" prefHeight="18.0" prefWidth="279.0" text="Nom choisi" textFill="WHITE" />
+                        <Region HBox.hgrow="ALWAYS"/>
                         <Label fx:id="timeLabelWhite" styleClass="timer" text="10:00" textFill="aliceblue" />
                     </children>
                     <VBox.margin>
