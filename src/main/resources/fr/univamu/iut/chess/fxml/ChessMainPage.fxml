@@ -7,9 +7,9 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessMainPageController">
+<BorderPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessMainPageController">
    <right>
-      <VBox alignment="TOP_CENTER" prefHeight="1081.0" prefWidth="632.0" spacing="10" styleClass="onglet" BorderPane.alignment="CENTER" >
+      <VBox alignment="TOP_CENTER" spacing="10" styleClass="onglet" BorderPane.alignment="CENTER" >
          <HBox alignment="TOP_CENTER">
             <children>
                <VBox alignment="TOP_CENTER">

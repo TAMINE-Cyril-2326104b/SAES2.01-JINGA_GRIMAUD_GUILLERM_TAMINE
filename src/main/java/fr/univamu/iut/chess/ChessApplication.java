@@ -24,7 +24,7 @@ public class ChessApplication extends Application {
     public void start(Stage stage) throws IOException {
         // Chargement du fichier FXML de la page principale du jeu d'échecs
         FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1520, 800); // Création de la scène et définition de sa taille
+        Scene scene = new Scene(fxmlLoader.load(), 1220, 800); // Création de la scène et définition de sa taille
         stage.setTitle("Chess.com"); // Définition du titre de la fenêtre
 
         // Affichage de la scène dans la fenêtre

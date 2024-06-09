@@ -157,12 +157,10 @@ public class ChessMainPageController implements Initializable {
      * @param event L'événement de clic sur le bouton.
      * @throws IOException Si une erreur d'entrée/sortie se produit lors du chargement de la scène.
      */
-    public void handleNewGameButtonAction(ActionEvent event) throws IOException { // action faite lorsque l'on clique sur le bouton nouvelle partie, nous remet sur la page de base
-        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
-        Scene secondScene = new Scene(secondSceneParent);
-
+    public void handleNewGameButtonAction(ActionEvent event) throws IOException {
+        Parent parent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(secondScene);
+        stage.setScene(new Scene(parent, 1520, 800)); // Taille réduite de la fenêtre
         stage.centerOnScreen();
         stage.show();
     }
