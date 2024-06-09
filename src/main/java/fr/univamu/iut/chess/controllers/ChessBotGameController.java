@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ChessBotGameController implements Initializable {
     @FXML
@@ -273,13 +275,25 @@ public class ChessBotGameController implements Initializable {
         timerWhite.play();
     }
 
-    private void endGame(Couleur winnerColor) {
+    public void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.BLANC) ? "Les blancs" : "Les noirs";
-        System.out.println(winner+" on gagnés");
-        Platform.exit(); // fermer l'application
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Fin de la partie");
+            alert.setHeaderText("ECHEC ET MAT !");
+            alert.setContentText("Les " + winnerColor + " gagnent la partie !");
+            alert.showAndWait();
+            try {
+                TimeUnit.SECONDS.sleep(4); // Mettre en pause pendant 3 secondes
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Fermer l'application
+            Platform.exit();
+        });
     }
     private boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);

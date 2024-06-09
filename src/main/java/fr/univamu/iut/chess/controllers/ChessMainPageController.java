@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +35,7 @@ public class ChessMainPageController implements Initializable {
     private Chessboard chessboard;
     @FXML
     private VBox VBoxDroite;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

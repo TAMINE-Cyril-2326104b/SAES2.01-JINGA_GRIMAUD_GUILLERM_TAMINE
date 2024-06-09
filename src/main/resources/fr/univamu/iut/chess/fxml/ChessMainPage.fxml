@@ -57,7 +57,7 @@
             <children>
                <VBox alignment="TOP_CENTER">
                   <children>
-                     <ChoiceBox prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
+                     <ChoiceBox fx:id="timeChoiceBox" prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
                         <items>
                            <FXCollections fx:factory="observableArrayList">
                               <String fx:value="5 min" />
