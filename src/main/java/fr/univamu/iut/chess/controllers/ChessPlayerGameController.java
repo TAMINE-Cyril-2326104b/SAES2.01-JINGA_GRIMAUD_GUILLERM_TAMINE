@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,13 +38,10 @@ public class ChessPlayerGameController {
     @FXML
     public Label timeLabelBlack;
 
-    @FXML
-    private ChoiceBox<String> timeChoiceBox;
-
     private Timeline timerWhite;
     private Timeline timerBlack;
-    private int timeWhite;
-    private int timeBlack;
+    private int timeWhite = 600; // 10 minutes in seconds
+    private int timeBlack = 600; // 10 minutes in seconds
     private boolean isWhiteTurn = true;
 
     @FXML
@@ -67,9 +63,8 @@ public class ChessPlayerGameController {
     private Position selectedPosition;
     public Couleur currentTurn;
 
-    @FXML
+
     public void initialize() { //initialise le nom des joueurs, le plateau etc...
-        setupChoiceBox();
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
@@ -85,40 +80,6 @@ public class ChessPlayerGameController {
             NomChoisiLabel.setText("File not found");
         }
         startGame();
-    }
-
-    private void setupChoiceBox() {
-        timeChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                switch (newValue) {
-                    case "5 min":
-                        timeWhite = 5 * 60; // 5 minutes in seconds
-                        timeBlack = 5 * 60;
-                        break;
-                    case "10 min":
-                        timeWhite = 10 * 60; // 10 minutes in seconds
-                        timeBlack = 10 * 60;
-                        break;
-                    case "20 min":
-                        timeWhite = 20 * 60; // 20 minutes in seconds
-                        timeBlack = 20 * 60;
-                        break;
-                }
-                resetTimers();
-            }
-        });
-        // Set a default value
-        timeChoiceBox.setValue("10 min");
-    }
-
-    private void resetTimers() {
-        if (timerWhite != null) {
-            timerWhite.stop();
-        }
-        if (timerBlack != null) {
-            timerBlack.stop();
-        }
-        setupTimers();
     }
 
     public void afficherPlateau() {
@@ -233,6 +194,8 @@ public class ChessPlayerGameController {
         }
     }
 
+
+
     public void setupTimers() {
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeWhite--;
@@ -271,10 +234,10 @@ public class ChessPlayerGameController {
         }
         isWhiteTurn = !isWhiteTurn;
     }
-
     public void startGame() {
         timerWhite.play();
     }
+
 
     public void endGame(Couleur winnerColor) {
         timerWhite.stop();
@@ -287,7 +250,7 @@ public class ChessPlayerGameController {
             alert.setContentText("Les " + winnerColor + " gagnent la partie !");
             alert.showAndWait();
             try {
-                TimeUnit.SECONDS.sleep(4); // Mettre en pause pendant 3 secondes
+                TimeUnit.SECONDS.sleep(3); // Mettre en pause pendant 3 secondes
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -295,8 +258,9 @@ public class ChessPlayerGameController {
             // Fermer l'application
             Platform.exit();
         });
-    }
 
+
+    }
     public boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
         for (Piece[] row : plateau.getPieces()) {
@@ -310,7 +274,6 @@ public class ChessPlayerGameController {
         }
         return false;
     }
-
     public boolean isCheckmate(Couleur kingColor) {
         if (!isKingInCheck(kingColor)) {
             return false;
@@ -329,7 +292,6 @@ public class ChessPlayerGameController {
         }
         return true;
     }
-
     public boolean canKingMove(Position from, Position to) {
         Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
         if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
@@ -344,7 +306,7 @@ public class ChessPlayerGameController {
         return false;
     }
 
-    public void handleNewGameButtonAction(ActionEvent event) throws IOException {
+    public void handleNewGameButtonAction(ActionEvent event) throws IOException{
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
@@ -353,7 +315,6 @@ public class ChessPlayerGameController {
         stage.centerOnScreen();
         stage.show();
     }
-
     public void readLastTwoLinesFromCSV(File file) { // prend les deux dernières ligne du csv afin de prendre les deux derniers joueurs inscrit
         String secondLastLine = "";
         String lastLine = "";
@@ -394,4 +355,5 @@ public class ChessPlayerGameController {
             NomChoisiLabel.setText("CSV is empty or does not contain enough lines");
         }
     }
+
 }

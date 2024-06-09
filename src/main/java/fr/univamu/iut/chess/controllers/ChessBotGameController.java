@@ -274,7 +274,7 @@ public class ChessBotGameController implements Initializable {
             alert.setContentText("Les " + winnerColor + " gagnent la partie !");
             alert.showAndWait();
             try {
-                TimeUnit.SECONDS.sleep(4); // Mettre en pause pendant 3 secondes
+                TimeUnit.SECONDS.sleep(3); // Mettre en pause pendant 3 secondes
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
