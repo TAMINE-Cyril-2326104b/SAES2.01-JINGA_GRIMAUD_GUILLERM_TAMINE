@@ -66,6 +66,12 @@ public class ChessTournamentController implements Initializable {
     private List<String> players;
     private int currentMatchIndex = 0;
 
+    /**
+     *
+     * Fonction permettant d'initialisatier le nombre de joueurs
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         players = readPlayersFromCSV();
@@ -76,7 +82,11 @@ public class ChessTournamentController implements Initializable {
             initializeGame();
         }
     }
-    private void initializeGame(){  //démare la partie, affiche le plateau met le timer ...
+
+    /**
+     * Fonction permettant d'initialisater la partie.
+     */
+    public void initializeGame(){  //démare la partie, affiche le plateau met le timer ...
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
@@ -97,7 +107,9 @@ public class ChessTournamentController implements Initializable {
         startGame();
     }
 
-
+    /**
+     * Fonction permettant d'afficher l'échiquier.
+     */
     public void afficherPlateau() {
         gridPaneJeu.getChildren().clear();
 
@@ -133,7 +145,12 @@ public class ChessTournamentController implements Initializable {
         }
     }
 
-    private void handlePieceClick(Piece piece, Position position) {
+    /**
+     * Détecte le clic sur une pièce du plateau.
+     * @param piece
+     * @param position
+     */
+    public void handlePieceClick(Piece piece, Position position) {
         if (selectedPiece == null) {
             if (piece.getColor().equals(currentTurn)) {
                 selectedPiece = piece;
@@ -145,13 +162,21 @@ public class ChessTournamentController implements Initializable {
         }
     }
 
-    private void handleEmptySquareClick(Position position) {
+    /**
+     * Détecte le clic sur une case vide, permettant le déplacement d'une pièce
+     * @param position
+     */
+    public void handleEmptySquareClick(Position position) {
         if (selectedPiece != null) {
             movePiece(position);
         }
     }
 
-    private void movePiece(Position newPosition) {
+    /**
+     * Permet le déplacement d'une pièce selon les fonctions mises en place dans leur classe respective.
+     * @param newPosition
+     */
+    public void movePiece(Position newPosition) {
         if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
@@ -207,18 +232,27 @@ public class ChessTournamentController implements Initializable {
         }
     }
 
-    private void switchTurn() {
+    /**
+     * Change le tour du joueur.
+     */
+    public void switchTurn() {
         currentTurn = (currentTurn == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
         afficherTourMessage();
         handleMove();
     }
 
-    private void afficherTourMessage() {
+    /**
+     * Affiche un message indiquant quel joueur joue.
+     */
+    public void afficherTourMessage() {
         tourMessage.setText((currentTurn == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText()) + " jouent !");
     }
 
 
-    private void setupTimers() {
+    /**
+     * Mise en place du timer, avec décrémentation.
+     */
+    public void setupTimers() {
         timeWhite=600;
         timeBlack=600;
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
@@ -242,13 +276,21 @@ public class ChessTournamentController implements Initializable {
         updateTimeLabel(timeLabelBlack, timeBlack);
     }
 
-    private void updateTimeLabel(Label label, int time) {
+    /**
+     * Mise à jour du temps
+     * @param label
+     * @param time
+     */
+    public void updateTimeLabel(Label label, int time) {
         int minutes = time / 60;
         int seconds = time % 60;
         label.setText(String.format("%02d:%02d", minutes, seconds));
     }
 
-    private void handleMove() {
+    /**
+     * Gestion des mouvements
+     */
+    public void handleMove() {
         if (isWhiteTurn) {
             timerWhite.stop();
             timerBlack.play();
@@ -258,12 +300,19 @@ public class ChessTournamentController implements Initializable {
         }
         isWhiteTurn = !isWhiteTurn;
     }
-    private void startGame() {
+
+    /**
+     * Démarrage de la partie, avec le début du timer des blancs.
+     */
+    public void startGame() {
         timerWhite.play();
     }
 
-
-    private void endGame(Couleur winnerColor) {
+    /**
+     * Fin de la partie, avec la fin du timer, l'apparition d'une alerte, ainsi que l'enregistrement des coups et la fermeture du programme.
+     * @param winnerColor
+     */
+    public void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();
 
@@ -309,7 +358,12 @@ public class ChessTournamentController implements Initializable {
         }
     }
 
-    private boolean isKingInCheck(Couleur kingColor) {
+    /**
+     * Vérifie si le roi est en position d'échec.
+     * @param kingColor
+     * @return
+     */
+    public boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
         for (Piece[] row : plateau.getPieces()) {
             for (Piece piece : row) {
@@ -322,7 +376,13 @@ public class ChessTournamentController implements Initializable {
         }
         return false;
     }
-    private boolean isCheckmate(Couleur kingColor) {
+
+    /**
+     * Vérifie si le joueur est en position d'échec et mat.
+     * @param kingColor
+     * @return
+     */
+    public boolean isCheckmate(Couleur kingColor) {
         if (!isKingInCheck(kingColor)) {
             return false;
         }
@@ -340,7 +400,14 @@ public class ChessTournamentController implements Initializable {
         }
         return true;
     }
-    private boolean canKingMove(Position from, Position to) {
+
+    /**
+     * Vérifie si le roi est en capacité de se déplacer dans une direction, en cas d'échec.
+     * @param from
+     * @param to
+     * @return
+     */
+    public boolean canKingMove(Position from, Position to) {
         Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
         if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
             Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
@@ -354,6 +421,11 @@ public class ChessTournamentController implements Initializable {
         return false;
     }
 
+    /**
+     * Permet de relancer une nouvelle partie.
+     * @param event
+     * @throws IOException
+     */
     public void handleNewGameButtonAction(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -361,7 +433,12 @@ public class ChessTournamentController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    private List<String> readPlayersFromCSV() {
+
+    /**
+     * Permet de lire les joueurs depuis le fichier CSV
+     * @return
+     */
+    public List<String> readPlayersFromCSV() {
         List<String> players = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -373,6 +450,12 @@ public class ChessTournamentController implements Initializable {
         }
         return players;
     }
+
+    /**
+     * Initialise le fichier CSV
+     * @param filePath
+     */
+
     public void initializeCSV(String filePath) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
             writer.println("Turn,Player,Piece,From,To");
@@ -380,6 +463,16 @@ public class ChessTournamentController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Enregistre les mouvements de la partie dans un CSV
+     * @param filePath
+     * @param turn
+     * @param player
+     * @param piece
+     * @param from
+     * @param to
+     */
     public void logMoveToCSV(String filePath, String turn, String player, String piece, String from, String to) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
             writer.println(turn + "," + player + "," + piece + "," + from + "," + to);
@@ -387,6 +480,13 @@ public class ChessTournamentController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Initialise dans le fichier CSV une partie entre deux joueurs.
+     * @param filePath
+     * @param player1
+     * @param player2
+     */
     public void logNewGameToCSV(String filePath, String player1, String player2) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
             writer.println("Nouvelle Partie: " + player1 + " vs " + player2);
@@ -394,6 +494,12 @@ public class ChessTournamentController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Enregistre le vainqueur de la partie dans un fichier CSV
+     * @param filePath
+     * @param winner
+     */
     public void logGameResultToCSV(String filePath, String winner) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
             writer.println("Le gagnant est: " + winner);

@@ -70,3 +70,16 @@ Turn,Player,Piece,From,To
 Nouvelle Partie: gdgd dgdg vs BOT
 Turn,Player,Piece,From,To
 Nouvelle Partie: fef fdfd vs BOT
+Turn,Player,Piece,From,To
+Nouvelle Partie: dfdf dfdf vs BOT
+White,dfdf dfdf,Pawn,6,4,4,4
+Black,BOT,Pawn,1,6,3,6
+White,dfdf dfdf,Queen,7,3,3,7
+Black,BOT,Knight,0,1,2,0
+White,dfdf dfdf,Bishop,7,5,3,1
+Black,BOT,Pawn,1,1,2,1
+White,dfdf dfdf,Bishop,3,1,4,2
+Black,BOT,Knight,2,0,4,1
+White,dfdf dfdf,Queen,3,7,1,5
+Black,BOT,Pawn,1,0,2,0
+Le gagnant est: dfdf dfdf
