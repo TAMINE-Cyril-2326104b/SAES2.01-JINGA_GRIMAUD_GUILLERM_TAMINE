@@ -1,14 +1,47 @@
 package fr.univamu.iut.chess.Piece;
 
+/**
+ * La classe King représente un Roi dans le jeu d'échecs.
+ * Elle hérite des caractéristiques de la classe abstraite Piece.
+ *
+ * @autor Estelle GRIMAUD
+ * @autor Mathis GUILLERM
+ * @autor Paul JINGA
+ * @autor Cyril TAMINE
+ */
 public class King extends Piece {
-    // La classe Roi hérite des caractéristiques de la classe abstraite Piece.
+    /**
+     * Constructeur de la classe King.
+     *
+     * @param couleur La couleur de la pièce (NOIR ou BLANC).
+     * @param imagePath Le chemin de l'image représentant la pièce.
+     * @param position La position initiale de la pièce sur l'échiquier.
+     */
     public King(Couleur couleur, String imagePath, Position position) {
         super(couleur, imagePath, position);
     }
 
-    public King(Couleur couleur, Position position) { super(couleur, position);}
+    /**
+     * Constructeur de la classe King sans chemin d'image.
+     *
+     * @param couleur La couleur de la pièce (NOIR ou BLANC).
+     * @param position La position initiale de la pièce sur l'échiquier.
+     */
+    public King(Couleur couleur, Position position) {
+        super(couleur, position);
+    }
 
-
+    /**
+     * Vérifie si le déplacement du Roi est légal.
+     * Le Roi peut se déplacer d'une case dans n'importe quelle direction.
+     *
+     * @param ligneDepart La ligne de départ du Roi.
+     * @param colonneDepart La colonne de départ du Roi.
+     * @param ligneArrivee La ligne d'arrivée du Roi.
+     * @param colonneArrivee La colonne d'arrivée du Roi.
+     * @param plateau L'échiquier actuel avec toutes les pièces.
+     * @return true si le déplacement est légal, false sinon.
+     */
     @Override
     public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int deltaLigne = Math.abs(ligneArrivee - ligneDepart);

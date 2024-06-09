@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<!--
+    Fichier FXML représentant l'interface graphique principale du jeu d'échecs.
+-->
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Region?>
-<BorderPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessBotGameController">
+<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessBotGameController">
+
+    <!-- Partie droite de la fenêtre -->
     <right>
+        <!-- Conteneur vertical pour les boutons et les messages -->
         <VBox alignment="TOP_CENTER" spacing="10" styleClass="onglet" BorderPane.alignment="CENTER">
+
+            <!-- Barre horizontale pour les boutons -->
             <HBox alignment="TOP_CENTER">
                 <children>
+                    <!-- Bouton Nouvelle Partie -->
                     <VBox alignment="TOP_CENTER">
                         <children>
                             <Button styleClass="onglet" onAction="#handleNewGameButtonAction">
@@ -32,43 +37,24 @@
                             </Button>
                         </children>
                     </VBox>
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Button mnemonicParsing="false" styleClass="onglet">
-                                <graphic>
-                                    <ImageView>
-                                        <image>
-                                            <Image url="@../img/logoPartieMenu.png" />
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </Button>
-                        </children>
-                    </VBox>
-                    <VBox alignment="TOP_CENTER">
-                        <children>
-                            <Button mnemonicParsing="false" styleClass="onglet">
-                                <graphic>
-                                    <ImageView styleClass="onglet">
-                                        <image>
-                                            <Image url="@../img/logoJoueurMenu.png" />
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </Button>
-                        </children>
-                    </VBox>
+
+                    <!-- Autres boutons -->
+                    <!-- Ajoutez d'autres boutons ici si nécessaire -->
                 </children>
             </HBox>
-            <Label fx:id="echecLabel" prefHeight="18.0" prefWidth="277.0" text="" textFill="WHITE" />
 
+            <!-- Labels pour afficher des messages -->
+            <Label fx:id="echecLabel" prefHeight="18.0" prefWidth="277.0" text="" textFill="WHITE" />
             <Label fx:id="tourMessage" layoutX="10" layoutY="10" text="Les blancs jouent !" textFill="white" />
             <Label fx:id="mouvImpo" layoutX="10" layoutY="10" text="" textFill="white" />
         </VBox>
     </right>
+
+    <!-- Partie centrale de la fenêtre -->
     <center>
         <VBox styleClass="onglet" BorderPane.alignment="BOTTOM_CENTER">
             <children>
+                <!-- Affichage de l'adversaire -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
                         <ImageView fx:id="opponentImageView" fitHeight="55.0" fitWidth="55.0">
@@ -82,17 +68,21 @@
                         <Insets bottom="3.0" left="5.0" top="3.0" />
                     </VBox.margin>
                 </HBox>
+
+                <!-- Grille de jeu -->
                 <HBox alignment="BOTTOM_CENTER">
                     <children>
                         <StackPane>
                             <children>
                                 <GridPane id="gridPaneJeu" fx:id="gridPaneJeu">
-
+                                    <!-- Les cases du jeu seront ajoutées dynamiquement ici -->
                                 </GridPane>
                             </children>
                         </StackPane>
                     </children>
                 </HBox>
+
+                <!-- Informations sur le joueur -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
                         <ImageView fx:id="playerImageView" fitHeight="55.0" fitWidth="55.0">
@@ -101,7 +91,8 @@
                             </image>
                         </ImageView>
                         <Label prefHeight="18.0" prefWidth="279.0" fx:id="LabelNom" text="Nom choisi" textFill="WHITE" />
-                        </children>
+                    </children>
+                    <!-- Timer -->
                     <children>
                         <Region HBox.hgrow="ALWAYS"/>
                         <Label fx:id="timeLabelWhite" styleClass="timer" text="10:00" textFill="aliceblue"/>

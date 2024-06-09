@@ -1,12 +1,25 @@
 package fr.univamu.iut.chess.Piece;
 
+/**
+ * La classe Chessboard représente un plateau d'échecs avec ses pièces positionnées initialement.
+ * Elle permet de manipuler les pièces sur le plateau.
+ *
+ * @autor Estelle GRIMAUD
+ * @autor Mathis GUILLERM
+ * @autor Paul JINGA
+ * @autor Cyril TAMINE
+ */
 public class Chessboard {
     private final Piece[][] pieces;
 
+    /**
+     * Constructeur de la classe Chessboard.
+     * Initialise le plateau avec les pièces placées dans leur position de départ.
+     */
     public Chessboard() {
         this.pieces = new Piece[8][8];
 
-        // Initialiser les pions, on lance une boucle afin d'afficher les pions sur toute la ligne.
+        // Initialiser les pions
         for (int i = 0; i < 8; i++) {
             pieces[1][i] = new Pawn(Couleur.NOIR, "/fr/univamu/iut/chess/img/piecesNoir/pionNoir.png", new Position(1, i));
             pieces[6][i] = new Pawn(Couleur.BLANC, "/fr/univamu/iut/chess/img/piecesBlanc/pionBlanc.png", new Position(6, i));
@@ -39,17 +52,35 @@ public class Chessboard {
         pieces[0][4] = new King(Couleur.NOIR, "/fr/univamu/iut/chess/img/piecesNoir/roiNoir.png", new Position(0, 4));
     }
 
-    // Renvoie la pièce.
+    /**
+     * Renvoie la matrice de pièces représentant le plateau.
+     *
+     * @return La matrice de pièces.
+     */
     public Piece[][] getPieces() {
         return pieces;
     }
 
-    // Renvoie la piece à la ligne et la colonne près.
+    /**
+     * Renvoie la pièce à une position spécifique sur le plateau.
+     *
+     * @param ligne   La ligne de la pièce.
+     * @param colonne La colonne de la pièce.
+     * @return        La pièce à la position spécifiée, ou null s'il n'y a pas de pièce.
+     */
     public Piece getPieces(int ligne, int colonne) {
         return pieces[ligne][colonne];
     }
 
-    // Change la position d'une pièce en définissant une nouvelle ligne et colonne.
+    /**
+     * Déplace une pièce d'une position de départ à une position d'arrivée sur le plateau.
+     *
+     * @param ligneDepart      La ligne de départ de la pièce.
+     * @param colonneDepart    La colonne de départ de la pièce.
+     * @param ligneArrivee     La ligne d'arrivée de la pièce.
+     * @param colonneArrivee   La colonne d'arrivée de la pièce.
+     * @param pieces           La matrice de pièces représentant le plateau.
+     */
     public void movePiece(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] pieces) {
         Piece piece = this.pieces[ligneDepart][colonneDepart];
         this.pieces[ligneDepart][colonneDepart] = null;
@@ -57,11 +88,23 @@ public class Chessboard {
         this.pieces[ligneArrivee][colonneArrivee] = piece;
     }
 
-    // Ajouter une méthode pour définir une pièce à une position spécifique
+    /**
+     * Définit une pièce à une position spécifique sur le plateau.
+     *
+     * @param row    La ligne où placer la pièce.
+     * @param col    La colonne où placer la pièce.
+     * @param piece  La pièce à placer.
+     */
     public void setPiece(int row, int col, Piece piece) {
         this.pieces[row][col] = piece;
     }
 
+    /**
+     * Trouve la position du roi d'une couleur spécifique sur le plateau.
+     *
+     * @param kingColor La couleur du roi à chercher.
+     * @return          La position du roi, ou null si le roi n'est pas trouvé.
+     */
     public Position findKingPosition(Couleur kingColor) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -71,7 +114,7 @@ public class Chessboard {
                 }
             }
         }
-        // Si le roi n'est pas trouvé (ce qui ne devrait pas arriver), renvoie null ou une exception.
+        // Si le roi n'est pas trouvé (ce qui ne devrait pas arriver), renvoie null.
         return null;
     }
 }
