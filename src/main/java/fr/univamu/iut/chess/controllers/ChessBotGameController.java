@@ -26,10 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +78,12 @@ public class ChessBotGameController implements Initializable {
         } else {
             LabelNom.setText("File not found");
         }
+        String movesFilePath = "chess_moves.csv";
+        initializeCSV(movesFilePath);
+        String player1 = LabelNom.getText();  // Nom du premier joueur
+        String player2 = "BOT";        // Nom du deuxième joueur
+        logNewGameToCSV(movesFilePath, player1, player2);
+
         startGame();
     }
 
@@ -141,6 +144,16 @@ public class ChessBotGameController implements Initializable {
         if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
+
+            // Enregistrer le mouvement dans le fichier CSV
+            String filePath = "chess_moves.csv"; // Chemin vers le fichier CSV
+            String turn = currentTurn == Couleur.BLANC ? "White" : "Black";
+            String player = currentTurn == Couleur.BLANC ? LabelNom.getText() : "BOT";
+            String piece = selectedPiece.getClass().getSimpleName();
+            String from = selectedPosition.getRow() + "," + selectedPosition.getCol();
+            String to = newPosition.getRow() + "," + newPosition.getCol();
+
+            logMoveToCSV(filePath, turn, player, piece, from, to);
 
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
             plateau.movePiece(
@@ -267,6 +280,11 @@ public class ChessBotGameController implements Initializable {
     public void endGame(Couleur winnerColor) {
         timerWhite.stop();
 
+        // Enregistrer le gagnant dans le fichier CSV
+        String filePath = "chess_moves.csv";
+        String winner = winnerColor == Couleur.BLANC ? LabelNom.getText() : "BOT";
+        logGameResultToCSV(filePath, winner);
+
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Fin de la partie");
@@ -361,6 +379,35 @@ public class ChessBotGameController implements Initializable {
             }
         } else {
             LabelNom.setText("CSV is empty");
+        }
+    }
+
+    public void logMoveToCSV(String filePath, String turn, String player, String piece, String from, String to) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println(turn + "," + player + "," + piece + "," + from + "," + to);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void logNewGameToCSV(String filePath, String player1, String player2) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println("Nouvelle Partie: " + player1 + " vs " + player2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void logGameResultToCSV(String filePath, String winner) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println("Le gagnant est: " + winner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void initializeCSV(String filePath) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println("Turn,Player,Piece,From,To");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
