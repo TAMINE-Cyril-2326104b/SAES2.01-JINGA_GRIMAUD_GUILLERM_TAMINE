@@ -6,6 +6,10 @@ public class Pawn extends Piece {
         super(color, imagePath, position);
     }
 
+    public Pawn(Couleur color, Position position){
+        super(color, position);
+    }
+
     @Override
     public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int direction = (this.getColor() == Couleur.WHITE) ? -1 : 1; // Les pions blancs montent, les pions noirs descendent

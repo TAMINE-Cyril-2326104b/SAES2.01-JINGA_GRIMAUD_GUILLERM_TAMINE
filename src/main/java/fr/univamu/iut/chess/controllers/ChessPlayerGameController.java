@@ -31,13 +31,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChessPlayerGameController implements Initializable {
+public class ChessPlayerGameController {
 
     @FXML
-    private Label timeLabelWhite;
+    public Label timeLabelWhite;
 
     @FXML
-    private Label timeLabelBlack;
+    public Label timeLabelBlack;
 
     private Timeline timerWhite;
     private Timeline timerBlack;
@@ -46,26 +46,26 @@ public class ChessPlayerGameController implements Initializable {
     private boolean isWhiteTurn = true;
 
     @FXML
-    private GridPane gridPaneJeu;
+    public GridPane gridPaneJeu;
     @FXML
     private Label NomChoisiLabel;
     @FXML
     private Label AdvLabel;
 
     @FXML
-    private Label tourMessage;
+    public Label tourMessage;
     @FXML
-    private Label echecLabel;
+    public Label echecLabel;
     @FXML
-    private Label mouvImpo;
+    public Label mouvImpo;
 
-    private Chessboard plateau;
+    public Chessboard plateau;
     private Piece selectedPiece;
     private Position selectedPosition;
-    private Couleur currentTurn;
+    public Couleur currentTurn;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initialize() {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
@@ -88,7 +88,7 @@ public class ChessPlayerGameController implements Initializable {
 
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                Rectangle rectangle = new Rectangle(40, 40);
+                Rectangle rectangle = new Rectangle(80, 80); // On initie notre grille avec des rectangles 80x80
                 if ((ligne + colonne) % 2 == 0) {
                     rectangle.setFill(Color.rgb(235,236,208));
                 } else {
@@ -96,7 +96,7 @@ public class ChessPlayerGameController implements Initializable {
                 }
 
                 StackPane stackPane = new StackPane();
-                stackPane.getChildren().add(rectangle);
+                stackPane.getChildren().add(rectangle); // On ajoute ces rectangles à notre gridPane
 
                 Piece piece = plateau.getPieces(ligne, colonne);
                 if (piece != null) {
@@ -118,7 +118,7 @@ public class ChessPlayerGameController implements Initializable {
         }
     }
 
-    private void handlePieceClick(Piece piece, Position position) {
+    public void handlePieceClick(Piece piece, Position position) {
         if (selectedPiece == null) {
             if (piece.getColor().equals(currentTurn)) {
                 selectedPiece = piece;
@@ -130,13 +130,13 @@ public class ChessPlayerGameController implements Initializable {
         }
     }
 
-    private void handleEmptySquareClick(Position position) {
+    public void handleEmptySquareClick(Position position) {
         if (selectedPiece != null) {
             movePiece(position);
         }
     }
 
-    private void movePiece(Position newPosition) {
+    public void movePiece(Position newPosition) {
         if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
@@ -157,7 +157,7 @@ public class ChessPlayerGameController implements Initializable {
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " déplacement impossible !");
                         switchTurn();
                     }
                 }
@@ -182,18 +182,22 @@ public class ChessPlayerGameController implements Initializable {
         }
     }
 
-    private void switchTurn() {
+    public void switchTurn() {
         currentTurn = (currentTurn == Couleur.WHITE) ? Couleur.BLACK : Couleur.WHITE;
         afficherTourMessage();
         handleMove();
     }
 
-    private void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+    public void afficherTourMessage() {
+        // Vérifier si le tourMessage n'est pas null avant de le mettre à jour
+        if (tourMessage != null) {
+            tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+        }
     }
 
 
-    private void setupTimers() {
+
+    public void setupTimers() {
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
@@ -215,13 +219,13 @@ public class ChessPlayerGameController implements Initializable {
         updateTimeLabel(timeLabelBlack, timeBlack);
     }
 
-    private void updateTimeLabel(Label label, int time) {
+    public void updateTimeLabel(Label label, int time) {
         int minutes = time / 60;
         int seconds = time % 60;
         label.setText(String.format("%02d:%02d", minutes, seconds));
     }
 
-    private void handleMove() {
+    public void handleMove() {
         if (isWhiteTurn) {
             timerWhite.stop();
             timerBlack.play();
@@ -231,18 +235,23 @@ public class ChessPlayerGameController implements Initializable {
         }
         isWhiteTurn = !isWhiteTurn;
     }
-    private void startGame() {
+    public void startGame() {
         timerWhite.play();
     }
-    private void endGame(Couleur winnerColor) {
+    public void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
-        System.out.println(winner+" ont gagnés");
-        Platform.exit(); // fermer l'application
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Fin de la partie");
+            alert.setHeaderText(null);
+            alert.setContentText( winnerColor + " WINS !");
+            alert.showAndWait();
+        });
+
     }
-    private boolean isKingInCheck(Couleur kingColor) {
+    public boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
         for (Piece[] row : plateau.getPieces()) {
             for (Piece piece : row) {
@@ -255,7 +264,7 @@ public class ChessPlayerGameController implements Initializable {
         }
         return false;
     }
-    private boolean isCheckmate(Couleur kingColor) {
+    public boolean isCheckmate(Couleur kingColor) {
         if (!isKingInCheck(kingColor)) {
             return false;
         }
@@ -273,7 +282,7 @@ public class ChessPlayerGameController implements Initializable {
         }
         return true;
     }
-    private boolean canKingMove(Position from, Position to) {
+    public boolean canKingMove(Position from, Position to) {
         Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
         if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
             Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
@@ -296,7 +305,7 @@ public class ChessPlayerGameController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    private void readLastTwoLinesFromCSV(File file) {
+    public void readLastTwoLinesFromCSV(File file) {
         String secondLastLine = "";
         String lastLine = "";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {

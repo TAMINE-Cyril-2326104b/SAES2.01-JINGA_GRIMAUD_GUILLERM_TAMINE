@@ -11,6 +11,11 @@ public abstract class Piece {
         this.position = position;
     }
 
+    public Piece(Couleur color, Position position) {
+        this.color=color;
+        this.position = position;
+    }
+
     public Couleur getColor() {
         return color;
     }
