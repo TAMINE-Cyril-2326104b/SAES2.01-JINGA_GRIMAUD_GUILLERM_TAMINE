@@ -198,4 +198,12 @@ public class ChessMainPageController implements Initializable {
         stage.centerOnScreen();
         stage.show(); // On fait apparaître le stage
     }
+
+    public void handleChangeSceneGames(ActionEvent event) throws IOException {
+        List<String> players = readPlayersFromFile("chess_moves.csv");
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll(players);
+        VBoxDroite.getChildren().clear();
+        VBoxDroite.getChildren().addAll(listView);
+    }
 }
