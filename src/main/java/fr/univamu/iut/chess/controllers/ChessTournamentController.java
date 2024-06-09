@@ -77,7 +77,7 @@ public class ChessTournamentController implements Initializable {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
-        this.currentTurn = Couleur.WHITE;
+        this.currentTurn = Couleur.BLANC;
         this.isWhiteTurn=true;
         afficherPlateau();
 
@@ -155,23 +155,23 @@ public class ChessTournamentController implements Initializable {
 
             if (isKingInCheck(currentTurn)) {
                 if (isCheckmate(currentTurn)) {
-                    endGame(currentTurn == Couleur.WHITE ? Couleur.BLACK : Couleur.WHITE);
+                    endGame(currentTurn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC);
                 } else {
-                    echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
-                    if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
+                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " echec !");
+                    if ( isKingInCheck(Couleur.NOIR) ||  isKingInCheck(Couleur.BLANC)){
                         plateau.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " deplacement impossible !");
                         switchTurn();
                     }
                 }
             }else {
                 echecLabel.setText("");
             }
-            if(currentTurn.equals(Couleur.WHITE) && isKingInCheck(Couleur.BLACK) || currentTurn.equals(Couleur.BLACK) && isKingInCheck(Couleur.WHITE)){
-                echecLabel.setText((currentTurn == Couleur.BLACK ? "Les blancs" : "Les noirs") + " echec !");
+            if(currentTurn.equals(Couleur.BLANC) && isKingInCheck(Couleur.NOIR) || currentTurn.equals(Couleur.NOIR) && isKingInCheck(Couleur.BLANC)){
+                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " echec !");
 
             }else {
                 echecLabel.setText("");
@@ -189,13 +189,13 @@ public class ChessTournamentController implements Initializable {
     }
 
     private void switchTurn() {
-        currentTurn = (currentTurn == Couleur.WHITE) ? Couleur.BLACK : Couleur.WHITE;
+        currentTurn = (currentTurn == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
         afficherTourMessage();
         handleMove();
     }
 
     private void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? NomChoisiLabel.getText() : AdvLabel.getText()) + " jouent !");
+        tourMessage.setText((currentTurn == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText()) + " jouent !");
     }
 
 
@@ -206,7 +206,7 @@ public class ChessTournamentController implements Initializable {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
             if (timeWhite <= 0) {
-                endGame(Couleur.BLACK);
+                endGame(Couleur.NOIR);
             }
         }));
         timerWhite.setCycleCount(Timeline.INDEFINITE);
@@ -215,7 +215,7 @@ public class ChessTournamentController implements Initializable {
             timeBlack--;
             updateTimeLabel(timeLabelBlack, timeBlack);
             if (timeBlack <= 0) {
-                endGame(Couleur.WHITE);
+                endGame(Couleur.BLANC);
             }
         }));
         timerBlack.setCycleCount(Timeline.INDEFINITE);
@@ -248,8 +248,8 @@ public class ChessTournamentController implements Initializable {
         timerWhite.stop();
         timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.WHITE) ? NomChoisiLabel.getText() : AdvLabel.getText();
-        String loser = (winnerColor == Couleur.WHITE) ? AdvLabel.getText() : NomChoisiLabel.getText();
+        String winner = (winnerColor == Couleur.BLANC) ? NomChoisiLabel.getText() : AdvLabel.getText();
+        String loser = (winnerColor == Couleur.BLANC) ? AdvLabel.getText() : NomChoisiLabel.getText();
 
         System.out.println(winner + " ont gagné");
         mouvImpo.setText(winner + " ont gagné");

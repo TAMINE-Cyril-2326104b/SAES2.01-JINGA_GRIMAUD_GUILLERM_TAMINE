@@ -15,22 +15,32 @@ public class PawnMoveTest {
     public void setUp() {
         controller = new ChessPlayerGameController();
         controller.plateau = new Chessboard();
-
     }
-
 
     @Test
     public void testPawnMove() {
-            // Déplacer un pion blanc d'une case vers le haut
-            Piece pawn = new Pawn(Couleur.WHITE, new Position(1, 0));
-            controller.plateau.setPiece(1, 0, pawn);
-            controller.plateau.movePiece(1,0,2,0, controller.plateau.getPieces());
+        // Placer un pion blanc
+        Piece pawn = new Pawn(Couleur.BLANC, new Position(1, 0));
+        controller.plateau.setPiece(1, 0, pawn);
+        controller.plateau.movePiece(1, 0, 2, 0, controller.plateau.getPieces());
 
-            // Vérifier que le pion a été déplacé
-            assertSame(2, pawn.getPosition().getRow());
-            assertNull(controller.plateau.getPieces()[1][0]); // Vérifier que la case précédente est vide
-        };
+        // Vérifier que le pion a été déplacé
+        assertSame(2, pawn.getPosition().getRow());
+        assertSame(0, pawn.getPosition().getCol());
+        assertNull(controller.plateau.getPieces()[1][0]); // Vérifier que la case précédente est vide
+    }
 
+    @Test
+    public void testIllegalPawnMove() {
+        // Placer un pion blanc
+        Piece pawn = new Pawn(Couleur.BLANC, new Position(1, 0));
+        controller.plateau.setPiece(1, 0, pawn);
+
+        // Essayer de déplacer le pion d'une manière illégale
+        boolean moveResult = pawn.isMoveLegal(1, 0, 2, 2, controller.plateau.getPieces()); // Déplacement en diagonale
+
+        // Vérifier que le pion n'a pas été déplacé
+        assertFalse(moveResult);
+        assertSame(pawn, controller.plateau.getPieces()[1][0]);
+    }
 }
-
-

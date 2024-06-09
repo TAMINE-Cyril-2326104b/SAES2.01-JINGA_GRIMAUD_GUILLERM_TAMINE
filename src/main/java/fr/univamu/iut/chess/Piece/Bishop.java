@@ -7,7 +7,11 @@ public class Bishop extends Piece {
         super(couleur, imagePath, position);
     }
 
+    public Bishop(Couleur couleur, Position position) { super(couleur, position); }
+
+
     @Override
+
     public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int deltaLigne = Math.abs(ligneArrivee - ligneDepart);
         int deltaColonne = Math.abs(colonneArrivee - colonneDepart);

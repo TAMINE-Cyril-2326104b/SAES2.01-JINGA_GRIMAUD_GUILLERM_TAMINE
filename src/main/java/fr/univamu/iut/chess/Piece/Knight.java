@@ -8,6 +8,10 @@ public class Knight extends Piece {
         super(couleur, imagePath, position);
     }
 
+    public Knight(Couleur couleur, Position position) {
+        super(couleur, position);
+    }
+
     @Override
     public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
         int deltaLigne = Math.abs(ligneArrivee - ligneDepart);

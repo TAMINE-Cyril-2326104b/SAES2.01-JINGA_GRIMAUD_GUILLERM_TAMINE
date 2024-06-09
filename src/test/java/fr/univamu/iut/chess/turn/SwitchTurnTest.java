@@ -22,24 +22,24 @@ public class SwitchTurnTest {
         controller.timeLabelBlack = new Label();
 
         controller.plateau = new Chessboard();
-        controller.currentTurn = Couleur.WHITE;
+        controller.currentTurn = Couleur.BLANC;
     }
 
     @Test
     public void testSwitchTurn() {
         // Vérifier que la couleur initiale est blanche
-        assertEquals(Couleur.WHITE, controller.currentTurn);
+        assertEquals(Couleur.BLANC, controller.currentTurn);
 
         // Changer le tour
         controller.switchTurn();
 
         // Vérifier que la couleur a changé en noir
-        assertEquals(Couleur.BLACK, controller.currentTurn);
+        assertEquals(Couleur.NOIR, controller.currentTurn);
 
         // Changer le tour à nouveau
         controller.switchTurn();
 
         // Vérifier que la couleur est à nouveau blanche
-        assertEquals(Couleur.WHITE, controller.currentTurn);
+        assertEquals(Couleur.BLANC, controller.currentTurn);
     }
 }
