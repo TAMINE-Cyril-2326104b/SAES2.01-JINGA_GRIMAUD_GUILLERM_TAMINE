@@ -31,13 +31,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChessPlayerGameController implements Initializable {
+public class ChessPlayerGameController {
 
     @FXML
-    private Label timeLabelWhite;
+    public Label timeLabelWhite;
 
     @FXML
-    private Label timeLabelBlack;
+    public Label timeLabelBlack;
 
     private Timeline timerWhite;
     private Timeline timerBlack;
@@ -64,8 +64,8 @@ public class ChessPlayerGameController implements Initializable {
     private Position selectedPosition;
     public Couleur currentTurn;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initialize() {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
@@ -157,7 +157,7 @@ public class ChessPlayerGameController implements Initializable {
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " déplacement impossible !");
                         switchTurn();
                     }
                 }
@@ -189,8 +189,12 @@ public class ChessPlayerGameController implements Initializable {
     }
 
     public void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+        // Vérifier si le tourMessage n'est pas null avant de le mettre à jour
+        if (tourMessage != null) {
+            tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+        }
     }
+
 
 
     public void setupTimers() {
