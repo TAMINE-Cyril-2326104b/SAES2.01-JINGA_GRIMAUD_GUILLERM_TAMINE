@@ -39,12 +39,12 @@ public class ChessBotGameController implements Initializable {
     private Label timeLabelWhite;
 
     @FXML
-
+    private Label timeLabelBlack;
 
     private Timeline timerWhite;
-
+    private Timeline timerBlack;
     private int timeWhite = 600; // 10 minutes in seconds
-
+    private int timeBlack = 600; // 10 minutes in seconds
     private boolean isWhiteTurn = true;
     @FXML
     private Label LabelNom;
@@ -136,7 +136,7 @@ public class ChessBotGameController implements Initializable {
      * @param piece
      * @param position
      */
-    public void handlePieceClick(Piece piece, Position position) {
+    private void handlePieceClick(Piece piece, Position position) {
         if (selectedPiece == null) {
             if (piece.getColor().equals(currentTurn)) { // Il faut que cela soit le tour du joueur pour sélectionner une pièce.
                 selectedPiece = piece;
@@ -152,7 +152,7 @@ public class ChessBotGameController implements Initializable {
      * Détecte le clic sur une case vide, permettant le déplacement d'une pièce
      * @param position
      */
-    public void handleEmptySquareClick(Position position) {
+    private void handleEmptySquareClick(Position position) {
         if (selectedPiece != null) {
             movePiece(position);
         }
@@ -162,7 +162,7 @@ public class ChessBotGameController implements Initializable {
      * Permet le déplacement d'une pièce selon les fonctions mises en place dans leur classe respective.
      * @param newPosition
      */
-    public void movePiece(Position newPosition) {
+    private void movePiece(Position newPosition) {
         if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
@@ -221,7 +221,7 @@ public class ChessBotGameController implements Initializable {
     /**
      * Change le tour du joueur.
      */
-    public void switchTurn() {
+    private void switchTurn() {
         currentTurn = (currentTurn == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
         afficherTourMessage();
         if (currentTurn == Couleur.NOIR) {
@@ -232,14 +232,14 @@ public class ChessBotGameController implements Initializable {
     /**
      * Affiche un message indiquant quel joueur joue.
      */
-    public void afficherTourMessage() {
+    private void afficherTourMessage() {
         tourMessage.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " jouent !");
     }
 
     /**
      * Le bot joue, avec un mouvement valide aléatoire.
      */
-    public void jouerTourBot() {
+    private void jouerTourBot() {
         List<Move> validMoves = obtenirDeplacementsValides(Couleur.NOIR);
         if (!validMoves.isEmpty()) {
             Random rand = new Random();
@@ -256,7 +256,7 @@ public class ChessBotGameController implements Initializable {
      * @param couleur
      * @return
      */
-    public List<Move> obtenirDeplacementsValides(Couleur couleur) {
+    private List<Move> obtenirDeplacementsValides(Couleur couleur) {
         List<Move> validMoves = new ArrayList<>();
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
@@ -291,7 +291,7 @@ public class ChessBotGameController implements Initializable {
     /**
      * Mise en place du timer, avec décrémentation.
      */
-    public void setupTimers() {
+    private void setupTimers() {
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
@@ -309,7 +309,7 @@ public class ChessBotGameController implements Initializable {
      * @param label
      * @param time
      */
-    public void updateTimeLabel(Label label, int time) {
+    private void updateTimeLabel(Label label, int time) {
         int minutes = time / 60;
         int seconds = time % 60;
         label.setText(String.format("%02d:%02d", minutes, seconds));
@@ -318,7 +318,7 @@ public class ChessBotGameController implements Initializable {
     /**
      * Gestion des mouvements
      */
-    public void handleMove() {
+    private void handleMove() {
         if (isWhiteTurn) {
             timerWhite.stop();
         } else {
@@ -330,7 +330,7 @@ public class ChessBotGameController implements Initializable {
     /**
      * Démarrage de la partie, avec le début du timer des blancs.
      */
-    public void startGame() {
+    private void startGame() {
         timerWhite.play();
     }
 
@@ -369,7 +369,7 @@ public class ChessBotGameController implements Initializable {
      * @param kingColor
      * @return
      */
-    public boolean isKingInCheck(Couleur kingColor) {
+    private boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
         for (Piece[] row : plateau.getPieces()) {
             for (Piece piece : row) {
@@ -388,7 +388,7 @@ public class ChessBotGameController implements Initializable {
      * @param kingColor
      * @return
      */
-    public boolean isCheckmate(Couleur kingColor) {
+    private boolean isCheckmate(Couleur kingColor) {
         if (!isKingInCheck(kingColor)) {
             return false;
         }
@@ -413,7 +413,7 @@ public class ChessBotGameController implements Initializable {
      * @param to
      * @return
      */
-    public boolean canKingMove(Position from, Position to) {
+    private boolean canKingMove(Position from, Position to) {
         Piece king = plateau.getPieces()[from.getRow()][from.getCol()];
         if (king.isMoveLegal(from.getRow(), from.getCol(), to.getRow(), to.getCol(), plateau.getPieces())) {
             Piece temp = plateau.getPieces()[to.getRow()][to.getCol()];
@@ -442,10 +442,10 @@ public class ChessBotGameController implements Initializable {
 
 
     /**
-     * Prend le dernier nom rentré dans le fichier csv
+     * prend le dernier nom rentré dans le fichier csv
      * @param file
      */
-    public void readLastLineFromCSV(File file) {
+    private void readLastLineFromCSV(File file) {
         String lastLine = "";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
@@ -489,7 +489,7 @@ public class ChessBotGameController implements Initializable {
     }
 
     /**
-     * Annonce chaque nouvellle parties dans le fichier csv afin de différencier les parties facilement
+     * Annonce chaque nouvelle parties dans le fichier csv afin de différencier les parties facilement
      * @param filePath
      * @param player1
      * @param player2
@@ -503,7 +503,7 @@ public class ChessBotGameController implements Initializable {
     }
 
     /**
-     * Met les résultat de la prties dans le csv a la fin de la partie
+     * met les résultat de la prties dans le csv a la fin de la partie
      * @param filePath
      * @param winner
      */
