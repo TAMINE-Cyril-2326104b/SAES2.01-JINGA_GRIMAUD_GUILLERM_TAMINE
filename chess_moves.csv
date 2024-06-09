@@ -83,3 +83,5 @@ Black,BOT,Knight,2,0,4,1
 White,dfdf dfdf,Queen,3,7,1,5
 Black,BOT,Pawn,1,0,2,0
 Le gagnant est: dfdf dfdf
+Turn,Player,Piece,From,To
+Nouvelle Partie: v v vs BOT
