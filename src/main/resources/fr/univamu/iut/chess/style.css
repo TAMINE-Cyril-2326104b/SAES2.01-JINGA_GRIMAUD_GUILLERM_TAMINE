@@ -113,6 +113,7 @@
     -fx-border-color: #bcbcbb;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
+    -fx-text-fill: white;
 }
 
 .formTextField:hover{
