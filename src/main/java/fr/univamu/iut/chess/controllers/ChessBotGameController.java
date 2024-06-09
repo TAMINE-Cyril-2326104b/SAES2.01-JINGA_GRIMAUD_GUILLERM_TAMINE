@@ -272,6 +272,7 @@ public class ChessBotGameController implements Initializable {
     private void startGame() {
         timerWhite.play();
     }
+
     private void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();

@@ -65,7 +65,7 @@ public class ChessPlayerGameController {
     public Couleur currentTurn;
 
 
-    public void initialize() {
+    public void initialize() { //initialise le nom des joueurs, le plateau etc...
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
@@ -118,7 +118,7 @@ public class ChessPlayerGameController {
         }
     }
 
-    public void handlePieceClick(Piece piece, Position position) {
+    public void handlePieceClick(Piece piece, Position position) { //permet de choisir la piece a déplacer ou de choisir la case vers laquelle la déplacer
         if (selectedPiece == null) {
             if (piece.getColor().equals(currentTurn)) {
                 selectedPiece = piece;
@@ -130,7 +130,7 @@ public class ChessPlayerGameController {
         }
     }
 
-    public void handleEmptySquareClick(Position position) {
+    public void handleEmptySquareClick(Position position) { // si on choisi une case vide et qu"on a aupréalablement choisi une piece on la déplace
         if (selectedPiece != null) {
             movePiece(position);
         }
@@ -238,6 +238,8 @@ public class ChessPlayerGameController {
     public void startGame() {
         timerWhite.play();
     }
+
+
     public void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();
@@ -305,7 +307,7 @@ public class ChessPlayerGameController {
         stage.centerOnScreen();
         stage.show();
     }
-    public void readLastTwoLinesFromCSV(File file) {
+    public void readLastTwoLinesFromCSV(File file) { // prend les deux dernières ligne du csv afin de prendre les deux derniers joueurs inscrit
         String secondLastLine = "";
         String lastLine = "";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -320,7 +322,7 @@ public class ChessPlayerGameController {
             e.printStackTrace();
         }
 
-        // Assuming CSV format: lastName, firstName
+        //  CSV format: lastName, firstName
         if (!lastLine.isEmpty() && !secondLastLine.isEmpty()) {
             String[] lastParts = lastLine.split(",");
             String[] secondLastParts = secondLastLine.split(",");

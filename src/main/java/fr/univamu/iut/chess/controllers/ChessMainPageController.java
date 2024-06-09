@@ -42,7 +42,7 @@ public class ChessMainPageController implements Initializable {
         this.chessboard = new Chessboard();
         displayChessboard();
     }
-    public void handleChangeSceneJoueurList(ActionEvent event) throws IOException {
+    public void handleChangeSceneJoueurList(ActionEvent event) throws IOException { // apres avoir cliqué sur le bouton la partie droite chagne et affiche la liste des joueurs
         List<String> players = readPlayersFromFile("PlayerGame_joueurs.csv");
         List<String> playersVSBot = readPlayersFromFile("BotGame_joueur.csv");
         ListView<String> listView = new ListView<>();
@@ -66,7 +66,7 @@ public class ChessMainPageController implements Initializable {
         }
         return players;
     }
-    private void clearCSVFile() {
+    private void clearCSVFile() {   //supprime tout le contenue du fichier contenant les joueurs du tournois
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("TournamentGame.csv"))) {
             // Writing an empty string to clear the file
             writer.write("");
@@ -105,7 +105,7 @@ public class ChessMainPageController implements Initializable {
     }
 
     // Une fonction permettant de changer de scène et d'affronter l'ordinateur
-    public void handleChangeSceneBot(ActionEvent event) throws IOException {
+    public void handleChangeSceneBot(ActionEvent event) throws IOException { // nous envoie vers le mode de jeu contre le bot
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessBotGameForm.fxml")); // On charge la page de formulaire FXML
         Scene secondScene = new Scene(secondSceneParent);
 
@@ -115,7 +115,7 @@ public class ChessMainPageController implements Initializable {
         stage.show(); // On fait apparaître le stage
     }
 
-    public void handleNewGameButtonAction(ActionEvent event) throws IOException{
+    public void handleNewGameButtonAction(ActionEvent event) throws IOException{ //action faite lorsque l'on clique sur le bouton nouvelle partie, nous remet sur la page de base
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
@@ -126,7 +126,7 @@ public class ChessMainPageController implements Initializable {
     }
 
     // Une fonction permettant de changer de scène et d'affronter un autre joueur
-    public void handleChangeScenePlayer(ActionEvent event) throws IOException{
+    public void handleChangeScenePlayer(ActionEvent event) throws IOException{ // nous envoie vers playerGameForm afin de rentrer les noms des joueurs 1v1
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessPlayerGameForm.fxml")); // On charge la page de formulaire FXML
         Scene secondScene = new Scene(secondSceneParent);
 
@@ -135,7 +135,7 @@ public class ChessMainPageController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    public void handleChangeSceneTournament(ActionEvent event) throws IOException{
+    public void handleChangeSceneTournament(ActionEvent event) throws IOException{ // nous envoie vers le tournois
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessTournamentForm.fxml"));
         Scene secondScene = new Scene(secondSceneParent);
 
