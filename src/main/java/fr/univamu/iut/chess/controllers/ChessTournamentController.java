@@ -245,7 +245,7 @@ public class ChessTournamentController implements Initializable {
      * Affiche un message indiquant quel joueur joue.
      */
     public void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText()) + " jouent !");
+        tourMessage.setText((currentTurn == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText()) + " joue !");
     }
 
 
