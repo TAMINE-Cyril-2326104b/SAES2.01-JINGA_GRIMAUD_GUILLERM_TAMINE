@@ -69,7 +69,7 @@ public class ChessBotGameController implements Initializable {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
-        this.currentTurn = Couleur.WHITE;
+        this.currentTurn = Couleur.BLANC;
         afficherPlateau();
         afficherTourMessage();
         String filePath = "BotGame_joueur.csv";
@@ -148,23 +148,23 @@ public class ChessBotGameController implements Initializable {
 
             if (isKingInCheck(currentTurn)) {
                 if (isCheckmate(currentTurn)) {
-                    endGame(currentTurn == Couleur.WHITE ? Couleur.BLACK : Couleur.WHITE);
+                    endGame(currentTurn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC);
                 } else {
-                    echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
-                    if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
+                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " echec !");
+                    if ( isKingInCheck(Couleur.NOIR) ||  isKingInCheck(Couleur.BLANC)){
                         plateau.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " deplacement impossible !");
                         switchTurn();
                     }
                 }
             }else {
                 echecLabel.setText("");
             }
-            if(currentTurn.equals(Couleur.WHITE) && isKingInCheck(Couleur.BLACK) || currentTurn.equals(Couleur.BLACK) && isKingInCheck(Couleur.WHITE)){
-                echecLabel.setText((currentTurn == Couleur.BLACK ? "Les blancs" : "Les noirs") + " echec !");
+            if(currentTurn.equals(Couleur.BLANC) && isKingInCheck(Couleur.NOIR) || currentTurn.equals(Couleur.NOIR) && isKingInCheck(Couleur.BLANC)){
+                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " echec !");
 
             }else {
                 echecLabel.setText("");
@@ -182,18 +182,18 @@ public class ChessBotGameController implements Initializable {
     }
 
     private void switchTurn() {
-        currentTurn = (currentTurn == Couleur.WHITE) ? Couleur.BLACK : Couleur.WHITE;
+        currentTurn = (currentTurn == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
         afficherTourMessage();
-        if (currentTurn == Couleur.BLACK) {
+        if (currentTurn == Couleur.NOIR) {
             jouerTourBot();
         }
     }
 
     private void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+        tourMessage.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " jouent !");
     }
     private void jouerTourBot() {
-        List<Move> validMoves = obtenirDeplacementsValides(Couleur.BLACK);
+        List<Move> validMoves = obtenirDeplacementsValides(Couleur.NOIR);
         if (!validMoves.isEmpty()) {
             Random rand = new Random();
             Move move = validMoves.get(rand.nextInt(validMoves.size()));
@@ -236,12 +236,21 @@ public class ChessBotGameController implements Initializable {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
             if (timeWhite <= 0) {
-                endGame(Couleur.BLACK);
+                endGame(Couleur.NOIR);
             }
         }));
         timerWhite.setCycleCount(Timeline.INDEFINITE);
 
+        timerBlack = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            timeBlack--;
+            updateTimeLabel(timeLabelBlack, timeBlack);
+            if (timeBlack <= 0) {
+                endGame(Couleur.BLANC);
+            }
+        }));
+        timerBlack.setCycleCount(Timeline.INDEFINITE);
         updateTimeLabel(timeLabelWhite, timeWhite);
+        updateTimeLabel(timeLabelBlack, timeBlack);
     }
 
     private void updateTimeLabel(Label label, int time) {
@@ -253,7 +262,9 @@ public class ChessBotGameController implements Initializable {
     private void handleMove() {
         if (isWhiteTurn) {
             timerWhite.stop();
+            timerBlack.play();
         } else {
+            timerBlack.stop();
             timerWhite.play();
         }
         isWhiteTurn = !isWhiteTurn;
@@ -264,8 +275,9 @@ public class ChessBotGameController implements Initializable {
 
     private void endGame(Couleur winnerColor) {
         timerWhite.stop();
+        timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.WHITE) ? "Les blancs" : "Les noirs";
+        String winner = (winnerColor == Couleur.BLANC) ? "Les blancs" : "Les noirs";
         System.out.println(winner+" on gagnés");
         Platform.exit(); // fermer l'application
     }

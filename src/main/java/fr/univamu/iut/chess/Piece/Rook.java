@@ -6,6 +6,10 @@ public class Rook extends Piece {
         super(couleur, imagePath, position);
     }
 
+    public Rook(Couleur couleur, Position position){
+        super(couleur, position);
+    }
+
     // On utilise l'annotation @Override et on réecrit la fonction isMoveLegal :
     // La tour ne peut se déplacer uniquement à la verticale ou l'horizontale.
     @Override

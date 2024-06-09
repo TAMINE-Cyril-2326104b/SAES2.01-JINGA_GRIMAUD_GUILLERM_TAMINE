@@ -6,6 +6,10 @@ public class Queen extends Piece {
         super(color, imagePath, position);
     }
 
+    public Queen(Couleur color, Position position){
+        super(color, position);
+    }
+
     // On utilise l'annotation @Override et on réecrit la fonction isMoveLegal :
     // La reine possède à la fois les déplacements du fou et de la tour, on va donc les réutiliser dans le programme.
     @Override

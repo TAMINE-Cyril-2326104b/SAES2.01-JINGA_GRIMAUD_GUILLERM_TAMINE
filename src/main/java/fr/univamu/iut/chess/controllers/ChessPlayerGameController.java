@@ -8,11 +8,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,8 +28,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ChessPlayerGameController {
 
@@ -69,7 +68,7 @@ public class ChessPlayerGameController {
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
-        this.currentTurn = Couleur.WHITE;
+        this.currentTurn = Couleur.BLANC;
         afficherPlateau();
         afficherTourMessage();
         String filePath = "PlayerGame_joueurs.csv";
@@ -149,23 +148,23 @@ public class ChessPlayerGameController {
 
             if (isKingInCheck(currentTurn)) {
                 if (isCheckmate(currentTurn)) {
-                    endGame(currentTurn == Couleur.WHITE ? Couleur.BLACK : Couleur.WHITE);
+                    endGame(currentTurn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC);
                 } else {
-                    echecLabel.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " echec !");
-                    if ( isKingInCheck(Couleur.BLACK) ||  isKingInCheck(Couleur.WHITE)){
+                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " echec !");
+                    if ( isKingInCheck(Couleur.NOIR) ||  isKingInCheck(Couleur.BLANC)){
                         plateau.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " déplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " déplacement impossible !");
                         switchTurn();
                     }
                 }
             }else {
                 echecLabel.setText("");
             }
-            if(currentTurn.equals(Couleur.WHITE) && isKingInCheck(Couleur.BLACK) || currentTurn.equals(Couleur.BLACK) && isKingInCheck(Couleur.WHITE)){
-                echecLabel.setText((currentTurn == Couleur.BLACK ? "Les blancs" : "Les noirs") + " echec !");
+            if(currentTurn.equals(Couleur.BLANC) && isKingInCheck(Couleur.NOIR) || currentTurn.equals(Couleur.NOIR) && isKingInCheck(Couleur.BLANC)){
+                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " echec !");
 
             }else {
                 echecLabel.setText("");
@@ -183,7 +182,7 @@ public class ChessPlayerGameController {
     }
 
     public void switchTurn() {
-        currentTurn = (currentTurn == Couleur.WHITE) ? Couleur.BLACK : Couleur.WHITE;
+        currentTurn = (currentTurn == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
         afficherTourMessage();
         handleMove();
     }
@@ -191,7 +190,7 @@ public class ChessPlayerGameController {
     public void afficherTourMessage() {
         // Vérifier si le tourMessage n'est pas null avant de le mettre à jour
         if (tourMessage != null) {
-            tourMessage.setText((currentTurn == Couleur.WHITE ? "Les blancs" : "Les noirs") + " jouent !");
+            tourMessage.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " jouent !");
         }
     }
 
@@ -202,7 +201,7 @@ public class ChessPlayerGameController {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
             if (timeWhite <= 0) {
-                endGame(Couleur.BLACK);
+                endGame(Couleur.NOIR);
             }
         }));
         timerWhite.setCycleCount(Timeline.INDEFINITE);
@@ -211,7 +210,7 @@ public class ChessPlayerGameController {
             timeBlack--;
             updateTimeLabel(timeLabelBlack, timeBlack);
             if (timeBlack <= 0) {
-                endGame(Couleur.WHITE);
+                endGame(Couleur.BLANC);
             }
         }));
         timerBlack.setCycleCount(Timeline.INDEFINITE);
@@ -247,10 +246,19 @@ public class ChessPlayerGameController {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Fin de la partie");
-            alert.setHeaderText(null);
-            alert.setContentText( winnerColor + " WINS !");
+            alert.setHeaderText("ECHEC ET MAT !");
+            alert.setContentText("Les " + winnerColor + " gagnent la partie !");
             alert.showAndWait();
+            try {
+                TimeUnit.SECONDS.sleep(4); // Mettre en pause pendant 3 secondes
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Fermer l'application
+            Platform.exit();
         });
+
 
     }
     public boolean isKingInCheck(Couleur kingColor) {

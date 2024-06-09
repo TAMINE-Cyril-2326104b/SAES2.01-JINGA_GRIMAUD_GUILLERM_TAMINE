@@ -12,7 +12,7 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isMoveLegal(int ligneDepart, int colonneDepart, int ligneArrivee, int colonneArrivee, Piece[][] plateau) {
-        int direction = (this.getColor() == Couleur.WHITE) ? -1 : 1; // Les pions blancs montent, les pions noirs descendent
+        int direction = (this.getColor() == Couleur.BLANC) ? -1 : 1; // Les pions blancs montent, les pions noirs descendent
 
         // Vérification du déplacement d'une case en avant
         if (ligneArrivee == ligneDepart + direction && colonneArrivee == colonneDepart) {
@@ -20,7 +20,7 @@ public class Pawn extends Piece {
         }
 
         // Vérification du déplacement de deux cases en avant depuis la position de départ
-        if ((this.getColor() == Couleur.WHITE && ligneDepart == 6 || this.getColor() == Couleur.BLACK && ligneDepart == 1) &&
+        if ((this.getColor() == Couleur.BLANC && ligneDepart == 6 || this.getColor() == Couleur.NOIR && ligneDepart == 1) &&
                 ligneArrivee == ligneDepart + 2 * direction && colonneArrivee == colonneDepart) {
             return plateau[ligneArrivee][colonneArrivee] == null && plateau[ligneDepart + direction][colonneArrivee] == null;
         }
