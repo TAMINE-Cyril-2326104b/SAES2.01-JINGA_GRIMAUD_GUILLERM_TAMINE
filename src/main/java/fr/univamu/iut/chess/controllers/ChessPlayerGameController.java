@@ -464,7 +464,7 @@ public class ChessPlayerGameController {
     }
 
     /**
-     * Annonce chaque nouvellle parties dans le fichier csv afin de différencier les parties facilement
+     * Annonce chaque nouvelle parties dans le fichier csv afin de différencier les parties facilement
      * @param filePath
      * @param player1
      * @param player2
@@ -478,7 +478,7 @@ public class ChessPlayerGameController {
     }
 
     /**
-     * Met les résultat de la prties dans le csv a la fin de la partie
+     * Met les résultat de la parties dans le csv a la fin de la partie
      * @param filePath
      * @param winner
      */
