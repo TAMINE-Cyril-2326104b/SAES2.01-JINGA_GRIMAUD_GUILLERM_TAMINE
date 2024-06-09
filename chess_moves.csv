@@ -49,3 +49,7 @@ White,dfdf dfdfd,Pawn,3,2,2,1
 Black,BOT,Knight,2,5,4,6
 White,dfdf dfdfd,Pawn,2,1,1,0
 Black,BOT,Knight,4,6,3,4
+Turn,Player,Piece,From,To
+Nouvelle Partie: gdgd dgdg vs BOT
+Turn,Player,Piece,From,To
+Nouvelle Partie: fef fdfd vs BOT

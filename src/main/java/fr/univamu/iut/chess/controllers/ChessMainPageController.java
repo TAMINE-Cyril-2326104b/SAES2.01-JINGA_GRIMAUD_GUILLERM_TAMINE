@@ -56,10 +56,8 @@ public class ChessMainPageController implements Initializable {
     /**
      * Change la scène pour afficher la liste des joueurs.
      *
-     * @param event L'événement de clic sur le bouton.
-     * @throws IOException Si une erreur d'entrée/sortie se produit lors du chargement de la scène.
      */
-    public void handleChangeSceneJoueurList(ActionEvent event) throws IOException {
+    public void handleChangeSceneJoueurList() {
         List<String> players = readPlayersFromFile("PlayerGame_joueurs.csv");
         List<String> playersVSBot = readPlayersFromFile("BotGame_joueur.csv");
         ListView<String> listView = new ListView<>();
@@ -197,7 +195,7 @@ public class ChessMainPageController implements Initializable {
         stage.show(); // On fait apparaître le stage
     }
 
-    public void handleChangeSceneGames(ActionEvent event) throws IOException {
+    public void handleChangeSceneGames() {
         List<String> players = readPlayersFromFile("chess_moves.csv");
         ListView<String> listView = new ListView<>();
         listView.getItems().addAll(players);

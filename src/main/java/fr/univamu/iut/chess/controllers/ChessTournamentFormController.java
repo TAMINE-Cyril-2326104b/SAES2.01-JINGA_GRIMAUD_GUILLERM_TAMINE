@@ -16,10 +16,10 @@ import java.io.IOException;
  * Contrôleur pour le formulaire de tournoi d'échecs.
  * Gère l'ajout de joueurs au tournoi et l'enregistrement dans un fichier CSV.
  *
- * <p>
- *     Ce contrôleur gère l'ajout de joueurs au tournoi d'échecs et les enregistre
- *     dans un fichier CSV. Il permet également de naviguer entre les différentes vues.
- * </p>
+ *
+ * Ce contrôleur gère l'ajout de joueurs au tournoi d'échecs et les enregistre
+ * dans un fichier CSV. Il permet également de naviguer entre les différentes vues.
+ *
  *
  * @author Votre Nom
  */
