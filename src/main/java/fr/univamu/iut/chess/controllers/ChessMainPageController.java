@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,8 @@ public class ChessMainPageController implements Initializable {
     private Chessboard chessboard;
     @FXML
     private VBox VBoxDroite;
+    @FXML
+    private ChoiceBox<String> timeChoiceBox;
 
 
     /**
@@ -170,6 +173,23 @@ public class ChessMainPageController implements Initializable {
      * @throws IOException Si une erreur d'entrée/sortie se produit lors du chargement de la scène.
      */
     public void handleChangeScenePlayer(ActionEvent event) throws IOException { // nous envoie vers playerGameForm afin de rentrer les noms des joueurs 1v1
+//        String selectedTime = timeChoiceBox.getValue();
+//        int gameTimeInSeconds = 600; // Default to 10 minutes if nothing is selected
+//
+//        if ("5 minutes".equals(selectedTime)) {
+//            gameTimeInSeconds = 300;
+//        } else if ("10 minutes".equals(selectedTime)) {
+//            gameTimeInSeconds = 600;
+//        } else if ("20 minutes".equals(selectedTime)) {
+//            gameTimeInSeconds = 1200;
+//        }
+//
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ChessPlayerGameForm.fxml"));
+//        Parent secondSceneParent = loader.load();
+//
+//        ChessPlayerGameController gameController = loader.getController();
+//        gameController.setGameTime(gameTimeInSeconds);
+
         Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessPlayerGameForm.fxml")); // On charge la page de formulaire FXML
         Scene secondScene = new Scene(secondSceneParent);
 

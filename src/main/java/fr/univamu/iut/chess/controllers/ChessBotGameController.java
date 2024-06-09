@@ -442,7 +442,7 @@ public class ChessBotGameController implements Initializable {
 
 
     /**
-     *
+     * prend le dernier nom rentré dans le fichier csv
      * @param file
      */
     private void readLastLineFromCSV(File file) {
@@ -472,7 +472,7 @@ public class ChessBotGameController implements Initializable {
     }
 
     /**
-     *
+     * Introduit les mouvements dans le fichier csv
      * @param filePath
      * @param turn
      * @param player
@@ -489,7 +489,7 @@ public class ChessBotGameController implements Initializable {
     }
 
     /**
-     *
+     * Annonce chaque nouvellle parties dans le fichier csv afin de différencier les parties facilement
      * @param filePath
      * @param player1
      * @param player2
@@ -503,7 +503,7 @@ public class ChessBotGameController implements Initializable {
     }
 
     /**
-     *
+     * met les résultat de la prties dans le csv a la fin de la partie
      * @param filePath
      * @param winner
      */

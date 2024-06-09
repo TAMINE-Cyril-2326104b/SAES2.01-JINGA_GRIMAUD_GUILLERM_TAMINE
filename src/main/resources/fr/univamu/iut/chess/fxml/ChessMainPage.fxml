@@ -60,9 +60,9 @@
                      <ChoiceBox fx:id="timeChoiceBox" prefHeight="60.0" prefWidth="150.0" styleClass="selecteur">
                         <items>
                            <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="5 min" />
-                              <String fx:value="10 min" />
-                              <String fx:value="20 min" />
+                              <String fx:value="5 minutes" />
+                              <String fx:value="10 minutes" />
+                              <String fx:value="20 minutes" />
                            </FXCollections>
                         </items>
                         <VBox.margin>
