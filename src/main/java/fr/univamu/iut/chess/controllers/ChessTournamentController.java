@@ -4,6 +4,7 @@ import fr.univamu.iut.chess.ChessApplication;
 import fr.univamu.iut.chess.Piece.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +28,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ChessTournamentController implements Initializable {
 
@@ -83,6 +86,12 @@ public class ChessTournamentController implements Initializable {
 
         NomChoisiLabel.setText(players.get(currentMatchIndex));
         AdvLabel.setText(players.get(currentMatchIndex + 1));
+
+        String movesFilePath = "chess_moves.csv";
+        initializeCSV(movesFilePath);
+        String player1 = NomChoisiLabel.getText();  // Nom du premier joueur
+        String player2 = AdvLabel.getText();        // Nom du deuxième joueur
+        logNewGameToCSV(movesFilePath, player1, player2);
 
         afficherTourMessage();
         startGame();
@@ -146,6 +155,16 @@ public class ChessTournamentController implements Initializable {
         if (selectedPiece != null && selectedPiece.isMoveLegal(
                 selectedPosition.getRow(), selectedPosition.getCol(),
                 newPosition.getRow(), newPosition.getCol(), plateau.getPieces())) {
+
+            // Enregistrer le mouvement dans le fichier CSV
+            String filePath = "chess_moves.csv"; // Chemin vers le fichier CSV
+            String turn = currentTurn == Couleur.BLANC ? "White" : "Black";
+            String player = currentTurn == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText();
+            String piece = selectedPiece.getClass().getSimpleName();
+            String from = selectedPosition.getRow() + "," + selectedPosition.getCol();
+            String to = newPosition.getRow() + "," + newPosition.getCol();
+
+            logMoveToCSV(filePath, turn, player, piece, from, to);
 
             System.out.println("Moving piece to " + newPosition.getRow() + ", " + newPosition.getCol());
             plateau.movePiece(
@@ -251,6 +270,11 @@ public class ChessTournamentController implements Initializable {
         String winner = (winnerColor == Couleur.BLANC) ? NomChoisiLabel.getText() : AdvLabel.getText();
         String loser = (winnerColor == Couleur.BLANC) ? AdvLabel.getText() : NomChoisiLabel.getText();
 
+        // Enregistrer le gagnant dans le fichier CSV
+        String filePath = "chess_moves.csv";
+        String winner2 = winnerColor == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText();
+        logGameResultToCSV(filePath, winner2);
+
         System.out.println(winner + " ont gagné");
         mouvImpo.setText(winner + " ont gagné");
 
@@ -265,6 +289,21 @@ public class ChessTournamentController implements Initializable {
         if (players.size() == 1) {
             System.out.println("Tournoi terminé. " + winner + " est le champion!");
             mouvImpo.setText("Tournoi terminé. " + winner + " est le champion!");
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Fin de la partie");
+                alert.setHeaderText("ECHEC ET MAT !");
+                alert.setContentText("Les " + winnerColor + " gagnent la partie !");
+                alert.showAndWait();
+                try {
+                    TimeUnit.SECONDS.sleep(3); // Mettre en pause pendant 3 secondes
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Fermer l'application
+                Platform.exit();
+            });
         } else {
             initializeGame();
         }
@@ -335,5 +374,33 @@ public class ChessTournamentController implements Initializable {
             e.printStackTrace();
         }
         return players;
+    }
+    public void initializeCSV(String filePath) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println("Turn,Player,Piece,From,To");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void logMoveToCSV(String filePath, String turn, String player, String piece, String from, String to) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println(turn + "," + player + "," + piece + "," + from + "," + to);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void logNewGameToCSV(String filePath, String player1, String player2) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println("Nouvelle Partie: " + player1 + " vs " + player2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void logGameResultToCSV(String filePath, String winner) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            writer.println("Le gagnant est: " + winner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

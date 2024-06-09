@@ -1,0 +1,11 @@
+Turn,Player,Piece,From,To
+Nouvelle Partie: dei,da, vs ma,pe,
+White,dei,da,,Pawn,6,4,4,4
+Black,ma,pe,,Pawn,1,5,3,5
+White,dei,da,,Queen,7,3,3,7
+Black,ma,pe,,Pawn,1,6,2,6
+White,dei,da,,Pawn,6,6,5,6
+Black,ma,pe,,Pawn,1,7,2,7
+White,dei,da,,Queen,3,7,2,6
+Black,ma,pe,,Pawn,3,5,4,5
+Le gagnant est: dei,da,
