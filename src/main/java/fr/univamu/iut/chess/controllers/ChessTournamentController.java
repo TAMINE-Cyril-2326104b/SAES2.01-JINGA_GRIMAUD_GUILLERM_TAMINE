@@ -54,28 +54,37 @@ public class ChessTournamentController implements Initializable {
     private Label echecLabel;
     @FXML
     private Label mouvImpo;
+    private String filePath = "TournamentGame.csv";
 
     private Chessboard plateau;
     private Piece selectedPiece;
     private Position selectedPosition;
     private Couleur currentTurn;
+    private List<String> players;
+    private int currentMatchIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        players = readPlayersFromCSV();
+        if (players.size() < 2) {
+            AdvLabel.setText("Pas assez de joueurs pour un tournoi");
+            NomChoisiLabel.setText("Pas assez de joueurs pour un tournoi");
+        } else {
+            initializeGame();
+        }
+    }
+    private void initializeGame(){  //démare la partie, affiche le plateau met le timer ...
         setupTimers();
         timeLabelWhite.setOnMouseClicked(event -> handleMove());
         this.plateau = new Chessboard();
         this.currentTurn = Couleur.WHITE;
+        this.isWhiteTurn=true;
         afficherPlateau();
+
+        NomChoisiLabel.setText(players.get(currentMatchIndex));
+        AdvLabel.setText(players.get(currentMatchIndex + 1));
+
         afficherTourMessage();
-        String filePath = "TournamentGame.csv";
-        File file = new File(filePath);
-        if (file.exists()) {
-            readLastTwoLinesFromCSV(file);
-        } else {
-            AdvLabel.setText("File not found");
-            NomChoisiLabel.setText("File not found");
-        }
         startGame();
     }
 
@@ -85,7 +94,7 @@ public class ChessTournamentController implements Initializable {
 
         for (int ligne = 0; ligne < 8; ligne++) {
             for (int colonne = 0; colonne < 8; colonne++) {
-                Rectangle rectangle = new Rectangle(40, 40);
+                Rectangle rectangle = new Rectangle(80, 80);
                 if ((ligne + colonne) % 2 == 0) {
                     rectangle.setFill(Color.rgb(235,236,208));
                 } else {
@@ -186,11 +195,13 @@ public class ChessTournamentController implements Initializable {
     }
 
     private void afficherTourMessage() {
-        tourMessage.setText((currentTurn == Couleur.WHITE ? NomChoisiLabel : AdvLabel) + " jouent !");
+        tourMessage.setText((currentTurn == Couleur.WHITE ? NomChoisiLabel.getText() : AdvLabel.getText()) + " jouent !");
     }
 
 
     private void setupTimers() {
+        timeWhite=600;
+        timeBlack=600;
         timerWhite = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeWhite--;
             updateTimeLabel(timeLabelWhite, timeWhite);
@@ -231,13 +242,34 @@ public class ChessTournamentController implements Initializable {
     private void startGame() {
         timerWhite.play();
     }
+
+
     private void endGame(Couleur winnerColor) {
         timerWhite.stop();
         timerBlack.stop();
 
-        String winner = (winnerColor == Couleur.WHITE) ? "Les blancs "+NomChoisiLabel : "Les noirs "+AdvLabel;
-        System.out.println(winner+" ont gagnés");
+        String winner = (winnerColor == Couleur.WHITE) ? NomChoisiLabel.getText() : AdvLabel.getText();
+        String loser = (winnerColor == Couleur.WHITE) ? AdvLabel.getText() : NomChoisiLabel.getText();
+
+        System.out.println(winner + " ont gagné");
+        mouvImpo.setText(winner + " ont gagné");
+
+        // Mise à jour des joueurs pour le prochain match
+        players.remove(loser);
+        currentMatchIndex++;
+
+        if (currentMatchIndex >= players.size() - 1) {
+            currentMatchIndex = 0; // Réinitialiser pour les prochains tours
+        }
+
+        if (players.size() == 1) {
+            System.out.println("Tournoi terminé. " + winner + " est le champion!");
+            mouvImpo.setText("Tournoi terminé. " + winner + " est le champion!");
+        } else {
+            initializeGame();
+        }
     }
+
     private boolean isKingInCheck(Couleur kingColor) {
         Position kingPosition = plateau.findKingPosition(kingColor);
         for (Piece[] row : plateau.getPieces()) {
@@ -292,67 +324,16 @@ public class ChessTournamentController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    private void readLastTwoLinesFromCSV(File file) {
-        String secondLastLine = "";
-        String lastLine = "";
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+    private List<String> readPlayersFromCSV() {
+        List<String> players = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    secondLastLine = lastLine;
-                    lastLine = line;
-                }
+                players.add(line.trim());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Assuming CSV format: lastName, firstName
-        if (!lastLine.isEmpty() && !secondLastLine.isEmpty()) {
-            String[] lastParts = lastLine.split(",");
-            String[] secondLastParts = secondLastLine.split(",");
-            if (lastParts.length >= 2 && secondLastParts.length >= 2) {
-                String lastNameLast = lastParts[0].trim();
-                String firstNameLast = lastParts[1].trim();
-                String lastNameSecondLast = secondLastParts[0].trim();
-                String firstNameSecondLast = secondLastParts[1].trim();
-                if (!lastNameLast.isEmpty() && !firstNameLast.isEmpty() && !lastNameSecondLast.isEmpty() && !firstNameSecondLast.isEmpty()) {
-                    AdvLabel.setText(lastNameLast + " " + firstNameLast);
-                    NomChoisiLabel.setText( lastNameSecondLast + " " + firstNameSecondLast);
-                } else {
-                    AdvLabel.setText("Invalid CSV format: empty values");
-                    NomChoisiLabel.setText("Invalid CSV format: empty values");
-                }
-            } else {
-                AdvLabel.setText("Invalid CSV format: not enough values");
-                NomChoisiLabel.setText("Invalid CSV format: not enough values");
-            }
-        } else {
-            AdvLabel.setText("CSV is empty or does not contain enough lines");
-            NomChoisiLabel.setText("CSV is empty or does not contain enough lines");
-        }
-    }
-    public static void deleteLineContainingPhrase(String phrase) {
-        List<String> lines = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("TournamentGame.csv"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (!line.contains(phrase)) {
-                    lines.add(line);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("TournamentGame.csv"))) {
-            for (String line : lines) {
-                writer.write(line);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return players;
     }
 }

@@ -10,18 +10,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ChessMainPageController implements Initializable {
@@ -30,12 +33,38 @@ public class ChessMainPageController implements Initializable {
     private GridPane gridPaneJeu;
 
     private Chessboard chessboard;
+    @FXML
+    private VBox VBoxDroite;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clearCSVFile();
         this.chessboard = new Chessboard();
         displayChessboard();
+    }
+    public void handleChangeSceneJoueurList(ActionEvent event) throws IOException {
+        List<String> players = readPlayersFromFile("PlayerGame_joueurs.csv");
+        List<String> playersVSBot = readPlayersFromFile("BotGame_joueur.csv");
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll(players);
+        ListView<String> listViewBot = new ListView<>();
+        listViewBot.getItems().addAll(playersVSBot);
+        VBoxDroite.getChildren().clear();
+        VBoxDroite.getChildren().addAll(listView,listViewBot);
+    }
+    private List<String> readPlayersFromFile(String filename) {
+        List<String> players = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.equals("Nom")) { // Skip the header
+                    players.add(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return players;
     }
     private void clearCSVFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("TournamentGame.csv"))) {
@@ -84,6 +113,16 @@ public class ChessMainPageController implements Initializable {
         stage.setScene(secondScene);
         stage.centerOnScreen();
         stage.show(); // On fait apparaître le stage
+    }
+
+    public void handleNewGameButtonAction(ActionEvent event) throws IOException{
+        Parent secondSceneParent = FXMLLoader.load(ChessApplication.class.getResource("fxml/ChessMainPage.fxml"));
+        Scene secondScene = new Scene(secondSceneParent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(secondScene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     // Une fonction permettant de changer de scène et d'affronter un autre joueur
