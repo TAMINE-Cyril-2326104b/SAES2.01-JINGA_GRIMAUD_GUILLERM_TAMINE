@@ -179,13 +179,13 @@ public class ChessPlayerGameController {
                 if (isCheckmate(currentTurn)) {
                     endGame(currentTurn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC);
                 } else {
-                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " echec !");
+                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs " : "Les noirs") + " sont en échec !");
                     if ( isKingInCheck(Couleur.NOIR) ||  isKingInCheck(Couleur.BLANC)){
                         plateau.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " déplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs : " : "Les noirs :") + " Déplacement impossible !");
                         switchTurn();
                     }
                 }
@@ -193,7 +193,7 @@ public class ChessPlayerGameController {
                 echecLabel.setText("");
             }
             if(currentTurn.equals(Couleur.BLANC) && isKingInCheck(Couleur.NOIR) || currentTurn.equals(Couleur.NOIR) && isKingInCheck(Couleur.BLANC)){
-                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " echec !");
+                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " sont en échec !");
 
             }else {
                 echecLabel.setText("");

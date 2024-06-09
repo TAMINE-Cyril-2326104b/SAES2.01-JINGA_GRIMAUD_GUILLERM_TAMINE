@@ -187,13 +187,13 @@ public class ChessBotGameController implements Initializable {
                 if (isCheckmate(currentTurn)) {
                     endGame(currentTurn == Couleur.BLANC ? Couleur.NOIR : Couleur.BLANC);
                 } else {
-                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " echec !");
+                    echecLabel.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " sont en échec !");
                     if ( isKingInCheck(Couleur.NOIR) ||  isKingInCheck(Couleur.BLANC)){
                         plateau.movePiece(
                                 newPosition.getRow(), newPosition.getCol(),
                                 selectedPosition.getRow(), selectedPosition.getCol(),
                                 plateau.getPieces());
-                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " deplacement impossible !");
+                        mouvImpo.setText((currentTurn == Couleur.BLANC ? "Les blancs" : "Les noirs") + " : Déplacement impossible !");
                         switchTurn();
                     }
                 }
@@ -201,7 +201,7 @@ public class ChessBotGameController implements Initializable {
                 echecLabel.setText("");
             }
             if(currentTurn.equals(Couleur.BLANC) && isKingInCheck(Couleur.NOIR) || currentTurn.equals(Couleur.NOIR) && isKingInCheck(Couleur.BLANC)){
-                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " echec !");
+                echecLabel.setText((currentTurn == Couleur.NOIR ? "Les blancs" : "Les noirs") + " sont en échec !");
 
             }else {
                 echecLabel.setText("");
@@ -343,7 +343,7 @@ public class ChessBotGameController implements Initializable {
 
         // Enregistrer le gagnant dans le fichier CSV
         String filePath = "chess_moves.csv";
-        String winner = winnerColor == Couleur.BLANC ? LabelNom.getText() : "BOT";
+        String winner = winnerColor == Couleur.BLANC ? LabelNom.getText() : "EstelleBot";
         logGameResultToCSV(filePath, winner);
 
         Platform.runLater(() -> {
