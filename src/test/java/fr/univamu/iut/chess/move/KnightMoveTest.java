@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour les mouvements du cavalier.
+ */
 public class KnightMoveTest {
 
     private ChessPlayerGameController controller;
@@ -17,6 +20,9 @@ public class KnightMoveTest {
         controller.plateau = new Chessboard();
     }
 
+    /**
+     * Teste le déplacement légal du cavalier.
+     */
     @Test
     public void testKnightMove() {
         // Placer un cavalier blanc
@@ -31,6 +37,9 @@ public class KnightMoveTest {
         assertNull(controller.plateau.getPieces()[0][1]); // Vérifier que la case précédente est vide
     }
 
+    /**
+     * Teste un déplacement illégal du cavalier.
+     */
     @Test
     public void testIllegalKnightMove() {
         // Placer un cavalier blanc

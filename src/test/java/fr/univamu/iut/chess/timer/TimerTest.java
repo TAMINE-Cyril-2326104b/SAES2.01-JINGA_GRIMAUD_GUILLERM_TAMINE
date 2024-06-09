@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour vérifier le fonctionnement du timer.
+ */
 public class TimerTest {
 
     private ChessPlayerGameController controller;
@@ -19,6 +22,9 @@ public class TimerTest {
         timeLabelWhite = controller.timeLabelWhite; // Récupérer le label depuis le contrôleur
     }
 
+    /**
+     * Teste le fonctionnement du timer.
+     */
     @Test
     public void testTimer() throws InterruptedException {
         assertNotNull(timeLabelWhite); // Assurez-vous que le label n'est pas null

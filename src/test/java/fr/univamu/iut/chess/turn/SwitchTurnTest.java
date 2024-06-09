@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Classe de test pour vérifier le changement de tour.
+ */
 public class SwitchTurnTest {
 
     private ChessPlayerGameController controller;
@@ -25,6 +28,9 @@ public class SwitchTurnTest {
         controller.currentTurn = Couleur.BLANC;
     }
 
+    /**
+     * Teste le changement de tour.
+     */
     @Test
     public void testSwitchTurn() {
         // Vérifier que la couleur initiale est blanche

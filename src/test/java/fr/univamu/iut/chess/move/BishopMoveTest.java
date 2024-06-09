@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour les mouvements du fou.
+ */
 public class BishopMoveTest {
 
     private ChessPlayerGameController controller;
@@ -17,6 +20,9 @@ public class BishopMoveTest {
         controller.plateau = new Chessboard();
     }
 
+    /**
+     * Teste le déplacement légal du fou.
+     */
     @Test
     public void testBishopMove() {
         // Placer un fou blanc
@@ -31,6 +37,9 @@ public class BishopMoveTest {
         assertNull(controller.plateau.getPieces()[0][2]); // Vérifier que la case précédente est vide
     }
 
+    /**
+     * Teste un déplacement illégal du fou.
+     */
     @Test
     public void testIllegalBishopMove() {
         // Placer un fou blanc

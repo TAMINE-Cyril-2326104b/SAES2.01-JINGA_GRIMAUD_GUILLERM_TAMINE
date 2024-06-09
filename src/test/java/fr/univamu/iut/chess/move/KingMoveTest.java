@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour les mouvements du roi.
+ */
 public class KingMoveTest {
 
     private ChessPlayerGameController controller;
@@ -17,6 +20,9 @@ public class KingMoveTest {
         controller.plateau = new Chessboard();
     }
 
+    /**
+     * Teste le déplacement légal du roi.
+     */
     @Test
     public void testKingMove() {
         // Placer un roi blanc
@@ -31,6 +37,9 @@ public class KingMoveTest {
         assertNull(controller.plateau.getPieces()[0][4]); // Vérifier que la case précédente est vide
     }
 
+    /**
+     * Teste un déplacement illégal du roi.
+     */
     @Test
     public void testIllegalKingMove() {
         // Placer un roi blanc

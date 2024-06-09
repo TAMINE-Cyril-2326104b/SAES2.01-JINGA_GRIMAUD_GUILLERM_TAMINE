@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour les mouvements de la reine.
+ */
 public class QueenMoveTest {
 
     private ChessPlayerGameController controller;
@@ -17,6 +20,9 @@ public class QueenMoveTest {
         controller.plateau = new Chessboard();
     }
 
+    /**
+     * Teste le déplacement légal de la reine.
+     */
     @Test
     public void testQueenMove() {
         // Déplacer une reine blanche d'une case en diagonale
@@ -31,6 +37,9 @@ public class QueenMoveTest {
         assertNull(controller.plateau.getPieces()[0][3]); // Vérifier que la case précédente est vide
     }
 
+    /**
+     * Teste un déplacement illégal de la reine.
+     */
     @Test
     public void testIllegalQueenMove() {
         // Placer une reine blanche

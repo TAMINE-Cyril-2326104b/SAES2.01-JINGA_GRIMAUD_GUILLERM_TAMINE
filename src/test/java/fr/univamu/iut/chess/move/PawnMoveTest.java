@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour les mouvements du pion.
+ */
 public class PawnMoveTest {
 
     private ChessPlayerGameController controller;
@@ -17,6 +20,9 @@ public class PawnMoveTest {
         controller.plateau = new Chessboard();
     }
 
+    /**
+     * Teste le déplacement légal du pion.
+     */
     @Test
     public void testPawnMove() {
         // Placer un pion blanc
@@ -30,14 +36,17 @@ public class PawnMoveTest {
         assertNull(controller.plateau.getPieces()[1][0]); // Vérifier que la case précédente est vide
     }
 
+    /**
+     * Teste un déplacement illégal du pion.
+     */
     @Test
     public void testIllegalPawnMove() {
         // Placer un pion blanc
         Piece pawn = new Pawn(Couleur.BLANC, new Position(1, 0));
         controller.plateau.setPiece(1, 0, pawn);
 
-        // Essayer de déplacer le pion d'une manière illégale
-        boolean moveResult = pawn.isMoveLegal(1, 0, 2, 2, controller.plateau.getPieces()); // Déplacement en diagonale
+        // Essayer de déplacer le pion d'une manière illégale (en diagonale)
+        boolean moveResult = pawn.isMoveLegal(1, 0, 2, 2, controller.plateau.getPieces());
 
         // Vérifier que le pion n'a pas été déplacé
         assertFalse(moveResult);

@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour les mouvements de la tour.
+ */
 public class RookMoveTest {
 
     private ChessPlayerGameController controller;
@@ -17,6 +20,9 @@ public class RookMoveTest {
         controller.plateau = new Chessboard();
     }
 
+    /**
+     * Teste le déplacement légal de la tour.
+     */
     @Test
     public void testRookMove() {
         // Placer une tour blanche
@@ -31,6 +37,9 @@ public class RookMoveTest {
         assertNull(controller.plateau.getPieces()[0][0]); // Vérifier que la case précédente est vide
     }
 
+    /**
+     * Teste un déplacement illégal de la tour.
+     */
     @Test
     public void testIllegalRookMove() {
         // Placer une tour blanche
