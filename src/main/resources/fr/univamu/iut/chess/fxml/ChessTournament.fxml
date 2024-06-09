@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.Region?>
 <BorderPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univamu.iut.chess.controllers.ChessTournamentController">
     <right>
         <VBox alignment="TOP_CENTER" spacing="10" styleClass="onglet" BorderPane.alignment="CENTER">
@@ -71,9 +72,8 @@
                             </image>
                         </ImageView>
                         <Label prefHeight="18.0" prefWidth="277.0" fx:id="AdvLabel" text="Adversaire" textFill="WHITE" />
+                        <Region HBox.hgrow="ALWAYS"/>
                         <Label fx:id="timeLabelBlack" styleClass="timer" text="10:00" textFill="aliceblue" />
-
-
                     </children>
                     <VBox.margin>
                         <Insets bottom="3.0" left="5.0" top="3.0" />
@@ -99,6 +99,7 @@
                             </image>
                         </ImageView>
                         <Label prefHeight="18.0" prefWidth="279.0" fx:id="NomChoisiLabel" text="Nom choisi" textFill="WHITE" />
+                        <Region HBox.hgrow="ALWAYS"/>
                         <Label fx:id="timeLabelWhite" styleClass="timer" text="10:00" textFill="aliceblue" />
                     </children>
                     <VBox.margin>

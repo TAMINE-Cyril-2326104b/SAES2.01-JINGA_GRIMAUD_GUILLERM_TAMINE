@@ -43,7 +43,7 @@ public class ChessMainPageController implements Initializable {
         this.chessboard = new Chessboard();
         displayChessboard();
     }
-    public void handleChangeSceneJoueurList(ActionEvent event) throws IOException { // apres avoir cliqué sur le bouton la partie droite chagne et affiche la liste des joueurs
+    public void handleChangeSceneJoueurList(ActionEvent event) throws IOException { // apres avoir cliqué sur le bouton la partie droite change et affiche la liste des joueurs
         List<String> players = readPlayersFromFile("PlayerGame_joueurs.csv");
         List<String> playersVSBot = readPlayersFromFile("BotGame_joueur.csv");
         ListView<String> listView = new ListView<>();
