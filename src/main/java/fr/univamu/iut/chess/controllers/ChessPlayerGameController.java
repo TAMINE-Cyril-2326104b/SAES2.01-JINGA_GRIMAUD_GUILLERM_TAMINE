@@ -146,7 +146,7 @@ public class ChessPlayerGameController {
             // Enregistrer le mouvement dans le fichier CSV
             String filePath = "chess_moves.csv"; // Chemin vers le fichier CSV
             String turn = currentTurn == Couleur.BLANC ? "White" : "Black";
-            String player = currentTurn == Couleur.BLANC ? NomChoisiLabel.toString() : AdvLabel.toString();
+            String player = currentTurn == Couleur.BLANC ? NomChoisiLabel.getText() : AdvLabel.getText();
             String piece = selectedPiece.getClass().getSimpleName();
             String from = selectedPosition.getRow() + "," + selectedPosition.getCol();
             String to = newPosition.getRow() + "," + newPosition.getCol();

@@ -1,58 +1,11 @@
-White,White Player,Pawn,6,4,4,4
-Black,Black Player,Pawn,1,5,3,5
-White,White Player,Queen,7,3,3,7
-Black,Black Player,Pawn,1,6,2,6
-White,White Player,Pawn,6,5,5,5
-Black,Black Player,Pawn,1,7,2,7
-White,White Player,Queen,3,7,2,6
-Black,Black Player,Pawn,3,5,4,5
 Turn,Player,Piece,From,To
-White,White Player,Pawn,6,4,4,4
-Black,Black Player,Pawn,1,5,3,5
-White,White Player,Queen,7,3,3,7
-Black,Black Player,Pawn,1,6,2,6
-White,White Player,Pawn,6,5,5,5
-Black,Black Player,Pawn,1,7,2,7
-White,White Player,Queen,3,7,2,6
-Black,Black Player,Pawn,3,5,4,5
-Turn,Player,Piece,From,To
-Nouvelle Partie: test 1 vs test 2
-White,White Player,Pawn,6,4,4,4
-Black,Black Player,Pawn,1,5,3,5
-White,White Player,Queen,7,3,3,7
-Black,Black Player,Pawn,1,6,2,6
-White,White Player,Pawn,6,5,5,5
-Black,Black Player,Pawn,1,7,2,7
-White,White Player,Queen,3,7,2,6
-Black,Black Player,Pawn,3,5,4,5
-Le gagnant est: Blancs
-Turn,Player,Piece,From,To
-Nouvelle Partie: coucou 1 vs coucou 2
-White,White Player,Pawn,6,4,4,4
-Black,Black Player,Pawn,1,5,3,5
-White,White Player,Queen,7,3,3,7
-Black,Black Player,Pawn,1,6,2,6
-White,White Player,Pawn,6,5,5,5
-Black,Black Player,Pawn,1,7,2,7
-White,White Player,Queen,3,7,2,6
-Black,Black Player,Pawn,3,5,4,5
-Le gagnant est: Label[id=NomChoisiLabel, styleClass=label]'coucou 1'
-Turn,Player,Piece,From,To
-Nouvelle Partie: gdg 4 vs ge 5
-White,Label[id=NomChoisiLabel, styleClass=label]'gdg 4',Pawn,6,4,4,4
-Black,Label[id=AdvLabel, styleClass=label]'ge 5',Pawn,1,5,3,5
-White,Label[id=NomChoisiLabel, styleClass=label]'gdg 4',Queen,7,3,3,7
-Black,Label[id=AdvLabel, styleClass=label]'ge 5',Pawn,1,6,2,6
-White,Label[id=NomChoisiLabel, styleClass=label]'gdg 4',Pawn,6,5,5,5
-Black,Label[id=AdvLabel, styleClass=label]'ge 5',Pawn,2,6,3,6
-Le gagnant est: gdg 4
-Turn,Player,Piece,From,To
-Nouvelle Partie: coucou cava vs BOT
-White,coucou cava,Pawn,6,4,4,4
-Black,BOT,Pawn,1,3,3,3
-White,coucou cava,Queen,7,3,3,7
-Black,BOT,Pawn,3,3,4,4
-White,coucou cava,Bishop,7,5,3,1
-Black,BOT,Pawn,1,4,2,4
-Black,BOT,Pawn,1,6,3,6
-Le gagnant est: coucou cava
+Nouvelle Partie: dei,da, vs ma,pe,
+White,dei,da,,Pawn,6,4,4,4
+Black,ma,pe,,Pawn,1,5,3,5
+White,dei,da,,Queen,7,3,3,7
+Black,ma,pe,,Pawn,1,6,2,6
+White,dei,da,,Pawn,6,6,5,6
+Black,ma,pe,,Pawn,1,7,2,7
+White,dei,da,,Queen,3,7,2,6
+Black,ma,pe,,Pawn,3,5,4,5
+Le gagnant est: dei,da,
